@@ -1,13 +1,16 @@
 {
-  "name": "acebook",
+  "name": "Mystery-Route",
   "version": "0.0.0",
-  "description": "Template for the AceBook project",
+  "description": "Mystery Route setup",
   "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
-    "test": "jest"
+    "testing": "jest",
+    "start test server": "JWT_SECRET=SUPER_SECRET npm run start:test",
+    "start server": "JWT_SECRET=SUPER_SECRET npm run start",
+    "test": "JWT_SECRET=SUPER_SECRET npm run testing"
   },
   "engines": {
     "node": ">=18.1.0"
