@@ -6,6 +6,7 @@ const SessionsController = {
   Create: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    const name = req.body.name;
 
     User.findOne({ email: email }).then(async (user) => {
       if (!user) {
