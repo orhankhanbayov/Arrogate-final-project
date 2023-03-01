@@ -8,8 +8,8 @@
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
     "testing": "jest",
-    "start test server": "JWT_SECRET=SUPER_SECRET npm run start:test",
-    "start server": "JWT_SECRET=SUPER_SECRET npm run start",
+    "start test server": "JWT_SECRET=SUPER_SECRET npm start:test",
+    "start server": "JWT_SECRET=SUPER_SECRET npm start",
     "test": "JWT_SECRET=SUPER_SECRET npm run testing"
   },
   "engines": {
