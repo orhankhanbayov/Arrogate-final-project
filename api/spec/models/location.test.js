@@ -4,8 +4,9 @@ require('../mongodb_helper');
 const Location = require('../../models/location');
 
 describe('Location model', () => {
-  beforeEach(async () => {
-    await mongoose.connection.collections.locations.drop(() => {});
+  beforeEach((done) => {
+    mongoose.connection.collections.locations.drop(() => {});
+    done();
   });
 
   it('has a name', () => {

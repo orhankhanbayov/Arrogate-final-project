@@ -5,8 +5,9 @@ require('../mongodb_helper');
 const Route = require('../../models/routes');
 
 describe('Location model', () => {
-  beforeEach(async () => {
-    await mongoose.connection.collections.routes.drop(() => {});
+  beforeEach((done) => {
+    mongoose.connection.collections.routes.drop(() => {});
+    done();
   });
 
   it('has a name', () => {
