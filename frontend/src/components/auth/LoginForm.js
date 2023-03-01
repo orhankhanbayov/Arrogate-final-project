@@ -8,21 +8,23 @@ const LogInForm = ({ navigation }) => {
   const [error, setError] = useState(null);
 
   const handleSubmit = async () => {
-    let response = await fetch('https://example.com/tokens', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password })
-    })
+    try {
+      const response = await fetch('https://mystery-route-backend.onrender.com/tokens', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password })
+      });
 
-    if (response.status !== 201) {
-      setError("Incorrect login details");
-    } else {
-      let data = await response.json()
-      await AsyncStorage.setItem("token", data.token)
-      await AsyncStorage.setItem("email", email)
-      // navigation.navigate('Posts'); To update with solved navigation
+      console.log('the status:', response.status)
+      if (response.status == 201) {
+        console.log('succes')
+      } else {
+        console.log('sign up not succesfull')
+      }
+    } catch (error) {
+      console.error( 'Error', error);
     }
   }
 
@@ -48,7 +50,7 @@ const LogInForm = ({ navigation }) => {
           secureTextEntry={true}
           autoCapitalize="none"
         />
-        {error != null ? <Text style={styles.error}>{error}</Text> : null}
+        {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Login</Text>
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    paddingHorizontal: 20
   },
   error: {
     color: 'red',

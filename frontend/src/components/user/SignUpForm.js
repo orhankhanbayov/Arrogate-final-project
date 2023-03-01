@@ -7,21 +7,23 @@ const SignUpForm = ({ navigation }) => {
   const [name, setName] = useState('');
 
   const handleSubmit = async () => {
-    fetch('/users', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password, name: name})
-    })
-      .then(response => {
-        console.log(response)
-        if (response.status === 201) {
-          navigation.navigate('Login')
-        } else {
-          navigation.navigate('SignUp')
-        }
-      })
+    try {
+      const response = await fetch('https://mystery-route-backend.onrender.com/users', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password, name: name})
+      });
+      console.log(response.status)
+      if (response.status == 201) {
+        console.log('succes')
+      } else {
+        console.log('sign up not succesfull')
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleEmailChange = (value) => {
@@ -39,10 +41,7 @@ const SignUpForm = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
-        <Text style={styles.siteTitle}>Solved</Text>
-        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
+        <Text style={styles.title}>Solved</Text>
       </View>
 
       <View style={styles.signUpForm}>
@@ -50,27 +49,29 @@ const SignUpForm = ({ navigation }) => {
         <View style={styles.window}>
           <View style={styles.overlay} />
           <View style={styles.content}>
-            <Text style={styles.welcome}>Hello there!</Text>
-            <Text style={styles.subb}>Welcome to Acebook</Text>
+            <Text style={styles.subtitle}>Welcome to Solved!</Text>
             <Text style={styles.subtitle}>Please signup below</Text>
             <View style={styles.inputFields}>
               <TextInput
                 placeholder='Name'
-                style={styles.inputLine}
+                style={styles.input}
                 value={name}
                 onChangeText={handleNameChange}
+                autoCapitalize="none"
               />
               <TextInput
                 placeholder='Email'
-                style={styles.inputLine}
+                style={styles.input}
                 value={email}
                 onChangeText={handleEmailChange}
+                autoCapitalize="none"
               />
               <TextInput
                 placeholder='Password'
-                style={styles.inputLine}
+                style={styles.input}
                 value={password}
                 onChangeText={handlePasswordChange}
+                autoCapitalize="none"
                 secureTextEntry={true}
               />
             </View>
@@ -87,25 +88,53 @@ const SignUpForm = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  nav: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 10,
   },
-  siteTitle: {
-    fontWeight: 'bold',
+  title: {
     fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  loginButton: {
-    backgroundColor: '#333',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  }
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  inputContainer: {
+    width: '80%',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  // nav: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'space-between',
+  //   backgroundColor: '#fff',
+  //   paddingHorizontal: 20,
+  //   paddingTop: 40,
+  //   paddingBottom: 10,
+  // },
 })
 
 export default SignUpForm;
