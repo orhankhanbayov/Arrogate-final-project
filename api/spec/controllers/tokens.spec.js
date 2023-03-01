@@ -17,7 +17,7 @@ describe('/tokens', () => {
     await User.deleteMany({});
   });
 
-  test('a token is returned when creds are valid', async () => {
+  it('a token is returned when creds are valid', async () => {
     let response = await request(app)
       .post('/tokens')
       .send({ email: 'test@test.com', name: 'name', password: '12345678' });

@@ -4,7 +4,10 @@ const TokenGenerator = require('../models/token_generator');
 const RoutesController = {
   List: (req, res) => {
     Route.find()
-      .populate('Locations')
+      .populate({
+        path: 'locations',
+        model: 'Location',
+      })
       .exec(async (err, routes) => {
         if (err) {
           throw err;
