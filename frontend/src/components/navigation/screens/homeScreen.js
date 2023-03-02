@@ -18,8 +18,7 @@ let list = async () => {
       },
     }
   );
-
-  return response.body;
+  console.log(response.status);
 };
 
 list();
