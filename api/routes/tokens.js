@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const TokensController = require("../controllers/tokens");
+const TokensController = require('../controllers/tokens');
 
-router.post("https://mystery-route-backend.onrender.com/tokens", TokensController.Create);
+router.post('/', TokensController.Create);
 
 module.exports = router;
