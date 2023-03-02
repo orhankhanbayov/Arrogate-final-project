@@ -34,8 +34,7 @@ const LogInForm = ({ navigation }) => {
         const token = responseJson.token;
         await AsyncStorage.setItem('@storage_Key', token);
 
-        // save the token to local storage
-        // navigation.navigate('RoutesPage'); // this is to update accordingly to what Orhan is doing
+        navigation.navigate('mainContainer');
         console.log('success');
       } else {
         console.log('sign in not successful');
