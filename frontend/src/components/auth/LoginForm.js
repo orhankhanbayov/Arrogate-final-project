@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import MainContainer from '../../navigation/mainContainer';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+
 import {
   Image,
   StyleSheet,
@@ -34,7 +32,15 @@ const LogInForm = ({ navigation }) => {
       if (response.status !== 200) {
         const responseJson = await response.json();
         const token = responseJson.token;
-        await AsyncStorage.setItem('@storage_Key', token);
+
+        // async function save(key, value) {
+        //   await SecureStore.setItemAsync(key, value);
+        // }
+
+        // save('token', token);
+
+        await SecureStore.setItemAsync('token', token);
+
         navigation.reset({
           index: 0,
           routes: [{ name: 'MainContainer' }],
