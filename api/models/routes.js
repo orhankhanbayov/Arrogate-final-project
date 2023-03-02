@@ -7,6 +7,8 @@ const RouteSchema = new mongoose.Schema({
   locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
 });
 
+mongoose.model('Route', RouteSchema);
+
 const Route = mongoose.model('Route', RouteSchema);
 
 module.exports = Route;

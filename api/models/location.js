@@ -11,6 +11,8 @@ const LocationSchema = new mongoose.Schema({
   clue3: { type: String },
 });
 
+mongoose.model('Location', LocationSchema);
+
 const Location = mongoose.model('Location', LocationSchema);
 
 module.exports = Location;
