@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Image, View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 
 const SignUpForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -8,40 +16,48 @@ const SignUpForm = ({ navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('https://mystery-route-backend.onrender.com/users', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email, password: password, name: name})
-      });
-      console.log(response.status)
+      const response = await fetch(
+        'https://mystery-route-backend.onrender.com/users',
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            name: name,
+          }),
+        }
+      );
+      console.log(response.status);
       if (response.status == 201) {
-        navigation.navigate('LogIn')
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'LogIn' }],
+        });
       } else {
-        console.log('sign up not succesfull')
+        console.log('sign up not succesfull');
       }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleEmailChange = (value) => {
-    setEmail(value)
-  }
+    setEmail(value);
+  };
 
   const handlePasswordChange = (value) => {
-    setPassword(value)
-  }
+    setPassword(value);
+  };
 
   const handleNameChange = (value) => {
-    setName(value)
-  }
+    setName(value);
+  };
 
   return (
-     
     <View style={styles.signUpForm}>
-   
       <View style={styles.boldLine} />
       <View style={styles.window}>
         <View style={styles.overlay} />
@@ -50,21 +66,21 @@ const SignUpForm = ({ navigation }) => {
           <Text style={styles.subtitle}>Please signup below</Text>
           <View style={styles.inputFields}>
             <TextInput
-              placeholder='Name'
+              placeholder="Name"
               style={styles.input}
               value={name}
               onChangeText={handleNameChange}
               autoCapitalize="none"
             />
             <TextInput
-              placeholder='Email'
+              placeholder="Email"
               style={styles.input}
               value={email}
               onChangeText={handleEmailChange}
               autoCapitalize="none"
             />
             <TextInput
-              placeholder='Password'
+              placeholder="Password"
               style={styles.input}
               value={password}
               onChangeText={handlePasswordChange}
@@ -82,11 +98,9 @@ const SignUpForm = ({ navigation }) => {
           </View>
         </View>
       </View>
-    
-  </View>
-
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -134,8 +148,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-
 });
-
 
 export default SignUpForm;

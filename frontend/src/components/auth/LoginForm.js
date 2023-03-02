@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import MainContainer from '../../navigation/mainContainer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import {
   Image,
   StyleSheet,
@@ -33,8 +35,10 @@ const LogInForm = ({ navigation }) => {
         const responseJson = await response.json();
         const token = responseJson.token;
         await AsyncStorage.setItem('@storage_Key', token);
-
-        navigation.navigate('mainContainer');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MainContainer' }],
+        });
         console.log('success');
       } else {
         console.log('sign in not successful');
