@@ -17,7 +17,7 @@ const SignUpForm = ({ navigation }) => {
       });
       console.log(response.status)
       if (response.status == 201) {
-        console.log('succes')
+        navigation.navigate('LogIn')
       } else {
         console.log('sign up not succesfull')
       }

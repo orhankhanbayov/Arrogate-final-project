@@ -27,6 +27,9 @@ const LogInForm = ({ navigation }) => {
       console.error( 'Error', error);
     }
   }
+  const handleSignUpPress = () => {
+    navigation.navigate('SignUp');
+  };
 
   return (
     <View style={styles.container}>
@@ -53,11 +56,14 @@ const LogInForm = ({ navigation }) => {
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Image 
-              source={require('../../images/login-button.png')}
-              style={styles.image}
-            />
-          </TouchableOpacity>
+        <Image 
+          source={require('../../images/login-button.png')}
+          style={styles.image}
+        />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSignUpPress}>
+          <Text>Don't have an account? SignUp!</Text>
+        </TouchableOpacity>
     </View>
   );
 }
