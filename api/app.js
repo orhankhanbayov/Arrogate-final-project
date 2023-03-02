@@ -3,12 +3,19 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const JWT = require('jsonwebtoken');
+const cors = require('cors');
 
 const tokensRouter = require('./routes/tokens');
 const usersRouter = require('./routes/users');
+const routesRouter = require('./routes/routes');
 
 const app = express();
 
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 // setup for receiving JSON
 app.use(express.json());
 
@@ -39,6 +46,7 @@ const tokenChecker = (req, res, next) => {
 // route setup
 app.use('/tokens', tokensRouter);
 app.use('/users', usersRouter);
+app.use('/routes', tokenChecker, routesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -8,8 +8,8 @@
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
     "testing": "jest",
-    "start test server": "JWT_SECRET=SUPER_SECRET npm run start:test",
-    "start server": "JWT_SECRET=SUPER_SECRET npm run start",
+    "start test server": "JWT_SECRET=SUPER_SECRET npm start:test",
+    "start server": "JWT_SECRET=SUPER_SECRET npm start",
     "test": "JWT_SECRET=SUPER_SECRET npm run testing"
   },
   "engines": {
@@ -17,7 +17,9 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "express-session": "^1.17.2",
     "hbs": "^4.1.0",
