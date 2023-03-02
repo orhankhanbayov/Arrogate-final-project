@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { AsyncStorage } from 'react-native';
-import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 
 const LogInForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -10,32 +17,37 @@ const LogInForm = ({ navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('https://mystery-route-backend.onrender.com/tokens', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email, password: password })
-      });
+      const response = await fetch(
+        'https://mystery-route-backend.onrender.com/tokens',
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email, password: password }),
+        }
+      );
 
-      console.log('the status:', response.status)
-    if (response.status !== 200) {
-      const responseJson = await response.json();
-      const token = responseJson.token;
-      await AsyncStorage.setItem('token', token); // save the token to local storage
-     // navigation.navigate('RoutesPage'); // this is to update accordingly to what Orhan is doing 
-      console.log('success')
-    } else {
-      console.log('sign in not successful')
+      console.log('the status:', response.status);
+      if (response.status !== 200) {
+        const responseJson = await response.json();
+        const token = responseJson.token;
+        await AsyncStorage.setItem('@storage_Key', token);
+
+        // save the token to local storage
+        // navigation.navigate('RoutesPage'); // this is to update accordingly to what Orhan is doing
+        console.log('success');
+      } else {
+        console.log('sign in not successful');
+      }
+    } catch (error) {
+      console.error('Error', error);
     }
-  } catch (error) {
-    console.error( 'Error', error);
-  }
-}
+  };
 
-const handleSignUpPress = () => {
-  navigation.navigate('SignUp');
-};
+  const handleSignUpPress = () => {
+    navigation.navigate('SignUp');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hello there!</Text>
@@ -61,17 +73,20 @@ const handleSignUpPress = () => {
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Image 
+        <Image
           source={require('../../images/login-button.png')}
           style={styles.image}
         />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSignUpPress}>
-          <Text> Don't have an account?<Text style={{color: 'blue'}}> SignUp!</Text></Text>
-        </TouchableOpacity>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleSignUpPress}>
+        <Text>
+          {' '}
+          Don't have an account?<Text style={{ color: 'blue' }}> SignUp!</Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -99,14 +114,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   error: {
     color: 'red',
     marginBottom: 10,
   },
   image: {
-    resizeMode: 'contain', 
+    resizeMode: 'contain',
     height: 150,
     width: 150,
   },
