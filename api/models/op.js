@@ -24,8 +24,8 @@ route = async () => {
       'Content-type': 'application/json',
     },
     body: JSON.stringify({
-      name: 'Big Ben',
-      coordinates: { type: 'Point', coordinates: [1, 1] },
+      name: 'Buckingham Palace',
+      coordinates: { type: 'Point', coordinates: [5, 5] },
       clue1: 'Clue 1',
       clue2: 'Clue 2',
       clue3: 'Clue 3',
