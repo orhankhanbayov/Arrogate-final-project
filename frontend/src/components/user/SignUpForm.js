@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 
 const SignUpForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -39,49 +39,52 @@ const SignUpForm = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <Text style={styles.title}>Solved</Text>
-      </View>
-
-      <View style={styles.signUpForm}>
-        <View style={styles.boldLine} />
-        <View style={styles.window}>
-          <View style={styles.overlay} />
-          <View style={styles.content}>
-            <Text style={styles.subtitle}>Welcome to Solved!</Text>
-            <Text style={styles.subtitle}>Please signup below</Text>
-            <View style={styles.inputFields}>
-              <TextInput
-                placeholder='Name'
-                style={styles.input}
-                value={name}
-                onChangeText={handleNameChange}
-                autoCapitalize="none"
-              />
-              <TextInput
-                placeholder='Email'
-                style={styles.input}
-                value={email}
-                onChangeText={handleEmailChange}
-                autoCapitalize="none"
-              />
-              <TextInput
-                placeholder='Password'
-                style={styles.input}
-                value={password}
-                onChangeText={handlePasswordChange}
-                autoCapitalize="none"
-                secureTextEntry={true}
-              />
-            </View>
+     
+    <View style={styles.signUpForm}>
+   
+      <View style={styles.boldLine} />
+      <View style={styles.window}>
+        <View style={styles.overlay} />
+        <View style={styles.content}>
+          <Text style={styles.subtitle}>Welcome to Solved!</Text>
+          <Text style={styles.subtitle}>Please signup below</Text>
+          <View style={styles.inputFields}>
+            <TextInput
+              placeholder='Name'
+              style={styles.input}
+              value={name}
+              onChangeText={handleNameChange}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder='Email'
+              style={styles.input}
+              value={email}
+              onChangeText={handleEmailChange}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder='Password'
+              style={styles.input}
+              value={password}
+              onChangeText={handlePasswordChange}
+              autoCapitalize="none"
+              secureTextEntry={true}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.buttonText}>Create Account!</Text>
+              <Image
+                source={require('../../images/sign-up-button.png')}
+                style={styles.image}
+              />
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    
+  </View>
+
   );
 }
 
@@ -116,25 +119,23 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+  image: {
+    resizeMode: 'contain',
+    height: 150,
+    width: 150,
   },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  signUpForm: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  // nav: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-between',
-  //   backgroundColor: '#fff',
-  //   paddingHorizontal: 20,
-  //   paddingTop: 40,
-  //   paddingBottom: 10,
-  // },
-})
+  buttonContainer: {
+    marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
+  },
+
+});
+
 
 export default SignUpForm;

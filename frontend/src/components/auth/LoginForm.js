@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 
 const LogInForm = ({ navigation }) => {
@@ -53,8 +53,11 @@ const LogInForm = ({ navigation }) => {
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+            <Image 
+              source={require('../../images/login-button.png')}
+              style={styles.image}
+            />
+          </TouchableOpacity>
     </View>
   );
 }
@@ -91,15 +94,10 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  image: {
+    resizeMode: 'contain', 
+    height: 150,
+    width: 150,
   },
 });
 
