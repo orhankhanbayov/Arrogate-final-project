@@ -8,7 +8,7 @@ export default function App() {
   return (
     <View style={styles.container}>
    
-     <LogInForm></LogInForm>
+     {/* <LogInForm></LogInForm> */}
      <SignUpForm></SignUpForm>
       <StatusBar style="auto" />
     </View>
