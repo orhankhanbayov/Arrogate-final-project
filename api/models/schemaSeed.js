@@ -18,17 +18,22 @@ login = async () => {
 login();
 
 route = async () => {
-  await fetch('https://mystery-route-backend.onrender.com/locations', {
+  await fetch('https://mystery-route-backend.onrender.com/routes', {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
     },
     body: JSON.stringify({
-      name: 'Buckingham Palace',
-      coordinates: { type: 'Point', coordinates: [5, 5] },
-      clue1: 'Clue 1',
-      clue2: 'Clue 2',
-      clue3: 'Clue 3',
+      name: 'Central London',
+      bio: 'bio',
+      time: '1 hour',
+      locations: [
+        mongoose.Types.ObjectId('640132f34ccb3300501b9657'),
+        mongoose.Types.ObjectId('640133144ccb3300501b9659'),
+        mongoose.Types.ObjectId('640133259a23e100505ba73c'),
+        mongoose.Types.ObjectId('640133479a23e100505ba73f'),
+        mongoose.Types.ObjectId('640133679a23e100505ba741'),
+      ],
     }),
   });
 };
