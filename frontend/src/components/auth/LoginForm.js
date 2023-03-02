@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
 
 
 const LogInForm = ({ navigation }) => {
@@ -18,19 +19,23 @@ const LogInForm = ({ navigation }) => {
       });
 
       console.log('the status:', response.status)
-      if (response.status == 201) {
-        console.log('succes')
-      } else {
-        console.log('sign up not succesfull')
-      }
-    } catch (error) {
-      console.error( 'Error', error);
+    if (response.status !== 200) {
+      const responseJson = await response.json();
+      const token = responseJson.token;
+      await AsyncStorage.setItem('token', token); // save the token to local storage
+     // navigation.navigate('RoutesPage'); // this is to update accordingly to what Orhan is doing 
+      console.log('success')
+    } else {
+      console.log('sign in not successful')
     }
+  } catch (error) {
+    console.error( 'Error', error);
   }
-  const handleSignUpPress = () => {
-    navigation.navigate('SignUp');
-  };
+}
 
+const handleSignUpPress = () => {
+  navigation.navigate('SignUp');
+};
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hello there!</Text>
@@ -62,7 +67,7 @@ const LogInForm = ({ navigation }) => {
         />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSignUpPress}>
-          <Text>Don't have an account? SignUp!</Text>
+          <Text> Don't have an account?<Text style={{color: 'blue'}}> SignUp!</Text></Text>
         </TouchableOpacity>
     </View>
   );
