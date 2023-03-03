@@ -25,8 +25,9 @@ const HomeScreen = ({ navigation }) => {
         );
 
         const data = await response.json();
+        await SecureStore.setItemAsync('token', data.token);
 
-        setRoutes(data.routes[0]);
+        setRoutes(data.routes);
       }
     };
 
@@ -36,9 +37,17 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Routes</Text>
-      <Text>{routes.name}</Text>
-      <Text>{routes.bio}</Text>
-      <Text>{routes.time}</Text>
+
+      {routes.map((route) => (
+        <Text>
+          {route.name}
+          {'\n'}
+          {route.bio}
+          {'\n'}
+          {route.time}
+          {'\n'}
+        </Text>
+      ))}
     </View>
   );
 };

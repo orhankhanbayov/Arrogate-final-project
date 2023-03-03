@@ -33,12 +33,6 @@ const LogInForm = ({ navigation }) => {
         const responseJson = await response.json();
         const token = responseJson.token;
 
-        // async function save(key, value) {
-        //   await SecureStore.setItemAsync(key, value);
-        // }
-
-        // save('token', token);
-
         await SecureStore.setItemAsync('token', token);
 
         navigation.reset({
