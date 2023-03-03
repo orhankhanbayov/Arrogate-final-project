@@ -26,7 +26,6 @@ const HomeScreen = ({ navigation }) => {
 
         const data = await response.json();
         await SecureStore.setItemAsync('token', data.token);
-
         setRoutes(data.routes);
       }
     };
