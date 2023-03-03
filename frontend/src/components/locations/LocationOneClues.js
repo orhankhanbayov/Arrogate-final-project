@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Button, Image, Alert, useEffect} from 'react-native'
+import React, { useState, useEffect } from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Button, Image, Alert} from 'react-native'
+import * as SecureStore from 'expo-secure-store';
 
 const LocationOneClues = () =>{
 
@@ -8,6 +9,8 @@ const LocationOneClues = () =>{
   const [showValue3, setShowValue3] = useState(false);
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
+
+  
 
   const handleClue1 = () => {
     setShowValue1(true)
@@ -38,6 +41,32 @@ const LocationOneClues = () =>{
     );
   }
 
+  
+  const [routes, setRoutes] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      let token = await SecureStore.getItemAsync('token');
+      if (token) {
+        const response = await fetch(
+          'https://mystery-route-backend.onrender.com/routes',
+          {
+            method: 'get',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data.routes[0].locations[0].clue1);
+        await SecureStore.setItemAsync('token', data.token);
+        setRoutes(data.routes);
+      }
+    };
+    fetchData();
+  }, []);
+ 
+  
+
 return (
   <View style={styles.page}>
     
@@ -49,10 +78,10 @@ return (
       />
     </View>
 
-    {/* First Clue 'routes[0].location[0]' */}
+    {/* First Clue ']' */}
     {showValue1 ? (
       <View>
-        <Text style={styles.subtitle}>This building is home to a restaurant appropriately called ‘The View’.</Text>
+          <Text style={styles.subtitle}></Text>
         </View>
     ) : (
       <View style={styles.buttonContainer}>
