@@ -9,33 +9,6 @@ const LocationOneClues = () =>{
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
 
-  const [routes, setRoutes] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let token = await SecureStore.getItemAsync('token');
-
-      if (token) {
-        const response = await fetch(
-          'https://mystery-route-backend.onrender.com/routes',
-          {
-            method: 'get',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = await response.json();
-        await SecureStore.setItemAsync('token', data.token);
-
-        setRoutes(data.routes);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const handleClue1 = () => {
     setShowValue1(true)
   }
@@ -123,28 +96,24 @@ return (
         </TouchableOpacity>
         </View>
     )}
-<View>
-    {/* Submit Location */}
-    <View>
-      <Image
-        source={require('../../images/submit-location-button.png')}
-        style={styles.submitLocation}
-      />
-    </View>
+<View style={styles.buttonLower}>
+  <TouchableOpacity style={styles.button}>
+    <Image
+      source={require('../../images/submit-location-button.png')}
+      style={styles.submitLocation}
+    />
+  </TouchableOpacity>
 
-{/* Give up */}
-    <View> 
-      {showValue4 && confirmedReveal ? (
-        // 'routes[0].location[0].name'
-        <Text style={styles.title}>The Shard</Text>
-      ) : (<TouchableOpacity style={styles.giveUp} onPress={handleClue4}>
-        <Image
-          source={require('../../images/give-up-button.png')}
-          style={styles.giveUp}
-          />
-      </TouchableOpacity>) 
-      }
-      </View>
+  {showValue4 && confirmedReveal ? (
+    <Text style={styles.title}>The Shard</Text>
+  ) : (
+    <TouchableOpacity style={styles.button} onPress={handleClue4}>
+      <Image
+        source={require('../../images/give-up-button.png')}
+        style={styles.giveUp}
+      />
+    </TouchableOpacity>
+  )}
 </View>
 </View>
 );
@@ -218,7 +187,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 120,
     width: 200,
-    marginLeft: 100,
   },
   page: {
     backgroundColor: '#C5DBD6',
@@ -229,9 +197,15 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  lowerButtons: {
-    flexDirection: 'row'
-  }
+  buttonLower: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 120,
+  },
+  button: {
+  margin: 0,
+  } 
 });
 
 export default LocationOneClues;
