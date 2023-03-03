@@ -14,6 +14,7 @@ let list = async () => {
     {
       method: 'GET',
       headers: {
+        'Content-type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     }
@@ -21,7 +22,7 @@ let list = async () => {
   console.log(response.status);
 };
 
-list();
+// list();
 
 const HomeScreen = ({ navigation }) => {
   return (

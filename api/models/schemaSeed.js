@@ -5,36 +5,30 @@ const User = require('./user');
 const Route = require('./routes');
 const Location = require('./location');
 const mongoose = require('mongoose');
-login = async () => {
-  await fetch('https://mystery-route-backend.onrender.com/tokens', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email: 'orhan', password: 'orhan' }),
-  });
-};
+// login = async () => {
+//   let response = await fetch(
+//     'https://mystery-route-backend.onrender.com/tokens',
+//     {
+//       method: 'post',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ email: 'orhan', password: 'orhan' }),
+//     }
+//   );
 
-login();
+//   console.log(response.body);
+// };
+
+// login();
 
 route = async () => {
   await fetch('https://mystery-route-backend.onrender.com/routes', {
-    method: 'post',
+    method: 'get',
     headers: {
       'Content-type': 'application/json',
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQwMTJjNmM3MWQyYWIwMDUwOTEyMDBjIiwiaWF0IjoxNjc3ODAzNDA3LCJleHAiOjE2Nzc4MDM2MDg4NH0.zHTZVCMu3VclQvoBxfUivvS9ajGm7g9UK-Z6KdZZSFc`,
     },
-    body: JSON.stringify({
-      name: 'Central London',
-      bio: 'bio',
-      time: '1 hour',
-      locations: [
-        mongoose.Types.ObjectId('640132f34ccb3300501b9657'),
-        mongoose.Types.ObjectId('640133144ccb3300501b9659'),
-        mongoose.Types.ObjectId('640133259a23e100505ba73c'),
-        mongoose.Types.ObjectId('640133479a23e100505ba73f'),
-        mongoose.Types.ObjectId('640133679a23e100505ba741'),
-      ],
-    }),
   });
 };
 
