@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
       <Text>Routes</Text>
 
       {routes.map((route) => (
-        <Text>
+        <Text key={route._id}>
           {route.name}
           {'\n'}
           {route.bio}
