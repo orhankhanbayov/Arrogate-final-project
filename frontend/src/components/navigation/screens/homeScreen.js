@@ -6,28 +6,39 @@ import { View, Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
-let list = async () => {
-  let token = await SecureStore.getItemAsync('token');
-
-  let response = await fetch(
-    'https://mystery-route-backend.onrender.com/routes',
-    {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  console.log(response.status);
-};
-
-// list();
-
 const HomeScreen = ({ navigation }) => {
+  const [routes, setRoutes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let token = await SecureStore.getItemAsync('token');
+
+      if (token) {
+        const response = await fetch(
+          'https://mystery-route-backend.onrender.com/routes',
+          {
+            method: 'get',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        setRoutes(data.routes[0]);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <View>
       <Text>Routes</Text>
+      <Text>{routes.name}</Text>
+      <Text>{routes.bio}</Text>
+      <Text>{routes.time}</Text>
     </View>
   );
 };
