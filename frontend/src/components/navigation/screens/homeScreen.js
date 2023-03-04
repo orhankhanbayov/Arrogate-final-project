@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -36,7 +36,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Routes</Text>
+      <ImageBackground source={require('../../../images/background.png')} resizeMode='cover' style={styles.background}></ImageBackground>
+      <Text>Choose the area you want to explore</Text>
 
       {routes.map((route) => (
         <Text key={route._id}>
@@ -52,4 +53,14 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '106%',
+  },
+});
+
+export default HomeScreen
