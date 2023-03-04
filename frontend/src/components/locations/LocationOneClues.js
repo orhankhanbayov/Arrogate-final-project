@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Button, Image, Alert} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native'
 import * as SecureStore from 'expo-secure-store';
 
 const LocationOneClues = () =>{
@@ -9,6 +9,7 @@ const LocationOneClues = () =>{
   const [showValue3, setShowValue3] = useState(false);
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
+  const [chosenRoutes, setChosenRoutes] = useState("");
 
   
 
@@ -57,7 +58,7 @@ const LocationOneClues = () =>{
           }
         );
         const data = await response.json();
-        console.log(data.routes[0].locations[0].clue1);
+        console.log(data.routes[2].locations[1].name);
         await SecureStore.setItemAsync('token', data.token);
         setRoutes(data.routes);
       }
@@ -65,7 +66,7 @@ const LocationOneClues = () =>{
     fetchData();
   }, []);
  
-  
+
 
 return (
   <View style={styles.page}>
@@ -81,7 +82,9 @@ return (
     {/* First Clue ']' */}
     {showValue1 ? (
       <View>
-          <Text style={styles.subtitle}></Text>
+          <Text style={styles.subtitle}>
+            
+          </Text>
         </View>
     ) : (
       <View style={styles.buttonContainer}>
@@ -97,8 +100,10 @@ return (
     {/* Second Clue */}
     {showValue2 ? (
       <View>
-        <Text style={styles.subtitle}>During its construction a fox was discovered living on the 46th floor.</Text>
-        </View>
+        <Text style={styles.subtitle}>
+
+        </Text>
+      </View>
     ) : (
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleClue2}>
@@ -113,8 +118,10 @@ return (
     {/* Third Clue */}
     {showValue3 ? (
       <View>
-        <Text style={styles.subtitle}>Standing 309.6 metres high, it is the tallest building in the United Kingdom, and the seventh-tallest building in Europe.</Text>
-        </View>
+        <Text style={styles.subtitle}>
+
+        </Text>
+      </View>
     ) : (
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleClue3}>
@@ -125,16 +132,21 @@ return (
         </TouchableOpacity>
         </View>
     )}
+
+    {/* // submit location  */}
 <View style={styles.buttonLower}>
   <TouchableOpacity style={styles.button}>
     <Image
       source={require('../../images/submit-location-button.png')}
       style={styles.submitLocation}
     />
-  </TouchableOpacity>
 
+    {/* give up */}
+  </TouchableOpacity> 
   {showValue4 && confirmedReveal ? (
-    <Text style={styles.title}>The Shard</Text>
+    <Text style={styles.title}>
+    
+    </Text>
   ) : (
     <TouchableOpacity style={styles.button} onPress={handleClue4}>
       <Image
