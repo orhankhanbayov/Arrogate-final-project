@@ -47,6 +47,7 @@ const LogInForm = ({ navigation }) => {
   const handleSignUpPress = () => {
     navigation.navigate('SignUp');
   };
+  
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>Welcome to</Text>
@@ -72,12 +73,14 @@ const LogInForm = ({ navigation }) => {
         />
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
+
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Image
           source={require('../../images/login-button.png')}
           style={styles.image}
         />
       </TouchableOpacity>
+      
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text>Don't have an account?</Text>
         <TouchableOpacity onPress={handleSignUpPress}>
