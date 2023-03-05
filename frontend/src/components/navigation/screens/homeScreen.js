@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import ChooseRoutes from '../../chooseRoutes/chooseRoutes';
 import LocationOneClues from '../../locations/LocationOneClues';
+import CongratulationsNextClue from '../../congraulationsNextClue/congratulationsNextClue';
 import {
   View,
   Text,
@@ -23,6 +24,10 @@ const HomeScreen = ({ navigation }) => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="ChooseRoutes" component={ChooseRoutes} />
       <Stack.Screen name="LocationOneClues" component={LocationOneClues} />
+      <Stack.Screen
+        name="CongratulationsNextClue"
+        component={CongratulationsNextClue}
+      />
     </Stack.Navigator>
   );
 };

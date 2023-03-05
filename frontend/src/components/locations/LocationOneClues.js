@@ -10,16 +10,27 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
-const LocationOneClues = ({ route }) => {
+const LocationOneClues = ({ route, navigation }) => {
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
   const [chosenRoutes, setChosenRoutes] = useState('');
+  const [locationCounter, setLocationCounter] = useState(0);
+
+  const [value, setValue] = useState(0);
+
+  const set = () => {
+    if (value === 0) {
+      setChosenRoutes(route.params.route);
+      setValue(1);
+    }
+  };
+
+  set();
 
   const handleClue1 = () => {
-    setChosenRoutes(route.params.route);
     setShowValue1(true);
   };
 
@@ -51,6 +62,20 @@ const LocationOneClues = ({ route }) => {
     );
   };
 
+  const nextClue = () => {
+    setLocationCounter(locationCounter + 1);
+
+    setShowValue1(false);
+    setShowValue2(false);
+    setShowValue3(false);
+    setShowValue4(false);
+    if (locationCounter === 4) {
+      ('');
+    } else {
+      navigation.navigate('CongratulationsNextClue');
+    }
+  };
+
   return (
     <View style={styles.page}>
       {/* Area/Location banner */}
@@ -64,7 +89,9 @@ const LocationOneClues = ({ route }) => {
       {/* First Clue ']' */}
       {showValue1 ? (
         <View>
-          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue1}</Text>
+          <Text style={styles.subtitle}>
+            {chosenRoutes.locations[locationCounter].clue1}
+          </Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -80,7 +107,9 @@ const LocationOneClues = ({ route }) => {
       {/* Second Clue */}
       {showValue2 ? (
         <View>
-          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue2}</Text>
+          <Text style={styles.subtitle}>
+            {chosenRoutes.locations[locationCounter].clue2}
+          </Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -96,7 +125,9 @@ const LocationOneClues = ({ route }) => {
       {/* Third Clue */}
       {showValue3 ? (
         <View>
-          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue3}</Text>
+          <Text style={styles.subtitle}>
+            {chosenRoutes.locations[locationCounter].clue3}
+          </Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -111,7 +142,7 @@ const LocationOneClues = ({ route }) => {
 
       {/* // submit location  */}
       <View style={styles.buttonLower}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={nextClue}>
           <Image
             source={require('../../images/submit-location-button.png')}
             style={styles.submitLocation}
@@ -120,7 +151,9 @@ const LocationOneClues = ({ route }) => {
           {/* give up */}
         </TouchableOpacity>
         {showValue4 && confirmedReveal ? (
-          <Text style={styles.title}>{chosenRoutes.locations[0].name}</Text>
+          <Text style={styles.title}>
+            {chosenRoutes.locations[locationCounter].name}
+          </Text>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleClue4}>
             <Image
