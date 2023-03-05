@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import { NavigationContainer } from '@react-navigation/native';
 
-const LocationOneClues = () =>{
-
+const LocationOneClues = () => {
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
-  const [chosenRoutes, setChosenRoutes] = useState("");
-
-  
+  const [chosenRoutes, setChosenRoutes] = useState('');
+  const [routes, setRoutes] = useState([]);
 
   const handleClue1 = () => {
-    setShowValue1(true)
-  }
+    setShowValue1(true);
+  };
 
   const handleClue2 = () => {
-    setShowValue2(true)
-  }
+    setShowValue2(true);
+  };
 
   const handleClue3 = () => {
-    setShowValue3(true)
-  }
+    setShowValue3(true);
+  };
 
   const handleClue4 = () => {
     setShowValue4(!showValue4);
@@ -33,17 +39,18 @@ const LocationOneClues = () =>{
       'You will get your location',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'OK', onPress: () => {
-          setConfirmedReveal(true);
-          setShowValue4(!showValue4);
-        } },
+        {
+          text: 'OK',
+          onPress: () => {
+            setConfirmedReveal(true);
+            setShowValue4(!showValue4);
+          },
+        },
       ],
       { cancelable: false }
     );
-  }
+  };
 
-  
-  const [routes, setRoutes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let token = await SecureStore.getItemAsync('token');
@@ -58,108 +65,95 @@ const LocationOneClues = () =>{
           }
         );
         const data = await response.json();
-        console.log(data.routes[2].locations[1].name);
         await SecureStore.setItemAsync('token', data.token);
         setRoutes(data.routes);
       }
     };
     fetchData();
   }, []);
- 
 
+  return (
+    <View style={styles.page}>
+      {/* Area/Location banner */}
+      <View style={styles.banner}>
+        <Image
+          source={require('../../images/area1-banner.png')}
+          style={styles.banner}
+        />
+      </View>
 
-return (
-  <View style={styles.page}>
-    
-    {/* Area/Location banner */}
-    <View style={styles.banner}>
-      <Image
-        source={require('../../images/area1-banner.png')}
-        style={styles.banner}
-      />
+      {/* First Clue ']' */}
+      {showValue1 ? (
+        <View>
+          <Text style={styles.subtitle}></Text>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleClue1}>
+            <Image
+              source={require('../../images/get-first-clue-button.png')}
+              style={styles.image}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* Second Clue */}
+      {showValue2 ? (
+        <View>
+          <Text style={styles.subtitle}></Text>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleClue2}>
+            <Image
+              source={require('../../images/get-second-clue-button.png')}
+              style={styles.image}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* Third Clue */}
+      {showValue3 ? (
+        <View>
+          <Text style={styles.subtitle}></Text>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleClue3}>
+            <Image
+              source={require('../../images/get-third-clue-button.png')}
+              style={styles.image}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* // submit location  */}
+      <View style={styles.buttonLower}>
+        <TouchableOpacity style={styles.button}>
+          <Image
+            source={require('../../images/submit-location-button.png')}
+            style={styles.submitLocation}
+          />
+
+          {/* give up */}
+        </TouchableOpacity>
+        {showValue4 && confirmedReveal ? (
+          <Text style={styles.title}></Text>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={handleClue4}>
+            <Image
+              source={require('../../images/give-up-button.png')}
+              style={styles.giveUp}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
-
-    {/* First Clue ']' */}
-    {showValue1 ? (
-      <View>
-          <Text style={styles.subtitle}>
-            
-          </Text>
-        </View>
-    ) : (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleClue1}>
-        <Image
-          source={require('../../images/get-first-clue-button.png')}
-          style={styles.image}
-        />
-        </TouchableOpacity>
-        </View>
-    )}
-
-    {/* Second Clue */}
-    {showValue2 ? (
-      <View>
-        <Text style={styles.subtitle}>
-
-        </Text>
-      </View>
-    ) : (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleClue2}>
-        <Image
-          source={require('../../images/get-second-clue-button.png')}
-          style={styles.image}
-        />
-        </TouchableOpacity>
-        </View>
-    )}
-
-    {/* Third Clue */}
-    {showValue3 ? (
-      <View>
-        <Text style={styles.subtitle}>
-
-        </Text>
-      </View>
-    ) : (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleClue3}>
-        <Image
-          source={require('../../images/get-third-clue-button.png')}
-          style={styles.image}
-        />
-        </TouchableOpacity>
-        </View>
-    )}
-
-    {/* // submit location  */}
-<View style={styles.buttonLower}>
-  <TouchableOpacity style={styles.button}>
-    <Image
-      source={require('../../images/submit-location-button.png')}
-      style={styles.submitLocation}
-    />
-
-    {/* give up */}
-  </TouchableOpacity> 
-  {showValue4 && confirmedReveal ? (
-    <Text style={styles.title}>
-    
-    </Text>
-  ) : (
-    <TouchableOpacity style={styles.button} onPress={handleClue4}>
-      <Image
-        source={require('../../images/give-up-button.png')}
-        style={styles.giveUp}
-      />
-    </TouchableOpacity>
-  )}
-</View>
-</View>
-);
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -197,7 +191,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     borderWidth: 1,
     borderColor: '#429494',
-    backgroundColor: '#F3FAFA'
+    backgroundColor: '#F3FAFA',
   },
 
   // Text of all clues
@@ -245,8 +239,8 @@ const styles = StyleSheet.create({
     marginBottom: 120,
   },
   button: {
-  margin: 0,
-  } 
+    margin: 0,
+  },
 });
 
 export default LocationOneClues;
