@@ -40,7 +40,7 @@ const SignUpForm = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>Welcome to </Text>
+      <Text style={styles.subtitle}>Welcome to</Text>
       <Image 
         source={require('../../images/solved-logo.png')}
         style={styles.logo}
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
-    marginBottom: 0,
+    marginBottom: -120,
   },
   inputContainer: {
     width: '80%',
@@ -124,8 +124,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'contain',
-    height: 200,
-    width: 200,
+    height: 360,
+    width: 350,
+    marginBottom: -90,
   },
 });
 
