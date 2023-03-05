@@ -16,6 +16,19 @@ const RoutesController = {
         res.status(200).json({ routes: routes, token: token });
       });
   },
+
+  Create: (req, res) => {
+    const route = new Route(req.body);
+    route.save(async (err) => {
+      if (err) {
+        res.status(400).json({ message: 'Bad request' });
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+
+        res.status(204).json({ message: 'OK', token: token });
+      }
+    });
+  },
 };
 
 module.exports = RoutesController;

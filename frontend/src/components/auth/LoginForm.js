@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 import {
   Image,
@@ -32,9 +32,13 @@ const LogInForm = ({ navigation }) => {
       if (response.status !== 200) {
         const responseJson = await response.json();
         const token = responseJson.token;
-        await AsyncStorage.setItem('@storage_Key', token);
 
-        navigation.navigate('mainContainer');
+        await SecureStore.setItemAsync('token', token);
+
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MainContainer' }],
+        });
         console.log('success');
       } else {
         console.log('sign in not successful');
