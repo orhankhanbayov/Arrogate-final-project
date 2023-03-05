@@ -2,7 +2,15 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -25,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
         );
 
         const data = await response.json();
-        console.log(data.routes[0].locations[0].clue1);
+        // console.log(data.routes[0].locations[0].clue1);
         await SecureStore.setItemAsync('token', data.token);
         setRoutes(data.routes);
       }
@@ -54,14 +62,17 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  const banner1 = require('../../../images/area1-banner.png')
-  const banner2 = require('../../../images/area2-banner.png')
-  const banner3 = require('../../../images/area3-banner.png')
+  const banner1 = require('../../../images/area1-banner.png');
+  const banner2 = require('../../../images/area2-banner.png');
+  const banner3 = require('../../../images/area3-banner.png');
 
- 
   return (
     <View>
-      <ImageBackground source={require('../../../images/background.png')} resizeMode='cover' style={styles.background}></ImageBackground>
+      <ImageBackground
+        source={require('../../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
 
       {/* Solved Logo */}
       <View style={styles.logo}>
@@ -157,7 +168,6 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     marginTop: -10,
   },
-
 });
 
-export default HomeScreen
+export default HomeScreen;

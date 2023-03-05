@@ -25,6 +25,7 @@ const MapScreen = ({ navigation }) => {
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121,
       }}
+      showsMyLocationButton={true}
     ></MapView>
   );
 };
