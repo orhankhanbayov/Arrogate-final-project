@@ -53,7 +53,8 @@ const LogInForm = ({ navigation }) => {
       <Text style={styles.subtitle}>Welcome to</Text>
       <Image 
         source={require('../../images/solved-logo.png')}
-        style={styles.logo}/>
+        style={styles.logo}
+      />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffff',
+    backgroundColor: '#EAF3F1',
   },
   title: {
     fontSize: 24,
@@ -125,8 +126,8 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    height: 150,
-    width: 150,
+    height: 175,
+    width: 175,
   },
   logo: {
     resizeMode: 'contain',

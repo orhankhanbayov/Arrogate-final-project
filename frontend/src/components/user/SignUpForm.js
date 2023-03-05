@@ -39,52 +39,45 @@ const SignUpForm = ({ navigation }) => {
   }
 
   return (
-     
-    <View style={styles.signUpForm}>
-   
-      <View style={styles.boldLine} />
-      <View style={styles.window}>
-        <View style={styles.overlay} />
-        <View style={styles.content}>
-          <Text style={styles.subtitle}>Welcome to Solved!</Text>
-          <Text style={styles.subtitle}>Please signup below</Text>
-          <View style={styles.inputFields}>
-            <TextInput
-              placeholder='Name'
-              style={styles.input}
-              value={name}
-              onChangeText={handleNameChange}
-              autoCapitalize="none"
-            />
-            <TextInput
-              placeholder='Email'
-              style={styles.input}
-              value={email}
-              onChangeText={handleEmailChange}
-              autoCapitalize="none"
-            />
-            <TextInput
-              placeholder='Password'
-              style={styles.input}
-              value={password}
-              onChangeText={handlePasswordChange}
-              autoCapitalize="none"
-              secureTextEntry={true}
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Image
-                source={require('../../images/sign-up-button.png')}
-                style={styles.image}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.subtitle}>Welcome to </Text>
+      <Image 
+        source={require('../../images/solved-logo.png')}
+        style={styles.logo}
+      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder='Name'
+          style={styles.input}
+          value={name}
+          onChangeText={handleNameChange}
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder='Email'
+          style={styles.input}
+          value={email}
+          onChangeText={handleEmailChange}
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder='Password'
+          style={styles.input}
+          value={password}
+          onChangeText={handlePasswordChange}
+          autoCapitalize="none"
+          secureTextEntry={true}
+        />
       </View>
-    
-  </View>
-
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Image
+            source={require('../../images/sign-up-button.png')}
+            style={styles.image}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -93,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#EAF3F1',
   },
   title: {
     fontSize: 24,
@@ -101,8 +94,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: 20,
+    marginBottom: 0,
   },
   inputContainer: {
     width: '80%',
@@ -121,20 +114,19 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    height: 150,
-    width: 150,
+    height: 175,
+    width: 175,
   },
   signUpForm: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonContainer: {
-    marginTop: 20,
-    width: '100%',
-    alignItems: 'center',
+  logo: {
+    resizeMode: 'contain',
+    height: 200,
+    width: 200,
   },
-
 });
 
 
