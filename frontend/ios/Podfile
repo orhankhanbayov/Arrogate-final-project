@@ -66,6 +66,8 @@ end
 
 target 'frontend' do
   use_expo_modules!
+  pod 'RNFS', path: '../node_modules/react-native-fs'
+
   pod 'Google-Maps-iOS-Utils',
       git: 'https://github.com/Simon-TechForm/google-maps-ios-utils.git',
       branch: 'feat/support-apple-silicon'

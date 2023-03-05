@@ -70,8 +70,11 @@ const LocationOneClues = ({ route, navigation }) => {
     setShowValue4(false);
     if (locationCounter === 4) {
       navigation.navigate('Finished');
+      // navigation.navigate('LandmarkCamera');
     } else {
-      navigation.navigate('CongratulationsNextClue');
+      navigation.navigate('LandmarkCamera');
+
+      // navigation.navigate('CongratulationsNextClue');
     }
   };
 

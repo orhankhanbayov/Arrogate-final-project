@@ -5,6 +5,7 @@ import ChooseRoutes from '../../chooseRoutes/chooseRoutes';
 import LocationOneClues from '../../locations/LocationOneClues';
 import CongratulationsNextClue from '../../congraulationsNextClue/congratulationsNextClue';
 import Finished from '../../finished/finished';
+import LandmarkCamera from '../../landmarkCamera/landmark';
 import {
   View,
   Text,
@@ -30,6 +31,7 @@ const HomeScreen = ({ navigation }) => {
         component={CongratulationsNextClue}
       />
       <Stack.Screen name="Finished" component={Finished} />
+      <Stack.Screen name="LandmarkCamera" component={LandmarkCamera} />
     </Stack.Navigator>
   );
 };

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
+
 import {
   Image,
   StyleSheet,
