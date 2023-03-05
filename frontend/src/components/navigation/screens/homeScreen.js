@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ChooseRoutes from '../../chooseRoutes/chooseRoutes';
 import LocationOneClues from '../../locations/LocationOneClues';
 import CongratulationsNextClue from '../../congraulationsNextClue/congratulationsNextClue';
+import Finished from '../../finished/finished';
 import {
   View,
   Text,
@@ -28,6 +29,7 @@ const HomeScreen = ({ navigation }) => {
         name="CongratulationsNextClue"
         component={CongratulationsNextClue}
       />
+      <Stack.Screen name="Finished" component={Finished} />
     </Stack.Navigator>
   );
 };

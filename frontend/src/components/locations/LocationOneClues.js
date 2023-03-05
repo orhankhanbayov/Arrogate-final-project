@@ -18,7 +18,6 @@ const LocationOneClues = ({ route, navigation }) => {
   const [confirmedReveal, setConfirmedReveal] = useState(false);
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
-
   const [value, setValue] = useState(0);
 
   const set = () => {
@@ -70,7 +69,7 @@ const LocationOneClues = ({ route, navigation }) => {
     setShowValue3(false);
     setShowValue4(false);
     if (locationCounter === 4) {
-      ('');
+      navigation.navigate('Finished');
     } else {
       navigation.navigate('CongratulationsNextClue');
     }
