@@ -77,12 +77,12 @@ const LogInForm = ({ navigation }) => {
           style={styles.image}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleSignUpPress}>
-        <Text>
-          {' '}
-          Don't have an account?<Text style={{ color: 'blue' }}> SignUp!</Text>
-        </Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text>Don't have an account?</Text>
+        <TouchableOpacity onPress={handleSignUpPress}>
+          <Text style={{ color: 'blue' }}> SignUp!</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
