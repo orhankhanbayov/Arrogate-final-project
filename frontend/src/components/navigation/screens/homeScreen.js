@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -34,6 +34,31 @@ const HomeScreen = ({ navigation }) => {
     fetchData();
   }, []);
 
+  const handleBannerPress = (route) => {
+    Alert.alert(
+      route.name,
+      route.bio,
+      [
+        {
+          text: 'Go Back',
+          style: 'cancel',
+        },
+        {
+          text: 'Take This Route',
+          onPress: () => {
+            navigation.navigate('LocationOneClues', { route });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const banner1 = require('../../../images/area1-banner.png')
+  const banner2 = require('../../../images/area2-banner.png')
+  const banner3 = require('../../../images/area3-banner.png')
+
+ 
   return (
     <View>
       <ImageBackground source={require('../../../images/background.png')} resizeMode='cover' style={styles.background}></ImageBackground>
@@ -49,39 +74,39 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.title}>Choose the area you want to explore:</Text>
 
       {/* Area banner 1 - South Bank */}
-      <View style={styles.banner}>
-        <Image
-          source={require('../../../images/area1-banner.png')}
-          style={styles.banner}
-        />
-      </View>
+      <View>
+        {routes.map((route) => {
+          let imageSource;
 
-      {/* Area banner 2 - City of London */}
-      <View style={styles.banner}>
-        <Image
-          source={require('../../../images/area2-banner.png')}
-          style={styles.banner}
-        />
-      </View>
+          switch (route.name) {
+            case 'South Bank':
+              imageSource = require('../../../images/area1-banner.png');
+              break;
+            case 'City Of London':
+              imageSource = require('../../../images/area2-banner.png');
+              break;
+            case 'West End':
+              imageSource = require('../../../images/area3-banner.png');
+              break;
+            default:
+              imageSource = null;
+          }
 
-      {/* Area banner 3 - West End */}
-      <View style={styles.banner}>
-        <Image
-          source={require('../../../images/area3-banner.png')}
-          style={styles.banner}
-        />
-      </View>
+          if (!imageSource) {
+            return null; // skip this route if image source not found
+          }
 
-      {/* {routes.map((route) => (
-        <Text key={route._id}>
-          {route.name}
-          {'\n'}
-          {route.bio}
-          {'\n'}
-          {route.time}
-          {'\n'}
-        </Text>
-      ))} */}
+          return (
+            <TouchableOpacity
+              key={route._id}
+              style={styles.banner}
+              onPress={() => handleBannerPress(route)}
+            >
+              <Image source={imageSource} style={styles.banner} />
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 };
