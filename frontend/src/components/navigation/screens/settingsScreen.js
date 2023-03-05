@@ -23,7 +23,6 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Settings Screen</Text>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Image
           source={require('../../../images/logout-button.png')}
