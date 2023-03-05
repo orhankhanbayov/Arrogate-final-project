@@ -10,16 +10,16 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
-const LocationOneClues = () => {
+const LocationOneClues = ({ route }) => {
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
   const [showValue4, setShowValue4] = useState(false); // this is for the give up
   const [confirmedReveal, setConfirmedReveal] = useState(false);
   const [chosenRoutes, setChosenRoutes] = useState('');
-  const [routes, setRoutes] = useState([]);
 
   const handleClue1 = () => {
+    setChosenRoutes(route.params.route);
     setShowValue1(true);
   };
 
@@ -51,27 +51,6 @@ const LocationOneClues = () => {
     );
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let token = await SecureStore.getItemAsync('token');
-      if (token) {
-        const response = await fetch(
-          'https://mystery-route-backend.onrender.com/routes',
-          {
-            method: 'get',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await response.json();
-        await SecureStore.setItemAsync('token', data.token);
-        setRoutes(data.routes);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
     <View style={styles.page}>
       {/* Area/Location banner */}
@@ -85,7 +64,7 @@ const LocationOneClues = () => {
       {/* First Clue ']' */}
       {showValue1 ? (
         <View>
-          <Text style={styles.subtitle}></Text>
+          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue1}</Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -101,7 +80,7 @@ const LocationOneClues = () => {
       {/* Second Clue */}
       {showValue2 ? (
         <View>
-          <Text style={styles.subtitle}></Text>
+          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue2}</Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -117,7 +96,7 @@ const LocationOneClues = () => {
       {/* Third Clue */}
       {showValue3 ? (
         <View>
-          <Text style={styles.subtitle}></Text>
+          <Text style={styles.subtitle}>{chosenRoutes.locations[0].clue3}</Text>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
@@ -141,7 +120,7 @@ const LocationOneClues = () => {
           {/* give up */}
         </TouchableOpacity>
         {showValue4 && confirmedReveal ? (
-          <Text style={styles.title}></Text>
+          <Text style={styles.title}>{chosenRoutes.locations[0].name}</Text>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleClue4}>
             <Image
