@@ -16,10 +16,35 @@ export default function LandmarkCamera({ route, navigation }) {
   const [location, setLocation] = useState();
   const { name } = route.params;
 
+  const getUserCoords = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      return;
+    }
+
+    let currentLocation = await Location.getCurrentPositionAsync({});
+    setLocation(currentLocation);
+
+    const dis1 = getPreciseDistance(
+      {
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+      }, // the user's coords
+      {
+        latitude: name.coordinates.coordinates[0],
+        longitude: name.coordinates.coordinates[1],
+      } // the secret location coords
+    );
+    if (dis1 < 50) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const takePicture = async () => {
     if (camera) {
       const { uri } = await camera.takePictureAsync(null);
-      console.log(uri);
 
       const base64 = await FileSystem.readAsStringAsync(uri, {
         encoding: FileSystem.EncodingType.Base64,
@@ -33,9 +58,11 @@ export default function LandmarkCamera({ route, navigation }) {
       });
       let response = await vision.annotate(req);
       let data = JSON.parse(JSON.stringify(response.responses));
+      let close = await getUserCoords();
       if (
-        data[0].landmarkAnnotations?.length > 0 &&
-        data[0].landmarkAnnotations[0].description === name
+        (data[0].landmarkAnnotations?.length > 0 &&
+          data[0].landmarkAnnotations[0].description === name.name) ||
+        close
       ) {
         navigation.navigate('CongratulationsNextClue');
       } else {

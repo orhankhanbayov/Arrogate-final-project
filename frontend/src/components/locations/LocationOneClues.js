@@ -75,7 +75,7 @@ const LocationOneClues = ({ route, navigation }) => {
       if (render === false) {
         setLocationCounter(locationCounter + 1);
       }
-      let name = chosenRoutes.locations[locationCounter].name;
+      let name = chosenRoutes.locations[locationCounter];
       navigation.navigate('LandmarkCamera', { name });
     }
   };
