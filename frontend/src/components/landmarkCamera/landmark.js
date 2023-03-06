@@ -4,13 +4,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Camera } from 'expo-camera';
 import vision from 'react-cloud-vision-api';
 import * as FileSystem from 'expo-file-system';
+import * as Location from 'expo-location';
+import { getPreciseDistance } from 'geolib';
 
 vision.init({ auth: 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E' });
 
-export default function LandmarkCamera({ navigation }) {
+export default function LandmarkCamera({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState(null);
+  const [location, setLocation] = useState();
+  const { name } = route.params;
 
   const takePicture = async () => {
     if (camera) {
@@ -27,17 +31,17 @@ export default function LandmarkCamera({ navigation }) {
         }),
         features: [new vision.Feature('LANDMARK_DETECTION', 4)],
       });
+      let response = await vision.annotate(req);
+      let data = JSON.parse(JSON.stringify(response.responses));
+      if (
+        data[0].landmarkAnnotations?.length > 0 &&
+        data[0].landmarkAnnotations[0].description === name
+      ) {
+        navigation.navigate('CongratulationsNextClue');
+      } else {
+        let render = true;
 
-      let response = vision.annotate(req).then(
-        (res) => {
-          console.log(JSON.stringify(res.responses));
-        },
-        (e, a) => {
-          console.log('Error: ', e);
-        }
-      );
-
-      if (response[0].description === '') {
+        navigation.navigate('LocationOneClues', { render });
       }
     }
   };
