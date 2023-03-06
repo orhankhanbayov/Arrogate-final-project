@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   // Text of location revealed
   title: {
     fontSize: 18,
-    color: 'navy',
+    color: '#204376',
     fontWeight: 'bold',
     justifyContent: 'center',
     padding: 5,
