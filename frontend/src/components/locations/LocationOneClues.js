@@ -94,6 +94,7 @@ const LocationOneClues = ({ route, navigation }) => {
       ></ImageBackground>
 
       {/* Area/Location banner */}
+
       <View style={styles.banner}>
         <Image
           source={
@@ -111,6 +112,7 @@ const LocationOneClues = ({ route, navigation }) => {
         <Text style={styles.header}>{`Location ${
           locationCounter + 1
         } of 5`}</Text>
+
         <Text>{render ? 'Please try again' : ''}</Text>
       </View>
 
