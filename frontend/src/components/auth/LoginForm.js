@@ -28,8 +28,7 @@ const LogInForm = ({ navigation }) => {
         }
       );
 
-      console.log('the status:', response.status);
-      if (response.status !== 200) {
+      if (response.status === 201) {
         const responseJson = await response.json();
         const token = responseJson.token;
 
@@ -41,10 +40,10 @@ const LogInForm = ({ navigation }) => {
         });
         console.log('success');
       } else {
-        console.log('sign in not successful');
+
       }
     } catch (error) {
-      console.error('Error', error);
+      error
     }
   };
 
@@ -64,6 +63,7 @@ const LogInForm = ({ navigation }) => {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          testID='Email'
         />
         <TextInput
           placeholder="Password"
@@ -72,6 +72,7 @@ const LogInForm = ({ navigation }) => {
           onChangeText={setPassword}
           secureTextEntry={true}
           autoCapitalize="none"
+          testID='Password'
         />
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
@@ -79,6 +80,7 @@ const LogInForm = ({ navigation }) => {
         <Image
           source={require('../../images/login-button.png')}
           style={styles.image}
+          testID={'login-button'}
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignUpPress}>

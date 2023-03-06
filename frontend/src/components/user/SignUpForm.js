@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+ 
 } from 'react-native';
 
 const SignUpForm = ({ navigation }) => {
@@ -89,7 +90,7 @@ const SignUpForm = ({ navigation }) => {
             />
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit} testID="signup-button">
               <Image
                 source={require('../../images/sign-up-button.png')}
                 style={styles.image}
