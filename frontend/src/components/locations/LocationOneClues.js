@@ -87,6 +87,7 @@ const LocationOneClues = ({ route, navigation }) => {
   return (
     <View style={styles.page}>
       {/* Area/Location banner */}
+
       <View style={styles.banner}>
         <Image
           source={require('../../images/area1-banner.png')}
@@ -94,6 +95,7 @@ const LocationOneClues = ({ route, navigation }) => {
         />
       </View>
       <View>
+        <Text>{`Location ${locationCounter + 1}`}</Text>
         <Text>{render ? 'Please try again' : ''}</Text>
       </View>
       {/* First Clue ']' */}
