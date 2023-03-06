@@ -28,7 +28,7 @@ export default function LandmarkCamera({ navigation }) {
         features: [new vision.Feature('LANDMARK_DETECTION', 4)],
       });
 
-      vision.annotate(req).then(
+      let response = vision.annotate(req).then(
         (res) => {
           console.log(JSON.stringify(res.responses));
         },
@@ -36,6 +36,9 @@ export default function LandmarkCamera({ navigation }) {
           console.log('Error: ', e);
         }
       );
+
+      if (response[0].description === '') {
+      }
     }
   };
 

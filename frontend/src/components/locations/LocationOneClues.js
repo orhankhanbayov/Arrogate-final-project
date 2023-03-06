@@ -72,8 +72,10 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('Finished');
       // navigation.navigate('LandmarkCamera');
     } else {
-      navigation.navigate('LandmarkCamera');
-
+      navigation.navigate(
+        'LandmarkCamera',
+        chosenRoutes.locations[locationCounter].name
+      );
       // navigation.navigate('CongratulationsNextClue');
     }
   };
