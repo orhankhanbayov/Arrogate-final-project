@@ -96,20 +96,28 @@ const LocationOneClues = ({ route, navigation }) => {
       {/* Area/Location banner */}
       <View style={styles.banner}>
         <Image
-          source={require('../../images/area1-banner.png')}
+          source={
+            chosenRoutes.name === 'South Bank'
+              ? require('../../images/area1-banner.png')
+              : chosenRoutes.name === 'City Of London'
+              ? require('../../images/area2-banner.png')
+              : require('../../images/area3-banner.png')
+          }
           style={styles.banner}
         />
       </View>
-      
+
       <View>
-        <Text style={styles.header}>{`Location ${locationCounter + 1} of 5`}</Text>
+        <Text style={styles.header}>{`Location ${
+          locationCounter + 1
+        } of 5`}</Text>
         <Text>{render ? 'Please try again' : ''}</Text>
       </View>
 
       {/* First Clue ']' */}
       {showValue1 ? (
         <View style={styles.clueBorder}>
-        <Text style={styles.cluesText}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue1}
           </Text>
         </View>
@@ -127,7 +135,7 @@ const LocationOneClues = ({ route, navigation }) => {
       {/* Second Clue */}
       {showValue2 ? (
         <View style={styles.clueBorder}>
-        <Text style={styles.cluesText}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue2}
           </Text>
         </View>
@@ -145,7 +153,7 @@ const LocationOneClues = ({ route, navigation }) => {
       {/* Third Clue */}
       {showValue3 ? (
         <View style={styles.clueBorder}>
-        <Text style={styles.cluesText}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue3}
           </Text>
         </View>
@@ -170,12 +178,13 @@ const LocationOneClues = ({ route, navigation }) => {
         </TouchableOpacity>
 
         {/* give up */}
-        
+
         {showValue4 && confirmedReveal ? (
           <View style={styles.giveUpBorder}>
-          <Text style={styles.textGiveUp}>
-            {chosenRoutes.locations[locationCounter].name}
-          </Text></View>
+            <Text style={styles.textGiveUp}>
+              {chosenRoutes.locations[locationCounter].name}
+            </Text>
+          </View>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleClue4}>
             <Image
@@ -184,7 +193,6 @@ const LocationOneClues = ({ route, navigation }) => {
             />
           </TouchableOpacity>
         )}
-        
       </View>
     </View>
   );
@@ -213,7 +221,7 @@ const styles = StyleSheet.create({
 
   header: {
     fontSize: 22,
-    flexDirection:'column',
+    flexDirection: 'column',
     color: '#204376',
     fontWeight: 'bold',
     marginTop: 140,
@@ -238,7 +246,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 25,
   },
-  
+
   // get clues buttons images
   buttonContainer1: {
     position: 'absolute',
