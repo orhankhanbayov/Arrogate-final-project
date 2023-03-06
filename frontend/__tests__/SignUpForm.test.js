@@ -1,14 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render, fireEvent, waitFor, act, screen } from '@testing-library/react-native';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  act,
+  screen,
+} from '@testing-library/react-native';
 import SignUpForm from '../src/components/user/SignUpForm';
 
-
 describe('Sign up form', () => {
-  
   it('renders correctly', () => {
-  const tree = renderer.create(<SignUpForm />).toJSON();
-  expect(tree.children.length).toBe(2);
+    const tree = renderer.create(<SignUpForm />).toJSON();
+    expect(tree.children.length).toBe(4);
   });
 
   it('renders all the input fields', () => {
@@ -55,4 +59,3 @@ describe('Sign up form', () => {
     await waitFor(() => expect(navigation.reset).toHaveBeenCalledTimes(1));
   });
 });
-
