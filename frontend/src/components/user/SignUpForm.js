@@ -57,30 +57,29 @@ const SignUpForm = ({ navigation }) => {
   };
 
   return (
-
     <View style={styles.container}>
       <Text style={styles.subtitle}>Welcome to</Text>
-      <Image 
+      <Image
         source={require('../../images/solved-logo.png')}
         style={styles.logo}
       />
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder='Name'
+          placeholder="Name"
           style={styles.input}
           value={name}
           onChangeText={handleNameChange}
           autoCapitalize="none"
         />
         <TextInput
-          placeholder='Email'
+          placeholder="Email"
           style={styles.input}
           value={email}
           onChangeText={handleEmailChange}
           autoCapitalize="none"
         />
         <TextInput
-          placeholder='Password'
+          placeholder="Password"
           style={styles.input}
           value={password}
           onChangeText={handlePasswordChange}
@@ -96,7 +95,6 @@ const SignUpForm = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
