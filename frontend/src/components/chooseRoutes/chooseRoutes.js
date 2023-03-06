@@ -41,25 +41,27 @@ const ChooseRoutes = ({ navigation }) => {
     fetchData();
   }, []);
 
-  const handleBannerPress = (route) => {
-    Alert.alert(
-      route.name,
-      route.bio,
-      [
-        {
-          text: 'Go Back',
-          style: 'cancel',
-        },
-        {
-          text: 'Take This Route',
-          onPress: () => {
-            navigation.navigate('LocationOneClues', { route });
-          },
-        },
-      ],
-      { cancelable: false }
-    );
-  };
+  // const handleBannerPress = (route) => {
+  //   Alert.alert(
+  //     route.name,
+  //     route.bio,
+  //     [
+  //       {
+  //         text: 'Go Back',
+  //         style: 'cancel',
+  //       },
+  //       {
+  //         text: 'Take This Route',
+  //         onPress: () => {
+  //           navigation.navigate('LocationOneClues', { route });
+  //         },
+  //       },
+  //     ],
+  //     { cancelable: false }
+  //   );
+  // };
+
+  const navDescription = () => {};
 
   const banner1 = require('../../images/area1-banner.png');
   const banner2 = require('../../images/area2-banner.png');
@@ -85,10 +87,10 @@ const ChooseRoutes = ({ navigation }) => {
 
       {/* Area banner 1 - South Bank */}
       <View>
-        {routes.map((route) => {
+        {routes.map((routes) => {
           let imageSource;
 
-          switch (route.name) {
+          switch (routes.name) {
             case 'South Bank':
               imageSource = require('../../images/area1-banner.png');
               break;
@@ -108,9 +110,11 @@ const ChooseRoutes = ({ navigation }) => {
 
           return (
             <TouchableOpacity
-              key={route._id}
+              key={routes._id}
               style={styles.banner}
-              onPress={() => handleBannerPress(route)}
+              onPress={() =>
+                navigation.navigate('RouteDescription', { routes })
+              }
             >
               <Image source={imageSource} style={styles.banner} />
             </TouchableOpacity>

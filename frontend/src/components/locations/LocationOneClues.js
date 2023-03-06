@@ -27,7 +27,7 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const set = () => {
     if (value === 0) {
-      setChosenRoutes(route.params.route);
+      setChosenRoutes(route.params.routes);
       setValue(1);
     }
   };
