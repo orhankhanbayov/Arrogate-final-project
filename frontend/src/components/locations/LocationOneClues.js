@@ -8,9 +8,13 @@ import {
   Alert,
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 const LocationOneClues = ({ route, navigation }) => {
+  const { render } = route.params;
+  const { pass } = route.params;
+
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
@@ -28,6 +32,12 @@ const LocationOneClues = ({ route, navigation }) => {
   };
 
   set();
+
+  useEffect(() => {
+    if (pass === false) {
+      setLocationCounter(locationCounter + 1);
+    }
+  }, [pass]);
 
   const handleClue1 = () => {
     setShowValue1(true);
@@ -62,8 +72,6 @@ const LocationOneClues = ({ route, navigation }) => {
   };
 
   const nextClue = () => {
-    setLocationCounter(locationCounter + 1);
-
     setShowValue1(false);
     setShowValue2(false);
     setShowValue3(false);
@@ -71,7 +79,8 @@ const LocationOneClues = ({ route, navigation }) => {
     if (locationCounter === 4) {
       navigation.navigate('Finished');
     } else {
-      navigation.navigate('CongratulationsNextClue');
+      let name = chosenRoutes.locations[locationCounter];
+      navigation.navigate('LandmarkCamera', { name });
     }
   };
 
@@ -84,7 +93,9 @@ const LocationOneClues = ({ route, navigation }) => {
           style={styles.banner}
         />
       </View>
-
+      <View>
+        <Text>{render ? 'Please try again' : ''}</Text>
+      </View>
       {/* First Clue ']' */}
       {showValue1 ? (
         <View>

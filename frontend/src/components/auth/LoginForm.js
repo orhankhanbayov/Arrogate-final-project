@@ -50,11 +50,14 @@ const LogInForm = ({ navigation }) => {
   const handleSignUpPress = () => {
     navigation.navigate('SignUp');
   };
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hello there!</Text>
-      <Text style={styles.subtitle}>Welcome to Solved!</Text>
-      <Text style={styles.subtitle}>Login below</Text>
+      <Text style={styles.subtitle}>Welcome to</Text>
+      <Image 
+        source={require('../../images/solved-logo.png')}
+        style={styles.logo}
+      />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -76,6 +79,7 @@ const LogInForm = ({ navigation }) => {
         />
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
+
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Image
           source={require('../../images/login-button.png')}
@@ -83,12 +87,13 @@ const LogInForm = ({ navigation }) => {
           testID={'login-button'}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleSignUpPress}>
-        <Text>
-          {' '}
-          Don't have an account?<Text style={{ color: 'blue' }}> SignUp!</Text>
-        </Text>
-      </TouchableOpacity>
+      
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text>Don't have an account?</Text>
+        <TouchableOpacity onPress={handleSignUpPress}>
+          <Text style={{ color: 'blue' }}> SignUp!</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#EAF3F1',
   },
   title: {
     fontSize: 24,
@@ -106,8 +111,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: 20,
+    marginBottom: -120,
   },
   inputContainer: {
     width: '80%',
@@ -127,8 +132,15 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    height: 150,
-    width: 150,
+    height: 175,
+    width: 175,
+    marginBottom: 60,
+  },
+  logo: {
+    resizeMode: 'contain',
+    height: 360,
+    width: 350,
+    marginBottom: -90,
   },
 });
 

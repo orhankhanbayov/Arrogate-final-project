@@ -7,7 +7,7 @@ import MainContainer from './src/components/navigation/mainContainer';
 import LocationOneClues from './src/components/locations/LocationOneClues';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-
+import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
 
 export default function App() {
