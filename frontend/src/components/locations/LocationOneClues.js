@@ -102,10 +102,7 @@ const LocationOneClues = ({ route, navigation }) => {
       </View>
       
       <View>
-        <Text style={styles.header}>Location __ of 5</Text>
-      </View>
-
-      <View>
+        <Text style={styles.header}>{`Location ${locationCounter + 1} of 5`}</Text>
         <Text>{render ? 'Please try again' : ''}</Text>
       </View>
 
@@ -170,13 +167,15 @@ const LocationOneClues = ({ route, navigation }) => {
             source={require('../../images/submit-location-button.png')}
             style={styles.submitLocation}
           />
-
-          {/* give up */}
         </TouchableOpacity>
+
+        {/* give up */}
+        
         {showValue4 && confirmedReveal ? (
+          <View style={styles.giveUpBorder}>
           <Text style={styles.textGiveUp}>
             {chosenRoutes.locations[locationCounter].name}
-          </Text>
+          </Text></View>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleClue4}>
             <Image
@@ -185,6 +184,7 @@ const LocationOneClues = ({ route, navigation }) => {
             />
           </TouchableOpacity>
         )}
+        
       </View>
     </View>
   );
@@ -217,22 +217,8 @@ const styles = StyleSheet.create({
     color: '#204376',
     fontWeight: 'bold',
     marginTop: 140,
-    marginLeft: 115,
+    marginLeft: 120,
     marginRight: 50,
-  },
-  // Text of location revealed
-  textGiveUp: {
-    fontSize: 20,
-    color: '#204376',
-    fontWeight: 'bold',
-    padding: 20,
-    marginLeft: 50,
-    marginRight: 200,
-    marginBottom: 100,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: '#429494',
-    backgroundColor: 'EAF3F1',
   },
 
   // Text of all clues
@@ -292,11 +278,30 @@ const styles = StyleSheet.create({
     height: 170,
     width: 180,
     marginRight: 5,
+    marginBottom: 10,
+    marginLeft: 5,
+  },
+  giveUpBorder: {
+    position: 'absolute',
+    borderRadius: 25,
+    backgroundColor: '#FFDE59',
+    marginVertical: 55,
+    // marginHorizontal: 150,
+    marginLeft: 170,
+    marginRight: 5,
+  },
+  // Text of location revealed
+  textGiveUp: {
+    fontSize: 18,
+    color: '#204376',
+    fontWeight: 'bold',
+    padding: 20,
+    marginLeft: 1,
+    marginRight: 10,
   },
   page: {
     flex: 1,
   },
-  
   buttonLower: {
     position: 'absolute',
     flexDirection: 'row',
