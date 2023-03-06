@@ -105,7 +105,11 @@ const LocationOneClues = ({ route, navigation }) => {
         </View>
       ) : (
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue1}>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={handleClue1}
+          testID="get-first-clue-button"
+          >
             <Image
               source={require('../../images/get-first-clue-button.png')}
               style={styles.image}
@@ -123,7 +127,11 @@ const LocationOneClues = ({ route, navigation }) => {
         </View>
       ) : (
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue2}>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={handleClue2} 
+          testID="get-second-clue-button"
+          >
             <Image
               source={require('../../images/get-second-clue-button.png')}
               style={styles.image}
@@ -141,7 +149,11 @@ const LocationOneClues = ({ route, navigation }) => {
         </View>
       ) : (
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue3}>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={handleClue3}
+          testID="get-third-clue-button"
+          >
             <Image
               source={require('../../images/get-third-clue-button.png')}
               style={styles.image}
@@ -152,7 +164,11 @@ const LocationOneClues = ({ route, navigation }) => {
 
       {/* // submit location  */}
       <View style={styles.buttonLower}>
-        <TouchableOpacity style={styles.button} onPress={nextClue}>
+        <TouchableOpacity 
+        style={styles.button} 
+        onPress={nextClue}
+        testID="next-clue"
+        >
           <Image
             source={require('../../images/submit-location-button.png')}
             style={styles.submitLocation}
@@ -165,7 +181,11 @@ const LocationOneClues = ({ route, navigation }) => {
             {chosenRoutes.locations[locationCounter].name}
           </Text>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleClue4}>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={handleClue4}
+          testID="give-up-button"
+          >
             <Image
               source={require('../../images/give-up-button.png')}
               style={styles.giveUp}
