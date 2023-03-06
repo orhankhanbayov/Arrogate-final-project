@@ -12,8 +12,8 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const CongratulationsNextClue = ({ navigation }) => {
   const nextLocation = () => {
-    let render = false;
-    navigation.navigate('LocationOneClues', render);
+    let pass = false;
+    navigation.navigate('LocationOneClues', { pass });
   };
 
   return (

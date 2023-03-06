@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
+  const { pass } = route.params;
 
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
@@ -31,6 +32,12 @@ const LocationOneClues = ({ route, navigation }) => {
   };
 
   set();
+
+  useEffect(() => {
+    if (pass === false) {
+      setLocationCounter(locationCounter + 1);
+    }
+  }, [pass]);
 
   const handleClue1 = () => {
     setShowValue1(true);
@@ -72,9 +79,6 @@ const LocationOneClues = ({ route, navigation }) => {
     if (locationCounter === 4) {
       navigation.navigate('Finished');
     } else {
-      if (render === false) {
-        setLocationCounter(locationCounter + 1);
-      }
       let name = chosenRoutes.locations[locationCounter];
       navigation.navigate('LandmarkCamera', { name });
     }
