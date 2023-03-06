@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ImageBackground,
   TouchableOpacity,
   Image,
   Alert,
@@ -56,7 +57,7 @@ const LocationOneClues = ({ route, navigation }) => {
     setConfirmedReveal(false);
     Alert.alert(
       'Are you sure?',
-      'You will get your location',
+      'You will get the location',
       [
         { text: 'Cancel', style: 'cancel' },
         {
@@ -86,28 +87,45 @@ const LocationOneClues = ({ route, navigation }) => {
 
   return (
     <View style={styles.page}>
+      <ImageBackground
+        source={require('../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
+
       {/* Area/Location banner */}
 
       <View style={styles.banner}>
         <Image
-          source={require('../../images/area1-banner.png')}
+          source={
+            chosenRoutes.name === 'South Bank'
+              ? require('../../images/area1-banner.png')
+              : chosenRoutes.name === 'City Of London'
+              ? require('../../images/area2-banner.png')
+              : require('../../images/area3-banner.png')
+          }
           style={styles.banner}
         />
       </View>
+
       <View>
-        <Text>{`Location ${locationCounter + 1}`}</Text>
+        <Text style={styles.header}>{`Location ${
+          locationCounter + 1
+        } of 5`}</Text>
+
         <Text>{render ? 'Please try again' : ''}</Text>
       </View>
+
       {/* First Clue ']' */}
       {showValue1 ? (
-        <View>
-          <Text style={styles.subtitle}>
+        <View style={styles.clueBorder}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue1}
           </Text>
         </View>
       ) : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue1}>
+        <View style={styles.buttonContainer1}>
+          <TouchableOpacity onPress={handleClue1}>
             <Image
               source={require('../../images/get-first-clue-button.png')}
               style={styles.image}
@@ -118,14 +136,14 @@ const LocationOneClues = ({ route, navigation }) => {
 
       {/* Second Clue */}
       {showValue2 ? (
-        <View>
-          <Text style={styles.subtitle}>
+        <View style={styles.clueBorder}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue2}
           </Text>
         </View>
       ) : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue2}>
+        <View style={styles.buttonContainer2}>
+          <TouchableOpacity onPress={handleClue2}>
             <Image
               source={require('../../images/get-second-clue-button.png')}
               style={styles.image}
@@ -136,14 +154,14 @@ const LocationOneClues = ({ route, navigation }) => {
 
       {/* Third Clue */}
       {showValue3 ? (
-        <View>
-          <Text style={styles.subtitle}>
+        <View style={styles.clueBorder}>
+          <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue3}
           </Text>
         </View>
       ) : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleClue3}>
+        <View style={styles.buttonContainer3}>
+          <TouchableOpacity onPress={handleClue3}>
             <Image
               source={require('../../images/get-third-clue-button.png')}
               style={styles.image}
@@ -159,13 +177,16 @@ const LocationOneClues = ({ route, navigation }) => {
             source={require('../../images/submit-location-button.png')}
             style={styles.submitLocation}
           />
-
-          {/* give up */}
         </TouchableOpacity>
+
+        {/* give up */}
+
         {showValue4 && confirmedReveal ? (
-          <Text style={styles.title}>
-            {chosenRoutes.locations[locationCounter].name}
-          </Text>
+          <View style={styles.giveUpBorder}>
+            <Text style={styles.textGiveUp}>
+              {chosenRoutes.locations[locationCounter].name}
+            </Text>
+          </View>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleClue4}>
             <Image
@@ -180,90 +201,125 @@ const LocationOneClues = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#EAF3F1',
-    padding: 8,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
-
   banner: {
     flex: 1,
     flexGrow: 1,
     flexDirection: 'row',
-    // to the left:
     justifyContent: 'flex-start',
-    padding: 60,
+    padding: 70,
     resizeMode: 'contain',
     height: 50,
     width: 20,
-    marginLeft: -10,
-    marginTop: 10,
+    position: 'absolute',
+    marginHorizontal: 15,
   },
 
-  // Text of location revealed
-  title: {
-    fontSize: 20,
-    color: 'navy',
+  header: {
+    fontSize: 22,
+    flexDirection: 'column',
+    color: '#204376',
     fontWeight: 'bold',
-    // justifyContent: 'flex-end',
-    padding: 20,
-    marginLeft: 50,
-    marginRight: 200,
-    marginBottom: 100,
-    borderWidth: 1,
-    borderColor: '#429494',
-    backgroundColor: '#F3FAFA',
+    marginTop: 140,
+    marginLeft: 120,
+    marginRight: 50,
   },
 
   // Text of all clues
-  subtitle: {
-    fontSize: 14,
-    color: 'black',
-    justifyContent: 'flex-end',
-    marginLeft: 50,
-    marginRight: 50,
-    padding: 20,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#429494',
+  cluesText: {
+    fontSize: 18,
+    color: '#204376',
+    justifyContent: 'space-evenly',
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  clueBorder: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    textAlign: 'center',
+    borderRadius: 25,
     backgroundColor: '#F3FAFA',
+    marginVertical: 20,
+    marginHorizontal: 25,
+  },
+
+  // get clues buttons images
+  buttonContainer1: {
+    position: 'absolute',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 150,
+    marginBottom: 10,
+  },
+  buttonContainer2: {
+    position: 'absolute',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 275,
+    marginBottom: 10,
+  },
+  buttonContainer3: {
+    position: 'absolute',
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 400,
+    marginBottom: 10,
   },
   image: {
+    alignItems: 'center',
     resizeMode: 'contain',
-    height: 120,
-    width: 150,
+    height: 175,
+    width: 200,
   },
   submitLocation: {
     resizeMode: 'contain',
-    height: 120,
-    width: 150,
-    marginLeft: 40,
+    height: 170,
+    width: 180,
+    marginLeft: -5,
   },
   giveUp: {
     resizeMode: 'contain',
-    height: 120,
-    width: 200,
+    height: 170,
+    width: 180,
+    marginRight: 5,
+    marginBottom: 10,
+    marginLeft: 5,
+  },
+  giveUpBorder: {
+    position: 'absolute',
+    borderRadius: 25,
+    backgroundColor: '#FFDE59',
+    marginVertical: 55,
+    // marginHorizontal: 150,
+    marginLeft: 170,
+    marginRight: 5,
+  },
+  // Text of location revealed
+  textGiveUp: {
+    fontSize: 18,
+    color: '#204376',
+    fontWeight: 'bold',
+    padding: 20,
+    marginLeft: 1,
+    marginRight: 10,
   },
   page: {
-    backgroundColor: '#C5DBD6',
     flex: 1,
   },
-  buttonContainer: {
-    marginTop: 5,
-    width: '100%',
-    alignItems: 'center',
-  },
   buttonLower: {
+    position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 120,
-  },
-  button: {
-    margin: 0,
+    width: '95%',
+    marginTop: 520,
+    marginBottom: 10,
+    marginHorizontal: 18,
   },
 });
 
