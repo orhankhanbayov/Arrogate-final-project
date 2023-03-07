@@ -16,23 +16,24 @@ import { NavigationContainer } from '@react-navigation/native';
 const RouteDescription = ({ route, navigation }) => {
   const { routes } = route.params;
   return (
-    <View style={styles.container}>
+    <View style={styles.page}>
       <ImageBackground
-        source={require('../../images/background.png')}
+        source={require('../../images/background-landmarks.png')}
         resizeMode="cover"
         style={styles.backgroundImage}
       >
         <View style={styles.TextViewStyle}>
-          <Text style={styles.TextStyle}>{routes.name}</Text>
-          <Text style={styles.TextStyle}>{routes.bio}</Text>
-          <Text style={styles.TextStyle}>{routes.time}</Text>
-          <Text style={styles.TextStyle}>{routes.start}</Text>
+          <Text style={styles.Title}>{routes.name}</Text>
+          <Text style={styles.TextDescription}>{routes.bio}</Text>
+          <Text style={styles.TextTime}>{routes.time}</Text>
+          <Text style={styles.TextStartLocation}>{ `Starting point: ${routes.start}.`}</Text>
         </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('ChooseRoutes')}>
             <Image
-              source={require('../../images/return-button.png')}
-              style={styles.back}
+              source={require('../../images/return.png')}
+              style={styles.returnButton}
             />
           </TouchableOpacity>
 
@@ -40,8 +41,8 @@ const RouteDescription = ({ route, navigation }) => {
             onPress={() => navigation.navigate('LocationOneClues', { routes })}
           >
             <Image
-              source={require('../../images/go-button.png')}
-              style={styles.go}
+              source={require('../../images/start.png')}
+              style={styles.startButton}
             />
           </TouchableOpacity>
         </View>
@@ -51,72 +52,74 @@ const RouteDescription = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  back: {
-    resizeMode: 'contain',
-    height: 170,
-    width: 180,
-    marginLeft: -5,
-  },
-
-  go: {
-    resizeMode: 'contain',
-    height: 170,
-    width: 180,
-    marginLeft: -5,
-  },
-
-  container: {
+  page: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: -10,
   },
-
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    width: '101%',
+    height: '104.5%',
+  },
+  
+  // All Texts
+  TextViewStyle: {
+    position: 'absolute',
+    bottom: 170,
+    left: 20,
+    borderRadius: 20,
+    borderColor: '#000000',
+    width: '90%',
+    padding: 7,
+    backgroundColor: '#FFFFFF',
   },
 
+  Title: {
+    fontSize: 23,
+    textAlign: 'center',
+    color: '#204376',
+    padding: 10,
+    fontWeight: 'bold',
+  },
+  TextDescription: {
+    fontSize: 17,
+    textAlign: 'justify',
+    color: '#204376',
+    padding: 10,
+  },
+  TextTime: {
+    fontSize: 17,
+    textAlign: 'justify',
+    color: '#204376',
+    padding: 10,
+  },
+  TextStartLocation: {
+    fontSize: 18,
+    textAlign: 'justify',
+    color: '#204376',
+    padding: 10,
+    fontWeight: 'bold',
+  },
+
+  // buttons
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: 10,
-    marginTop: 20,
+    marginTop: 485,
   },
-
-  buttonReady: {
-    position: 'absolute',
-    top: 475,
-    right: 25,
+  returnButton: {
+    resizeMode: 'contain',
+    height: 170,
+    width: 180,
+    marginLeft: -5,
   },
-  buttonReturn: {
-    position: 'absolute',
-    top: 525,
-    left: -30,
-  },
-
-  TextViewStyle: {
-    position: 'absolute',
-    top: 170,
-    left: 35,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    borderWidth: 3,
-    borderRadius: 10,
-    borderColor: '#000000',
-    width: '80%',
-    padding: 5,
-    backgroundColor: '#FFFFFF',
-  },
-
-  TextStyle: {
-    fontSize: 15,
-    textAlign: 'center',
-    color: '#000',
-    padding: 10,
+  startButton: {
+    resizeMode: 'contain',
+    height: 170,
+    width: 180,
+    marginLeft: -5,
   },
 });
 
