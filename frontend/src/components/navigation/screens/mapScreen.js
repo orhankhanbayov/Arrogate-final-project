@@ -2,9 +2,11 @@ import React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapViewDirections } from 'react-native-maps-directions';
-import Geolocation from '@react-native-community/geolocation';
+import { Platform, PermissionsIOS } from 'react-native';
+import * as Location from 'expo-location';
+import decodePolyline from 'decode-google-map-polyline';
 
 import {
   Image,
@@ -17,15 +19,35 @@ import {
 const MapScreen = () => {
   const [location, setLocation] = useState();
   const [destination, setDestination] = useState();
+  const [coords, setCoords] = useState({ coords: [] });
+  const [show, setShow] = useState(false);
+
   const GOOGLE_MAPS_APIKEY = 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E';
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
 
-  Geolocation.getCurrentPosition((info) => setLocation(info));
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
-  const getDirection = async () => {
-    let response = await fetch(
-      `https://maps.googleapis.com/maps/api/directions/json?origin=${location}=${destination}=${GOOGLE_MAPS_APIKEY}`
-    );
+  const getDirection = async (place_id) => {
+    let response =
+      await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${location.coords.latitude},${location.coords.longitude}&destination=place_id:${place_id}&mode=walking&key=${GOOGLE_MAPS_APIKEY}
+    `);
+    let respJson = await response.json();
+    let points = decodePolyline(respJson.routes[0].overview_polyline.points);
+
+    setCoords({ coords: points });
+    setShow(true);
+    console.log(response.status);
   };
+
   return (
     <>
       <MapView
@@ -40,13 +62,27 @@ const MapScreen = () => {
         showsMyLocationButton={true}
         showsUserLocation={true}
       >
+        {show ? (
+          <Polyline
+            coordinates={coords.coords}
+            strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
+            strokeColors={[
+              '#7F0000',
+              '#00000000', // no color, creates a "long" gradient between the previous and next coordinate
+              '#B24112',
+              '#E5845C',
+            ]}
+            strokeWidth={6}
+          />
+        ) : (
+          ''
+        )}
         <GooglePlacesAutocomplete
           placeholder="Search"
           fetchDetails={true}
           onPress={async (data, details = null) => {
             console.log(data.place_id);
-            setDestination(data.place_id);
-            console.log(destination);
+            await getDirection(data.place_id);
           }}
           query={{
             key: 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E',
