@@ -31,9 +31,10 @@ const TrophyScreen = ({ navigation }) => {
 
       <Text style={styles.header}>Welcome, _username_!</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
-      <Text style={styles.rankings}>Rankings</Text>
-      <Text style={styles.pointsTrophies}>? </Text>
-      <Text style={styles.pointsCoins}>? </Text>
+      <Text style={styles.rankingsTitle}>Rankings</Text>
+      <Text style={styles.pointsTrophiesAndCoins}>?                   ?</Text>
+
+      <Text style={styles.usersRankings}>name and points</Text>
     </View>
   );
 };
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    zIndex: 0,
     resizeMode: 'cover',
     position: 'absolute',
     width: '100%',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 10,
   },
-  rankings: {
+  rankingsTitle: {
     fontSize: 22,
     textAlign: 'center',
     justifyContent: 'space-evenly',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 150,
   },
-  pointsTrophies: {
+  pointsTrophiesAndCoins: {
     fontSize: 40,
     position: 'absolute',
     justifyContent: 'space-evenly',
@@ -87,16 +87,17 @@ const styles = StyleSheet.create({
     marginVertical: 155,
     marginHorizontal: 55,
   },
-  pointsCoins: {
-    fontSize: 40,
+  usersRankings: {
+    fontSize: 18,
     position: 'absolute',
     justifyContent: 'space-evenly',
-    zIndex: 50, 
+    textAlign: 'center',
     color: '#204376',
+    backgroundColor: 'white',
     fontWeight: 'bold',
-    marginVertical: 155,
-    marginHorizontal: 190,
-    
+    borderRadius:25,
+    marginVertical: 300,
+    marginHorizontal: 55,
   },
   // Images
   templatesContainer: {
@@ -111,7 +112,6 @@ const styles = StyleSheet.create({
   },
   trophyAndCoinTemplate: {
     flex: 1,
-    zIndex: 1,
     flexGrow: 1,
     padding: 130,
     height: 50,
