@@ -34,7 +34,13 @@ const TrophyScreen = ({ navigation }) => {
       <Text style={styles.rankingsTitle}>Rankings</Text>
       <Text style={styles.pointsTrophiesAndCoins}>?                   ?</Text>
 
-      <Text style={styles.usersRankings}>name and points</Text>
+      <View style={styles.usersRankingsContainer}>
+        <Text style={styles.usersRankings}>👤  photo David    3 🏆  15 🪙</Text>
+        <Text style={styles.usersRankings}>👤  photo Juliana  3 🏆  10 🪙</Text>    
+        <Text style={styles.usersRankings}>👤  photo Marta    2 🏆  15 🪙</Text>
+        <Text style={styles.usersRankings}>👤  photo Michal   1 🏆  15 🪙</Text>
+        <Text style={styles.usersRankings}>👤  photo Orhan    1 🏆  10 🪙</Text>
+        </View>
     </View>
   );
 };
@@ -87,17 +93,21 @@ const styles = StyleSheet.create({
     marginVertical: 155,
     marginHorizontal: 55,
   },
-  usersRankings: {
-    fontSize: 18,
+  usersRankingsContainer: {
     position: 'absolute',
-    justifyContent: 'space-evenly',
-    textAlign: 'center',
+    top: 320,
+    left: 40,
+    borderRadius: 25,
+    borderColor: '#FFFFFF',
+    width: '80%',
+    padding: 10,
+    backgroundColor: '#FFFFFF',
+  },
+  usersRankings: {
+    fontSize: 20,
+    textAlign: 'justify',
     color: '#204376',
-    backgroundColor: 'white',
-    fontWeight: 'bold',
-    borderRadius:25,
-    marginVertical: 300,
-    marginHorizontal: 55,
+    padding: 10,
   },
   // Images
   templatesContainer: {
@@ -107,8 +117,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 50,
     marginBottom: 10,
-    marginLeft:10,
-    marginRight:10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   trophyAndCoinTemplate: {
     flex: 1,
