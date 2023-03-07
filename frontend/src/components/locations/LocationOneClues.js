@@ -12,7 +12,7 @@ import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useContext } from 'react';
-import ScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
@@ -27,7 +27,7 @@ const LocationOneClues = ({ route, navigation }) => {
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
   const [scoreCounter, setScoreCounter] = useState(0)
-  const { score } = useContext(ScoreContext);
+  const { runningScore } = useContext(RunningScoreContext);
 
 
   const set = () => {
@@ -104,7 +104,7 @@ const LocationOneClues = ({ route, navigation }) => {
 
       <Text>{scoreCounter}</Text>
       <View>
-      <Text>Running Score: {score}</Text>
+      <Text>Running Score: {runningScore}</Text>
     </View>
 
       {/* Area/Location banner */}

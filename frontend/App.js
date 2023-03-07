@@ -9,14 +9,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
-import ScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
 
 
 
 export default function App() {
-  const [score, setScore] = useState(0);
+  const [runningScore, setRunningScore] = useState(0);
   return (
-    <ScoreContext.Provider value={{ score, setScore }}>
+    <RunningScoreContext.Provider value={{ runningScore, setRunningScore }}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LogIn" component={LogInForm} />
@@ -24,6 +24,6 @@ export default function App() {
         <Stack.Screen name="MainContainer" component={MainContainer} />
       </Stack.Navigator>
     </NavigationContainer>
-    </ScoreContext.Provider>
+    </RunningScoreContext.Provider>
   );
 }

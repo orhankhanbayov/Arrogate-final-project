@@ -8,7 +8,7 @@ import * as Location from 'expo-location';
 import { getPreciseDistance } from 'geolib';
 import { GOOGLE_API } from '@env';
 import Config from 'react-native-config';
-import ScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js'; //////////////
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js'; //////////////
 import { useContext } from 'react';
 
 vision.init({ auth: `${GOOGLE_API}` });
@@ -19,9 +19,9 @@ export default function LandmarkCamera({ route, navigation }) {
   const [camera, setCamera] = useState(null);
   const [location, setLocation] = useState();
   const { name, scoreCounter } = route.params;
-  const { score, setScore } = useContext(ScoreContext); /////////////////////
+  const { runningScore, setRunningScore } = useContext(RunningScoreContext); /////////////////////
   console.log(scoreCounter);
-  console.log(score);
+  console.log(runningScore);
 
   const getUserCoords = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -72,9 +72,9 @@ export default function LandmarkCamera({ route, navigation }) {
         close
       ) {
         navigation.navigate('CongratulationsNextClue');
-        setScore(score + scoreCounter);
+        setRunningScore(runningScore + scoreCounter);
         console.log(
-          `This is the running score from the landmarkcamera page: ${score}`
+          `This is the running score from the landmarkcamera page: ${runningScore}`
         );
       } else {
         let render = true;
