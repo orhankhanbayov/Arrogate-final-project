@@ -12,7 +12,7 @@ import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useContext } from 'react';
-import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext.js';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;

@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
-import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext.js';
 
 
 
