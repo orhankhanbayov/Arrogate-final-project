@@ -28,8 +28,8 @@ const CongratulationsNextClue = ({ navigation }) => {
       <Text style={styles.title}>Congratulations, you solved Location __</Text>
 
       <Image
-          source={require('../../images/coin-template.png')}
-          style={styles.image}
+        source={require('../../images/coin-template.png')}
+        style={styles.image}
       />
 
       <View style={styles.area}>
@@ -37,9 +37,9 @@ const CongratulationsNextClue = ({ navigation }) => {
       </View>
 
       <TouchableOpacity onPress={nextLocation}>
-        <Image 
-        source={require('../../images/next-location-button.png')} 
-        style={styles.buttonImage}
+        <Image
+          source={require('../../images/next-location-button.png')}
+          style={styles.buttonImage}
         />
       </TouchableOpacity>
     </View>

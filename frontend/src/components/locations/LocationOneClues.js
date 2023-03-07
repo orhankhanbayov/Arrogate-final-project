@@ -11,6 +11,8 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { useContext } from 'react';
+import ScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
@@ -24,6 +26,9 @@ const LocationOneClues = ({ route, navigation }) => {
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
+  const [scoreCounter, setScoreCounter] = useState(0)
+  const { score } = useContext(ScoreContext);
+
 
   const set = () => {
     if (value === 0) {
@@ -42,14 +47,17 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const handleClue1 = () => {
     setShowValue1(true);
+    setScoreCounter(5)
   };
 
   const handleClue2 = () => {
     setShowValue2(true);
+    setScoreCounter(3)
   };
 
   const handleClue3 = () => {
     setShowValue3(true);
+    setScoreCounter(1)
   };
 
   const handleClue4 = () => {
@@ -65,6 +73,7 @@ const LocationOneClues = ({ route, navigation }) => {
           onPress: () => {
             setConfirmedReveal(true);
             setShowValue4(!showValue4);
+            setScoreCounter(0)
           },
         },
       ],
@@ -81,7 +90,7 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('Finished');
     } else {
       let name = chosenRoutes.locations[locationCounter];
-      navigation.navigate('LandmarkCamera', { name });
+      navigation.navigate('LandmarkCamera', { name, scoreCounter } );
     }
   };
 
@@ -92,6 +101,11 @@ const LocationOneClues = ({ route, navigation }) => {
         resizeMode="cover"
         style={styles.background}
       ></ImageBackground>
+
+      <Text>{scoreCounter}</Text>
+      <View>
+      <Text>Running Score: {score}</Text>
+    </View>
 
       {/* Area/Location banner */}
 

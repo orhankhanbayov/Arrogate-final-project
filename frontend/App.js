@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import LogInForm from './src/components/auth/LoginForm';
 import SignUpForm from './src/components/user/SignUpForm';
@@ -9,9 +9,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
+import ScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js';
+
+
 
 export default function App() {
+  const [score, setScore] = useState(0);
   return (
+    <ScoreContext.Provider value={{ score, setScore }}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="LogIn" component={LogInForm} />
@@ -19,5 +24,6 @@ export default function App() {
         <Stack.Screen name="MainContainer" component={MainContainer} />
       </Stack.Navigator>
     </NavigationContainer>
+    </ScoreContext.Provider>
   );
 }
