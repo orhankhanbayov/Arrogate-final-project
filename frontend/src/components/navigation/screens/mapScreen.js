@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import MapView from 'react-native-maps';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
@@ -27,10 +26,10 @@ const MapScreen = ({ navigation }) => {
     setLocation(currentLocation);
   };
   getUserCoords();
-  // useEffect(() => {});
+
   return (
     <MapView
-      provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+      provider={PROVIDER_GOOGLE}
       style={styles.map}
       region={{
         latitude: 51.506554,
