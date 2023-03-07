@@ -113,7 +113,7 @@ const LocationOneClues = ({ route, navigation }) => {
           locationCounter + 1
         } of 5`}</Text>
 
-        <Text>{render ? 'Please try again' : ''}</Text>
+        <Text style={styles.header2}>{render ? 'Please try again' : ''}</Text>
       </View>
 
       {/* First Clue ']' */}
@@ -180,9 +180,14 @@ const LocationOneClues = ({ route, navigation }) => {
         </TouchableOpacity>
 
         {/* give up */}
-
         {showValue4 && confirmedReveal ? (
-          <View style={styles.giveUpBorder}>
+          <View style={styles.yellowButton}>
+            <ImageBackground
+            source={require('../../images/yellow-button.png')}
+            resizeMode="cover"
+            style={styles.yellowButton}
+          ></ImageBackground>
+
             <Text style={styles.textGiveUp}>
               {chosenRoutes.locations[locationCounter].name}
             </Text>
@@ -220,14 +225,27 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginHorizontal: 15,
   },
-
+  
+  // Location _ of 5
   header: {
     fontSize: 22,
-    flexDirection: 'column',
+    flexDirection:'column',
     color: '#204376',
     fontWeight: 'bold',
-    marginTop: 140,
+    marginTop: 130,
     marginLeft: 120,
+    marginRight: 50,
+  },
+
+  // Please try again
+  header2: {
+    position: 'absolute',
+    fontSize: 20,
+    flexDirection:'column',
+    color: 'red',
+    fontWeight: 'bold',
+    marginTop: 520,
+    marginLeft: 10,
     marginRight: 50,
   },
 
@@ -245,10 +263,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     backgroundColor: '#F3FAFA',
-    marginVertical: 20,
+    marginVertical: 15,
     marginHorizontal: 25,
   },
-
+  
   // get clues buttons images
   buttonContainer1: {
     position: 'absolute',
@@ -261,14 +279,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     width: '100%',
-    marginTop: 275,
+    marginTop: 255,
     marginBottom: 10,
   },
   buttonContainer3: {
     position: 'absolute',
     alignItems: 'center',
     width: '100%',
-    marginTop: 400,
+    marginTop: 355,
     marginBottom: 10,
   },
   image: {
@@ -280,34 +298,34 @@ const styles = StyleSheet.create({
   submitLocation: {
     resizeMode: 'contain',
     height: 170,
-    width: 180,
-    marginLeft: -5,
-  },
-  giveUp: {
-    resizeMode: 'contain',
-    height: 170,
-    width: 180,
-    marginRight: 5,
-    marginBottom: 10,
+    width: 110,
     marginLeft: 5,
   },
-  giveUpBorder: {
-    position: 'absolute',
-    borderRadius: 25,
-    backgroundColor: '#FFDE59',
-    marginVertical: 55,
-    // marginHorizontal: 150,
-    marginLeft: 170,
+  // red giveUp button
+  giveUp: {
+    resizeMode: 'contain',
+    height: 150,
+    width: 220,
     marginRight: 5,
+    marginBottom: 10,
+    marginLeft: 0,
+  },
+
+  yellowButton: {
+    position: 'absolute',
+    padding: 13,
+    height: 140,
+    width: 310,
+    marginLeft: 45,
   },
   // Text of location revealed
   textGiveUp: {
     fontSize: 18,
     color: '#204376',
     fontWeight: 'bold',
-    padding: 20,
-    marginLeft: 1,
-    marginRight: 10,
+    padding: 1,
+    marginTop: 55,
+    marginLeft: 90,
   },
   page: {
     flex: 1,
