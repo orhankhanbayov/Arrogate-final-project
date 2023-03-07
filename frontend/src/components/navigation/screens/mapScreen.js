@@ -1,14 +1,10 @@
-import * as React from 'react';
+import React from 'react';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import MapView from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
-
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import * as SecureStore from 'expo-secure-store';
-import { NavigationContainer } from '@react-navigation/native';
-import * as Location from 'expo-location';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { MapViewDirections } from 'react-native-maps-directions';
+import Geolocation from '@react-native-community/geolocation';
 
 import {
   Image,
@@ -18,23 +14,18 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-const MapScreen = ({ navigation }) => {
+const MapScreen = () => {
   const [location, setLocation] = useState();
-  const destination = {
-    latitude: 51.504500000000000171,
-    longitude: -0.086499999999999993561,
-  };
+  const [destination, setDestination] = useState();
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E';
 
-  const getUserCoords = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      return;
-    }
+  Geolocation.getCurrentPosition((info) => setLocation(info));
 
-    let currentLocation = await Location.getCurrentPositionAsync({});
-    setLocation(currentLocation);
+  const getDirection = async () => {
+    let response = await fetch(
+      `https://maps.googleapis.com/maps/api/directions/json?origin=${location}=${destination}=${GOOGLE_MAPS_APIKEY}`
+    );
   };
-  getUserCoords();
   return (
     <>
       <MapView
@@ -48,24 +39,25 @@ const MapScreen = ({ navigation }) => {
         }}
         showsMyLocationButton={true}
         showsUserLocation={true}
-      ></MapView>
-      <GooglePlacesAutocomplete
-        fetchDetails={true}
-        placeholder="Search"
-        onPress={(data, details = null) => {
-          console.log(data, details);
-        }}
-        query={{
-          key: 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E',
-          language: 'en',
-          components: 'country:uk',
-        }}
-      />
+      >
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          fetchDetails={true}
+          onPress={async (data, details = null) => {
+            console.log(data.place_id);
+            setDestination(data.place_id);
+            console.log(destination);
+          }}
+          query={{
+            key: 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E',
+            language: 'en',
+          }}
+        />
+      </MapView>
     </>
   );
 };
 
-export default MapScreen;
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
@@ -78,3 +70,5 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 });
+
+export default MapScreen;
