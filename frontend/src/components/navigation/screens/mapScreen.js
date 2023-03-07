@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapViewDirections } from 'react-native-maps-directions';
 import { Platform, PermissionsIOS } from 'react-native';
+
 import * as Location from 'expo-location';
 import decodePolyline from 'decode-polyline';
 
@@ -47,6 +48,7 @@ const MapScreen = () => {
     setShow(true);
     console.log(response.status);
   };
+
 
   return (
     <>
@@ -91,6 +93,7 @@ const MapScreen = () => {
         />
       </MapView>
     </>
+
   );
 };
 

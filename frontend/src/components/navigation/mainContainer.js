@@ -6,10 +6,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './screens/homeScreen';
 import SettingsScreen from './screens/settingsScreen';
 import MapScreen from './screens/mapScreen';
+import TrophyScreen from './screens/trophyScreen';
 
 const homeName = 'Home';
 const settingsName = 'Settings';
 const mapName = 'Map';
+const trophyName = 'Trophy';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +29,8 @@ const MainContainer = () => {
             iconName = focused ? 'settings' : 'settings-outline';
           } else if (rn === mapName) {
             iconName = focused ? 'map' : 'map-outline';
+          } else if (rn === trophyName) {
+            iconName = focused ? 'trophy' : 'trophy-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -34,6 +38,7 @@ const MainContainer = () => {
     >
       <Tab.Screen name={homeName} component={HomeScreen} />
       <Tab.Screen name={mapName} component={MapScreen} />
+      <Tab.Screen name={trophyName} component={TrophyScreen} />
       <Tab.Screen name={settingsName} component={SettingsScreen} />
     </Tab.Navigator>
   );

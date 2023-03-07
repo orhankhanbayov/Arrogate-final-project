@@ -28,7 +28,7 @@ const CongratulationsNextClue = ({ navigation }) => {
       <Text style={styles.title}>Congratulations, you solved Location __</Text>
 
       <Image
-          source={require('../../images/golden-coin2.png')}
+          source={require('../../images/coin-template.png')}
           style={styles.image}
       />
 

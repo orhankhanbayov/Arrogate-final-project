@@ -52,6 +52,7 @@
     "react-native": "0.71.3",
     "react-native-camera": "^4.2.1",
     "react-native-cloud-vision-api": "^0.2.1",
+    "react-native-dotenv": "^3.4.8",
     "react-native-encrypted-storage": "^4.0.3",
     "react-native-fs": "^2.20.0",
     "react-native-geolocation-service": "^5.3.1",

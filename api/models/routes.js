@@ -6,6 +6,7 @@ const RouteSchema = new mongoose.Schema({
   time: { type: String, required: true },
   start: { type: String },
   locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
+  start: { type: String },
 });
 
 mongoose.model('Route', RouteSchema);
