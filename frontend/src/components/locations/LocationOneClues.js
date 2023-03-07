@@ -24,6 +24,7 @@ const LocationOneClues = ({ route, navigation }) => {
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
+  const [currentClue, setCurrentClue] = useState(0);
 
   const set = () => {
     if (value === 0) {
@@ -39,17 +40,32 @@ const LocationOneClues = ({ route, navigation }) => {
       setLocationCounter(locationCounter + 1);
     }
   }, [pass]);
+  // const handleClue1 = () => { 
+  //   setShowValue1(true);
+  //  }; 
+  //  const handleClue2 = () => { 
+  //   setShowValue2(true); 
+  // }; 
+  // const handleClue3 = () => { 
+  //   setShowValue3(true); 
+  // };
 
   const handleClue1 = () => {
-    setShowValue1(true);
+    if (currentClue >= 0) {
+      setCurrentClue(1);
+    }
   };
 
   const handleClue2 = () => {
-    setShowValue2(true);
+    if (currentClue >= 1) {
+      setCurrentClue(2);
+    }
   };
 
   const handleClue3 = () => {
-    setShowValue3(true);
+    if (currentClue >= 2) {
+      setCurrentClue(3);
+    }
   };
 
   const handleClue4 = () => {
@@ -117,7 +133,7 @@ const LocationOneClues = ({ route, navigation }) => {
       </View>
 
       {/* First Clue ']' */}
-      {showValue1 ? (
+      {currentClue >= 1 ? (
         <View style={styles.clueBorder}>
           <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue1}
@@ -135,7 +151,7 @@ const LocationOneClues = ({ route, navigation }) => {
       )}
 
       {/* Second Clue */}
-      {showValue2 ? (
+      {currentClue >= 2? (
         <View style={styles.clueBorder}>
           <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue2}
@@ -153,7 +169,7 @@ const LocationOneClues = ({ route, navigation }) => {
       )}
 
       {/* Third Clue */}
-      {showValue3 ? (
+      {currentClue >= 3 ? (
         <View style={styles.clueBorder}>
           <Text style={styles.cluesText}>
             {chosenRoutes.locations[locationCounter].clue3}
@@ -299,7 +315,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 170,
     width: 110,
-    marginLeft: 5,
+    marginLeft: 15,
   },
   // red giveUp button
   giveUp: {
