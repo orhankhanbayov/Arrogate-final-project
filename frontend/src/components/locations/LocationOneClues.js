@@ -56,8 +56,8 @@ const LocationOneClues = ({ route, navigation }) => {
     setShowValue4(!showValue4);
     setConfirmedReveal(false);
     Alert.alert(
-      'Are you sure?',
-      'You will get the location',
+      'Please move to the location and submit it',
+      '',
       [
         { text: 'Cancel', style: 'cancel' },
         {
