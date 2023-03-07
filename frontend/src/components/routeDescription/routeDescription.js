@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     padding: 7,
     backgroundColor: '#FFFFFF',
   },
-
   Title: {
     fontSize: 23,
     textAlign: 'center',
