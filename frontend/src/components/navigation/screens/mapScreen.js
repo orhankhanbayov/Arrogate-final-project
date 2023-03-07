@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapViewDirections } from 'react-native-maps-directions';
 import { Platform, PermissionsIOS } from 'react-native';
+import { GOOGLE_API_URL } from '@env';
 
 import * as Location from 'expo-location';
 import decodePolyline from 'decode-polyline';
@@ -23,7 +24,7 @@ const MapScreen = () => {
   const [coords, setCoords] = useState({ coords: [] });
   const [show, setShow] = useState(false);
 
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E';
+  const GOOGLE_MAPS_APIKEY = GOOGLE_API_URL;
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -49,7 +50,6 @@ const MapScreen = () => {
     console.log(response.status);
   };
 
-
   return (
     <>
       <MapView
@@ -67,13 +67,8 @@ const MapScreen = () => {
         {show ? (
           <Polyline
             coordinates={coords.coords}
-            strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
-            strokeColors={[
-              '#7F0000',
-              '#00000000', // no color, creates a "long" gradient between the previous and next coordinate
-              '#B24112',
-              '#E5845C',
-            ]}
+            strokeColor="#000"
+            strokeColors={['#7F0000', '#00000000', '#B24112', '#E5845C']}
             strokeWidth={6}
           />
         ) : (
@@ -87,13 +82,12 @@ const MapScreen = () => {
             await getDirection(data.place_id);
           }}
           query={{
-            key: 'AIzaSyDjVEQ92HJFFPzfnj1LaB1EQmugY21AZ3E',
+            key: GOOGLE_MAPS_APIKEY,
             language: 'en',
           }}
         />
       </MapView>
     </>
-
   );
 };
 
