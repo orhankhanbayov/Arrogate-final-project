@@ -95,7 +95,7 @@ const TripAd = () => {
               <View key={index} style={styles.review}>
                 <Text>Title :<Text>{review.title}</Text></Text>
                 <Text>{review.text}</Text>
-                <Image source={{ uri: review.rating_image_url }} style={{ width: 20, height: 20 }} />
+                <Image style={styles.image} source={{ uri: review.rating_image_url }} />
               </View>
             ))}
           </View>
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+    zIndex: -1,
   },
   container: {
     borderWidth: 1,
@@ -145,7 +146,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#204376',
     textAlign: 'center',
-  }
+  },
+  image: {
+    alignItems: 'center',
+    resizeMode: 'contain',
+    height: 175,
+    width: 200,
+  },
 
 });
 
