@@ -16,7 +16,9 @@ export default function LandmarkCamera({ route, navigation }) {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [camera, setCamera] = useState(null);
   const [location, setLocation] = useState();
-  const { name } = route.params;
+  const { name, locationCounter } = route.params;
+  console.log(`locationCounter: ${locationCounter}`)
+  console.log(`name: ${name}`)
 
   const getUserCoords = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -66,7 +68,7 @@ export default function LandmarkCamera({ route, navigation }) {
           data[0].landmarkAnnotations[0].description === name.name) ||
         close
       ) {
-        navigation.navigate('CongratulationsNextClue');
+        navigation.navigate('CongratulationsNextClue', { name, locationCounter });
       } else {
         let render = true;
 

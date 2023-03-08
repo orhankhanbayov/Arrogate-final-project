@@ -81,7 +81,7 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('Finished');
     } else {
       let name = chosenRoutes.locations[locationCounter];
-      navigation.navigate('LandmarkCamera', { name });
+      navigation.navigate('LandmarkCamera', { name, locationCounter });
     }
   };
 
@@ -310,7 +310,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 0,
   },
-
   yellowButton: {
     position: 'absolute',
     padding: 13,

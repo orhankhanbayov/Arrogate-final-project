@@ -12,6 +12,11 @@ import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
 const CongratulationsNextClue = ({ navigation }) => {
+  const { name, locationCounter } = route.params;
+  // Checking if they get passed
+  console.log(`locationCounter: ${locationCounter}`)
+  console.log(`name: ${name}`)
+
   const nextLocation = () => {
     let pass = false;
     navigation.navigate('LocationOneClues', { pass });
@@ -25,7 +30,7 @@ const CongratulationsNextClue = ({ navigation }) => {
         style={styles.background}
       ></ImageBackground>
 
-      <Text style={styles.title}>Congratulations, you solved Location __</Text>
+      <Text style={styles.title}>{`Congratulations, you solved ${name}, location ${locationCounter + 1} of 5`}</Text>
 
       <Image
           source={require('../../images/coin-template.png')}
