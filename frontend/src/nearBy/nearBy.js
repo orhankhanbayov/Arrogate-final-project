@@ -31,6 +31,7 @@ import {
 const TripAd = () => {
   const [location, setLocation] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
+  const [reviews, setReviews] = useState({});
 
   const nearBy = async () => {
     try {
@@ -60,8 +61,10 @@ const TripAd = () => {
             const optionsReviews = { method: 'GET', headers: { accept: 'application/json' } };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
-            console.log(reviewData);
+            console.log(reviewData)
+            setReviews((prevReviews) => ({ ...prevReviews, [id]: reviewData.data }));
           }
+          
         })
         .catch((error) => console.error(error));
     } catch (error) {
@@ -73,40 +76,35 @@ const TripAd = () => {
     nearBy();
   }, []);
 
-  
-
-
   return (
-<View style={styles.page}> 
-    <ImageBackground
-        source={require('../images/background.png')}
-        resizeMode="cover"
-        style={styles.background}
-    ></ImageBackground>
-    <Text style={styles.header}>Restaurants near you</Text>
+    <View style={styles.page}>
+      <ImageBackground source={require('../images/background.png')} resizeMode="cover" style={styles.background}></ImageBackground>
+      <Text style={styles.header}>Restaurants near you</Text>
 
-
-      <View >
-      {restaurants.slice(0, 5).map((restaurant, index) => (
-        <View key={index} style={styles.container}>
-          <Text style={styles.text}>Name: <Text style={styles.name}>{restaurant.name}</Text></Text>
-          <Text style={styles.text}>Address: <Text style={styles.address}>{restaurant.address_obj.address_string}</Text></Text>
-       {restaurant.review && (
-              <>
-                <Text style={styles.text}>Rating: {console.log(restaurant.review.rating)}</Text>
-                <Image source={{ uri: restaurant.review.rating_image_url }} />
-                <Text style={styles.text}>Latest Review:</Text>
-                <Text style={styles.text}>{restaurant.review.title}</Text>
-                <Text style={styles.text}>{restaurant.review.text}</Text>
-              </>
-            )}
-        </View>
-      ))}
+      <View>
+        {restaurants.slice(0, 5).map((restaurant, index) => (
+          <View key={index} style={styles.container}>
+            <Text style={styles.text}>
+              Name: <Text style={styles.name}>{restaurant.name}</Text>
+            </Text>
+            <Text>
+              Address: <Text>{restaurant.address_obj.address_string}</Text>
+            </Text>
+            <Text>Reviews:</Text>
+            {reviews[restaurant.location_id]?.slice(0, 2).map((review, index) => (
+              <View key={index} style={styles.review}>
+                <Text>Title :<Text>{review.title}</Text></Text>
+                <Text>{review.text}</Text>
+                <Image source={{ uri: review.rating_image_url }} style={{ width: 20, height: 20 }} />
+              </View>
+            ))}
+          </View>
+        ))}
       </View>
-</View>
-)
-  
+    </View>
+  );
 };
+
 
 const styles = StyleSheet.create({
   page: {
