@@ -8,7 +8,7 @@ import * as Location from 'expo-location';
 import { getPreciseDistance } from 'geolib';
 import { GOOGLE_API } from '@env';
 import Config from 'react-native-config';
-import RunningScoreContext from 'frontend/src/components/landmarkCamera/ScoreContext.js'; //////////////
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext'; //////////////
 import { useContext } from 'react';
 
 vision.init({ auth: `${GOOGLE_API}` });
