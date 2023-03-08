@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Image,
     TextInput,
     TouchableOpacity,
   } from 'react-native';
@@ -38,25 +39,42 @@ const TripAd = () => {
         return;
       }
 
+      const apiKey = process.env.API_KEY;
+
+      // fetch restaurants based on users location
       let { coords } = await Location.getCurrentPositionAsync({});
       setLocation(coords);
-      const apiKey = process.env.API_KEY;
-      const url = `https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${coords.latitude}%2C${coords.longitude}&key=${apiKey}&category=restaurants&radius=400&radiusUnit=m&language=en`;
-      const options = { method: 'GET', headers: { accept: 'application/json' } };
+      const urlPlaces = `https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${coords.latitude}%2C${coords.longitude}&key=${apiKey}&category=restaurants&radius=400&radiusUnit=m&language=en`;
+      const optionsPlaces = { method: 'GET', headers: { accept: 'application/json' } };
 
-      fetch(url, options)
+      fetch(urlPlaces, optionsPlaces)
         .then((response) => response.json())
-        .then((data) => setRestaurants(data.data))
+        .then(async (data) => {
+          setRestaurants(data.data);
+
+          // fetch reviews by location id for each restaurant
+          const locationIDs = data.data.slice(0, 5).map((restaurant) => restaurant.location_id);
+
+          for (const id of locationIDs) {
+            const urlReviews = `https://api.content.tripadvisor.com/api/v1/location/${id}/reviews?key=${apiKey}&language=en`;
+            const optionsReviews = { method: 'GET', headers: { accept: 'application/json' } };
+            const response = await fetch(urlReviews, optionsReviews);
+            const reviewData = await response.json();
+            console.log(reviewData);
+          }
+        })
         .catch((error) => console.error(error));
     } catch (error) {
       console.error(error);
-    }      
-  
+    }
   };
 
   useEffect(() => {
     nearBy();
-  }, [])
+  }, []);
+
+  
+
 
   return (
 <View style={styles.page}> 
@@ -69,10 +87,19 @@ const TripAd = () => {
 
 
       <View >
-      {restaurants.map((restaurant, index) => (
+      {restaurants.slice(0, 5).map((restaurant, index) => (
         <View key={index} style={styles.container}>
           <Text style={styles.text}>Name: <Text style={styles.name}>{restaurant.name}</Text></Text>
           <Text style={styles.text}>Address: <Text style={styles.address}>{restaurant.address_obj.address_string}</Text></Text>
+       {restaurant.review && (
+              <>
+                <Text style={styles.text}>Rating: {console.log(restaurant.review.rating)}</Text>
+                <Image source={{ uri: restaurant.review.rating_image_url }} />
+                <Text style={styles.text}>Latest Review:</Text>
+                <Text style={styles.text}>{restaurant.review.title}</Text>
+                <Text style={styles.text}>{restaurant.review.text}</Text>
+              </>
+            )}
         </View>
       ))}
       </View>
