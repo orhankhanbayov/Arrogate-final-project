@@ -28,13 +28,46 @@ describe('/users', () => {
   });
 
   describe('/account', () => {
-    describe('trophies and coins', () => {
-      it('can update trophies', async () => {
+    describe('updateScore - trophies and coins', () => {
+      it('can update trophies and coins', async () => {
         let response = await request(app)
           .post('/account')
           .set('Authorization', `Bearer ${token}`)
           .send({ id: user_id, trophies: 5, coins: 10 });
         expect(response.status).toBe(204);
+      });
+
+      it('throws 401 without token when updating token and trophies', async () => {
+        let response = await request(app)
+          .post('/account')
+          .send({ id: user_id, trophies: 5, coins: 10 });
+        expect(response.status).toBe(401);
+      });
+
+      describe('getScores - trophies and coins', () => {
+        it('returns 200 on get with token', async () => {
+          let response = await request(app)
+            .get('/account')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ id: user_id });
+          expect(response.status).toBe(200);
+        });
+
+        it('returns 401 on get without token', async () => {
+          let response = await request(app)
+            .get('/account')
+            .send({ id: user_id });
+          expect(response.status).toBe(401);
+        });
+
+        it('returns trophies and coins for user in body', async () => {
+          let response = await request(app)
+            .get('/account')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ id: user_id });
+          expect(response.body.score.coins).toBe(10);
+          expect(response.body.score.trophies).toBe(5);
+        });
       });
     });
   });
