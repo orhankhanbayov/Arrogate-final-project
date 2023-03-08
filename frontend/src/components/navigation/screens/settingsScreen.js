@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as SecureStore from 'expo-secure-store';
 
 import {
@@ -9,10 +9,60 @@ import {
   Text,
   View,
   TextInput,
+  ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 
 const SettingsScreen = ({ navigation }) => {
+  
+  handleAboutPress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'About' }],
+    });
+  };
+  
+  handleRulesPress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Rules' }],
+    });
+  };
+
+  handleEditNamePress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Edit name' }],
+    });
+  };
+
+  handleEditEmailPress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Edit email' }],
+    });
+  };
+
+  handleEditPasswordPress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Edit password' }],
+    });
+  };
+
+  handleEditPicturePress = async () => {
+    await SecureStore.deleteItemAsync('token');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Edit picture' }],
+    });
+  };
+
   handleLogout = async () => {
     await SecureStore.deleteItemAsync('token');
     navigation.reset({
@@ -22,53 +72,92 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <TouchableOpacity style={styles.button} onPress={handleLogout}>
+    <View style={styles.page}>
+      
+      <View style={styles.textContainer}>
+        <TouchableOpacity onPress={handleAboutPress}>
+          <Text style={styles.title}>📄 About</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleRulesPress}>
+          <Text style={styles.title}>📢 Rules</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={handleEditNamePress}>
+          <Text style={styles.title}>👤 Edit name</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={handleEditNamePress}>
+          <Text style={styles.title}>📧 Edit email</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={handleEditNamePress}>
+          <Text style={styles.title}>🔑 Edit password</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleEditPicturePress}>
+          <Text style={styles.title}>📸 Edit picture</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleLogout}>
         <Image
           source={require('../../../images/logout-button.png')}
-          style={styles.image}
+          style={styles.logoutButton}
         />
       </TouchableOpacity>
+
+      <ImageBackground
+      // /src/components/navigation/screens/
+        source={require('../../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
+  },
+  textContainer: {
+    justifyContent: 'space-evenly',
+    padding: 10,
+    marginTop: 40,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  inputContainer: {
-    width: '80%',
-    marginBottom: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    fontSize: 25,
+    color: '#204376',
+    textAlign: 'center',
+    marginHorizontal: -10,
+    marginVertical: 10,
+    borderRadius: 15,
     padding: 10,
-    marginBottom: 10,
-    paddingHorizontal: 20,
+    backgroundColor: '#F3FAFA',
   },
-  error: {
-    color: 'red',
-    marginBottom: 10,
+
+  //loggout button
+  buttonContainer: {
+    alignItems: 'center',
+    width: '100%',
   },
-  image: {
+  logoutButton: {
     resizeMode: 'contain',
-    height: 150,
-    width: 150,
+    marginBottom: 10,
+    height: 180,
+    width: 180,
+  },
+
+  // background image
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
   },
 });
 
