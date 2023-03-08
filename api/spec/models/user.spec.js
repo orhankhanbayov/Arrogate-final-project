@@ -28,6 +28,28 @@ describe('User model', () => {
     expect(user.password).toEqual('password');
   });
 
+  it('has trophies', () => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password',
+      name: 'name',
+      trophies: 5,
+      coins: 10,
+    });
+    expect(user.trophies).toBe(5);
+  });
+
+  it('has trophies', () => {
+    const user = new User({
+      email: 'someone@example.com',
+      password: 'password',
+      name: 'name',
+      trophies: 5,
+      coins: 10,
+    });
+    expect(user.coins).toBe(10);
+  });
+
   it('can list all users', (done) => {
     User.find((err, users) => {
       expect(err).toBeNull();
