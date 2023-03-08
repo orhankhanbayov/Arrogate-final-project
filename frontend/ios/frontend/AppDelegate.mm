@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import "RNCConfig.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
 
@@ -8,7 +8,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   [GMSServices provideAPIKey:@"AIzaSyA5NUI-XZOU8iZ9_sbUEx6v05spj3X6INE"];
+  NSString *apiUrl = [RNCConfig envFor:@"GOOGLE_API"];
+
+   [GMSServices provideAPIKey:apiUrl];
   self.moduleName = @"main";
 
   // You can add your custom initial props in the dictionary below.

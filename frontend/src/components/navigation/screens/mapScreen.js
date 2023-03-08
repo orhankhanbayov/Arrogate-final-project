@@ -6,7 +6,6 @@ import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapViewDirections } from 'react-native-maps-directions';
 import { Platform, PermissionsIOS } from 'react-native';
 import { GOOGLE_API } from '@env';
-import Config from 'react-native-config';
 
 import * as Location from 'expo-location';
 import decodePolyline from 'decode-polyline';
