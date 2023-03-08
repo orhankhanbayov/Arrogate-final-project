@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import {
-    Image,
+    ImageBackground,
     StyleSheet,
     Text,
     View,
@@ -44,26 +44,69 @@ const TripAd = () => {
   }, [])
 
   return (
+<View style={styles.page}> 
+    <ImageBackground
+        source={require('../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+    ></ImageBackground>
+    <Text style={styles.header}>Restaurants near you</Text>
 
-    <View style={styles.container}>
+
+      <View >
       {restaurants.map((restaurant, index) => (
-        <View key={index}>
-          <Text>Name: {restaurant.name}</Text>
-          <Text>Address: {restaurant.address_obj.address_string}</Text>
+        <View key={index} style={styles.container}>
+          <Text style={styles.text}>Name: <Text style={styles.name}>{restaurant.name}</Text></Text>
+          <Text style={styles.text}>Address: <Text style={styles.address}>{restaurant.address_obj.address_string}</Text></Text>
         </View>
       ))}
-    </View>
+      </View>
+</View>
 )
   
 };
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#EAF3F1',
+  },
+  header: {
+    fontSize: 22,
+    flexDirection: 'column',
+    color: '#204376',
+    fontWeight: 'bold',
+    marginTop: 70,
+    marginLeft: 90,
+    marginRight: 50,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  container: {
+    borderWidth: 1,
+  },
+  address: {
+    fontSize: 17,
+    color: '#204376',
+    justifyContent: 'space-evenly',
+    marginHorizontal: 10,
+    marginVertical: 10,
+  },
+  text: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  name: {
+    fontSize: 17,
+    color: '#204376',
+    textAlign: 'center',
   }
+
 });
 
 export default TripAd;
