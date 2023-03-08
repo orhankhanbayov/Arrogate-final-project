@@ -9,7 +9,22 @@ import {
     TouchableOpacity,
   } from 'react-native';
 
-
+// Example API returned object : 
+// {
+//   "location_id": "3617159",
+//   "name": "Tatte Bakery and Cafe",
+//   "distance": "0.046736929341611735",
+//   "bearing": "northeast",
+//   "address_obj": {
+//     "street1": "1003 Beacon St",
+//     "street2": "",
+//     "city": "Brookline",
+//     "state": "Massachusetts",
+//     "country": "United States",
+//     "postalcode": "02446-5609",
+//     "address_string": "1003 Beacon St, Brookline, MA 02446-5609"
+//   }
+// },
 
 
 const TripAd = () => {
