@@ -33,7 +33,6 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.16",
-    "decode-google-map-polyline": "file:decode-google-map-polyline-js",
     "decode-polyline": "^1.0.2",
     "expo": "~48.0.4",
     "expo-camera": "~13.2.1",
