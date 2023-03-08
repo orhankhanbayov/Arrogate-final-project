@@ -6,9 +6,10 @@ import vision from 'react-cloud-vision-api';
 import * as FileSystem from 'expo-file-system';
 import * as Location from 'expo-location';
 import { getPreciseDistance } from 'geolib';
-import { GOOGLE_API_URL } from '@env';
+import { GOOGLE_API } from '@env';
+import Config from 'react-native-config';
 
-vision.init({ auth: GOOGLE_API_URL });
+vision.init({ auth: `${GOOGLE_API}` });
 
 export default function LandmarkCamera({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);

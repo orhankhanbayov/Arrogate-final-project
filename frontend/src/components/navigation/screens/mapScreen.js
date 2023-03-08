@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { MapViewDirections } from 'react-native-maps-directions';
 import { Platform, PermissionsIOS } from 'react-native';
-import { GOOGLE_API_URL } from '@env';
+import { GOOGLE_API } from '@env';
+import Config from 'react-native-config';
 
 import * as Location from 'expo-location';
 import decodePolyline from 'decode-polyline';
@@ -24,7 +25,7 @@ const MapScreen = () => {
   const [coords, setCoords] = useState({ coords: [] });
   const [show, setShow] = useState(false);
 
-  const GOOGLE_MAPS_APIKEY = GOOGLE_API_URL;
+  const GOOGLE_MAPS_APIKEY = `${GOOGLE_API}`;
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
