@@ -104,7 +104,7 @@ const LocationOneClues = ({ route, navigation }) => {
     setShowValue3(false);
     setShowValue4(false);
     if (locationCounter === 4) {
-      navigation.navigate('Finished');
+      navigation.navigate('Finished', runningScore);
     } else {
       let name = chosenRoutes.locations[locationCounter];
       navigation.navigate('LandmarkCamera', { name, scoreCounter });
