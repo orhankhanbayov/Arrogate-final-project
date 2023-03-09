@@ -13,6 +13,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 const TrophyScreen = ({ navigation }) => {
@@ -40,37 +41,39 @@ const TrophyScreen = ({ navigation }) => {
     scores();
   }, []);
   return (
-    <View style={styles.page}>
-      <ImageBackground
-        source={require('../../../images/background.png')}
-        resizeMode="cover"
-        style={styles.background}
-      ></ImageBackground>
+    <ScrollView>
+      <View style={styles.page}>
+        <ImageBackground
+          source={require('../../../images/background.png')}
+          resizeMode="cover"
+          style={styles.background}
+        ></ImageBackground>
 
-      <View style={styles.templatesContainer}>
-        <Image
-          source={require('../../../images/trophyandcoin-template.png')}
-          style={styles.trophyAndCoinTemplate}
-        ></Image>
+        <View style={styles.templatesContainer}>
+          <Image
+            source={require('../../../images/trophyandcoin-template.png')}
+            style={styles.trophyAndCoinTemplate}
+          ></Image>
+        </View>
+
+        <Text style={styles.header}>Welcome</Text>
+        <Text style={styles.currentTreasures}>Your current treasures are:</Text>
+        <Text style={styles.rankingsTitle}>Rankings</Text>
+        <Text style={styles.pointsTrophiesAndCoins}>
+          {userScore.coins} {userScore.trophies}
+        </Text>
+
+        <View style={styles.usersRankingsContainer}>
+          {scores.map((score) => {
+            return (
+              <Text key={score._id} style={styles.usersRankings}>
+                👤 {score.name} 🏆 {score.trophies} 🪙 {score.coins}
+              </Text>
+            );
+          })}
+        </View>
       </View>
-
-      <Text style={styles.header}>Welcome</Text>
-      <Text style={styles.currentTreasures}>Your current treasures are:</Text>
-      <Text style={styles.rankingsTitle}>Rankings</Text>
-      <Text style={styles.pointsTrophiesAndCoins}>
-        {userScore.coins} {userScore.trophies}
-      </Text>
-
-      <View style={styles.usersRankingsContainer}>
-        {scores.map((score) => {
-          return (
-            <Text key={score._id}>
-              👤 {score.name} {score.trophies} 🏆 {score.coins} 🪙
-            </Text>
-          );
-        })}
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   usersRankings: {
-    fontSize: 20,
+    fontSize: 19,
     textAlign: 'justify',
     color: '#204376',
     padding: 10,

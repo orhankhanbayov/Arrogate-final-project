@@ -76,6 +76,7 @@ const MapScreen = () => {
         )}
         <GooglePlacesAutocomplete
           placeholder="Search"
+          paddingAdjustmentBehavior={'automatic'}
           fetchDetails={true}
           onPress={async (data, details = null) => {
             console.log(data.place_id);
