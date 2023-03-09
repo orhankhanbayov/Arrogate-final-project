@@ -16,7 +16,6 @@ import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 const CongratulationsNextClue = ({ navigation }) => {
   const { setRunningScore, runningScore } = useContext(RunningScoreContext);
 
-
   const [locationCounter1, setLocationCounter] = useState(0);
 
   useEffect(() => {

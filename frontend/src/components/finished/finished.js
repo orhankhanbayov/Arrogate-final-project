@@ -11,15 +11,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
 
 const Finished = ({ navigation, route }) => {
+  let { runningScore } = route.params;
   useEffect(() => {
     const scores = async () => {
       let token = await SecureStore.getItemAsync('token');
       let email = await SecureStore.getItemAsync('email');
-
       let response = await fetch(
         'https://mystery-route-backend.onrender.com/account',
         {
-          method: 'post',
+          method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const Finished = ({ navigation, route }) => {
           body: JSON.stringify({
             email: email,
             trophies: 1,
-            coins: route.params.runningScore,
+            coins: runningScore,
           }),
         }
       );
