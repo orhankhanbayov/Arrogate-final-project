@@ -31,7 +31,7 @@ const ChooseRoutes = ({ navigation }) => {
             },
           }
         );
-
+        await SecureStore.setItemAsync('locationCounter', '0');
         const data = await response.json();
         await SecureStore.setItemAsync('token', data.token);
         setRoutes(data.routes);

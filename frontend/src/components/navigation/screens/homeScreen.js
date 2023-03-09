@@ -26,13 +26,22 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="ChooseRoutes" component={ChooseRoutes} />
-      <Stack.Screen name="LocationOneClues" component={LocationOneClues} />
+      <Stack.Screen
+        name="LocationOneClues"
+        component={LocationOneClues}
+        options={{ unmountOnBlur: true }}
+      />
       <Stack.Screen
         name="CongratulationsNextClue"
         component={CongratulationsNextClue}
+        options={{ unmountOnBlur: true }}
       />
       <Stack.Screen name="Finished" component={Finished} />
-      <Stack.Screen name="LandmarkCamera" component={LandmarkCamera} />
+      <Stack.Screen
+        name="LandmarkCamera"
+        component={LandmarkCamera}
+        options={{ unmountOnBlur: true }}
+      />
       <Stack.Screen name="RouteDescription" component={RouteDescription} />
     </Stack.Navigator>
   );
