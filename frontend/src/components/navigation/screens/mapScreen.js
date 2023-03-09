@@ -55,11 +55,11 @@ const MapScreen = () => {
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
-        region={{
+        initialRegion={{
           latitude: 51.506554,
           longitude: -0.129115,
-          latitudeDelta: 0.000808,
-          longitudeDelta: 0.000204,
+          latitudeDelta: 5,
+          longitudeDelta: 5,
         }}
         showsMyLocationButton={true}
         showsUserLocation={true}

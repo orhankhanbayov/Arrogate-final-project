@@ -20,6 +20,13 @@ const RouteDescription = ({ route, navigation }) => {
   const { routes } = route.params;
   const { setRunningScore, runningScore } = useContext(RunningScoreContext);
 
+  useEffect(() => {
+    const l = async () => {
+      await SecureStore.setItemAsync('locationCounter', '0');
+    };
+    l();
+  }, []);
+
   () => {
     setRunningScore(0);
   };

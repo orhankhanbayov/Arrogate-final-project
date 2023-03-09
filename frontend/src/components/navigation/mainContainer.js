@@ -11,7 +11,7 @@ import TrophyScreen from './screens/trophyScreen';
 const homeName = 'Home';
 const setName = 'Set';
 const mapName = 'Map';
-const trophyName = 'Trophy';
+const trophyName = 'Trophies';
 
 const Tab = createBottomTabNavigator();
 

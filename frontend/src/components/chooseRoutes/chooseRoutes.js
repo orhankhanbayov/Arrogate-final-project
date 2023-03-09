@@ -18,6 +18,13 @@ const ChooseRoutes = ({ navigation }) => {
   const [routes, setRoutes] = useState([]);
 
   useEffect(() => {
+    const set = async () => {
+      await SecureStore.setItemAsync('locationCounter', '0');
+    };
+    set();
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       let token = await SecureStore.getItemAsync('token');
 
@@ -31,7 +38,6 @@ const ChooseRoutes = ({ navigation }) => {
             },
           }
         );
-        // await SecureStore.setItemAsync('locationCounter', '0');
         const data = await response.json();
         await SecureStore.setItemAsync('token', data.token);
         setRoutes(data.routes);

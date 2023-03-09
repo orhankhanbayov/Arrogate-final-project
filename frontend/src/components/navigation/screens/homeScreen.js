@@ -23,15 +23,13 @@ import { NavigationContainer } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
-  useEffect(() => {
-    const l = async () => {
-      await SecureStore.setItemAsync('locationCounter', '0');
-    };
-    l();
-  }, []);
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="ChooseRoutes" component={ChooseRoutes} />
+      <Stack.Screen
+        name="ChooseRoutes"
+        component={ChooseRoutes}
+        options={{ unmountOnBlur: true }}
+      />
       <Stack.Screen
         name="LocationOneClues"
         component={LocationOneClues}
