@@ -34,7 +34,7 @@ const AccountController = {
   },
 
   Edit: (req, res) => {
-    User.updateOne({ email: req.body.email }, async (err, user) => {
+    User.findOne({ email: req.body.email }, async (err, user) => {
       if (err) {
         throw err;
       } else {
