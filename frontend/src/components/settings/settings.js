@@ -3,7 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreAllLogs();
+LogBox.ignoreLogs(['WARN: ']);
+LogBox.ignoreLogs([]);
 import {
   Image,
   StyleSheet,
@@ -15,6 +19,8 @@ import {
 } from 'react-native';
 
 const Settings = ({ navigation }) => {
+  LogBox.ignoreAllLogs();
+
   handleLogout = async () => {
     await SecureStore.deleteItemAsync('token');
     navigation.reset({

@@ -1,3 +1,5 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
@@ -11,19 +13,18 @@ import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
 import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext.js';
 
-
-
 export default function App() {
   const [runningScore, setRunningScore] = useState(0);
+
   return (
     <RunningScoreContext.Provider value={{ runningScore, setRunningScore }}>
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="LogIn" component={LogInForm} />
-        <Stack.Screen name="SignUp" component={SignUpForm} />
-        <Stack.Screen name="MainContainer" component={MainContainer} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="LogIn" component={LogInForm} />
+          <Stack.Screen name="SignUp" component={SignUpForm} />
+          <Stack.Screen name="MainContainer" component={MainContainer} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </RunningScoreContext.Provider>
   );
 }

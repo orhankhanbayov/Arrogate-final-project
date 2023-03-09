@@ -19,10 +19,8 @@ import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
   const { locationCounter1 } = route.params;
-  const [showValue1, setShowValue1] = useState(false);
-  const [showValue2, setShowValue2] = useState(false);
-  const [showValue3, setShowValue3] = useState(false);
-  const [showValue4, setShowValue4] = useState(false); // this is for the give up
+
+  const [showValue4, setShowValue4] = useState(false);
   const [confirmedReveal, setConfirmedReveal] = useState(false);
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
@@ -61,15 +59,6 @@ const LocationOneClues = ({ route, navigation }) => {
     }
   };
   set();
-  // const handleClue1 = () => {
-  //   setShowValue1(true);
-  //  };
-  //  const handleClue2 = () => {
-  //   setShowValue2(true);
-  // };
-  // const handleClue3 = () => {
-  //   setShowValue3(true);
-  // };
 
   const handleClue1 = () => {
     if (currentClue >= 0) {
@@ -116,7 +105,7 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const nextClue = () => {
     setCurrentClue(0);
-
+    setShowValue4(false);
     let name = chosenRoutes.locations[locationCounter];
     navigation.navigate('LandmarkCamera', {
       name,
