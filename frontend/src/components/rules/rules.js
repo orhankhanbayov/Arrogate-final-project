@@ -11,18 +11,20 @@ import {
   View,
   TextInput,
   ImageBackground,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
 const Rules = ({ navigation }) => {
-  return (
+  return (  
     <View style={styles.page}>
       <ImageBackground
         source={require('../../images/background.png')}
         resizeMode="cover"
         style={styles.background}
       ></ImageBackground>
-
+    
+      <ScrollView>
       <View style={styles.rulesContainer}>
         <Text style={styles.rulesTitle}>How to play Solved:</Text>  
         <Text style={styles.rules}>🗺️ You will be given the choice of three Areas: South Bank, City of London and West End</Text>
@@ -31,9 +33,7 @@ const Rules = ({ navigation }) => {
         <Text style={styles.rules}>✨ At each location, you can obtain up to 3 clues, which will lead them to the next location.</Text> 
         <Text style={styles.rules}>✨ You cannot skip any locations.</Text>  
         <Text style={styles.rules}>✨ Remember, the goal of a treasure hunt is to have fun 😀</Text>
-      </View>
 
-      <View style={styles.scoresContainer}>
         <Text style={styles.scoresTitle}> Points:</Text>
         <Text style={styles.scores}>5 🪙 for getting at the correct location after seeing only one clue</Text>
         <Text style={styles.scores}>3 🪙 for getting at the correct location after seeing two clues</Text>  
@@ -41,7 +41,9 @@ const Rules = ({ navigation }) => {
 
         <Text style={styles.scores}> You will get 1 🏆 for solving the area's challenge</Text>
       </View>
+      </ScrollView>
     </View>
+    
   );
 };
 
@@ -56,26 +58,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  rankingsTitle: {
-    fontSize: 22,
-    textAlign: 'center',
-    justifyContent: 'space-evenly',
-    color: '#204376',
-    fontWeight: 'bold',
-    marginVertical: 150,
-  },
-  pointsTrophiesAndCoins: {
-    fontSize: 40,
-    position: 'absolute',
-    justifyContent: 'space-evenly',
-    textAlign: 'center',
-    color: '#204376',
-    fontWeight: 'bold',
-    marginVertical: 155,
-    marginHorizontal: 55,
-  },
   rulesContainer: {
-    position: 'absolute',
     top: 20,
     left: 40,
     borderRadius: 25,
@@ -97,16 +80,7 @@ const styles = StyleSheet.create({
     color: '#204376',
     padding: 10,
   },
-  scoresContainer: {
-    position: 'absolute',
-    top: 600,
-    left: 40,
-    borderRadius: 25,
-    borderColor: '#FFFFFF',
-    width: '80%',
-    padding: 10,
-    backgroundColor: '#FFFFFF',
-  },
+
   scoresTitle: {
     fontWeight: 'bold',
     fontSize: 20,
