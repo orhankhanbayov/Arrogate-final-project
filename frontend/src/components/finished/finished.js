@@ -7,13 +7,31 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
-const Finished = ({ navigation }) => {
+const Finished = ({ navigation, route }) => {
   useEffect(() => {
     const scores = async () => {
-      await fetch('/');
+      let token = await SecureStore.getItemAsync('token');
+      let email = await SecureStore.getItemAsync('email');
+
+      let response = await fetch(
+        'https://mystery-route-backend.onrender.com/account',
+        {
+          method: 'post',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            trophies: 1,
+            coins: route.params.runningScore,
+          }),
+        }
+      );
+      console.log(response.status);
     };
     scores();
   }, []);

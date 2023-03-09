@@ -33,6 +33,7 @@ const LogInForm = ({ navigation }) => {
         const token = responseJson.token;
 
         await SecureStore.setItemAsync('token', token);
+        await SecureStore.setItemAsync('email', email);
 
         navigation.reset({
           index: 0,
@@ -40,21 +41,20 @@ const LogInForm = ({ navigation }) => {
         });
         console.log('success');
       } else {
-
       }
     } catch (error) {
-      error
+      error;
     }
   };
 
   const handleSignUpPress = () => {
     navigation.navigate('SignUp');
   };
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>Welcome to</Text>
-      <Image 
+      <Image
         source={require('../../images/solved-logo.png')}
         style={styles.logo}
       />
@@ -66,7 +66,7 @@ const LogInForm = ({ navigation }) => {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
-          testID='Email'
+          testID="Email"
         />
         <TextInput
           placeholder="Password"
@@ -75,7 +75,7 @@ const LogInForm = ({ navigation }) => {
           onChangeText={setPassword}
           secureTextEntry={true}
           autoCapitalize="none"
-          testID='Password'
+          testID="Password"
         />
         {/* {error != null ? <Text style={styles.error}>{error}</Text> : null} */}
       </View>
@@ -87,7 +87,7 @@ const LogInForm = ({ navigation }) => {
           testID={'login-button'}
         />
       </TouchableOpacity>
-      
+
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Text>Don't have an account?</Text>
         <TouchableOpacity onPress={handleSignUpPress}>
