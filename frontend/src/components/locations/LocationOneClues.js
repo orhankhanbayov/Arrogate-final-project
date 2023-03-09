@@ -16,6 +16,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
+  const { locationCounter1 } = route.params;
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
@@ -27,10 +28,6 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const [isLocationCounterLoaded, setIsLocationCounterLoaded] = useState(false);
   const isFocused = useIsFocused();
-
-  useEffect(() => {
-    //executes whenever this component/screen is focused
-  }, [isFocused]);
 
   useEffect(() => {
     const getLocationCounter = async () => {
@@ -47,45 +44,15 @@ const LocationOneClues = ({ route, navigation }) => {
     };
 
     getLocationCounter();
-  }, [locationCounter]);
-  useEffect(() => {
-    const set = async () => {
-      if (value === 0) {
-        setChosenRoutes(route.params.routes);
-        setValue(1);
-      }
-    };
-    set();
-  }, []);
+  });
 
-  // useLayoutEffect(() => {
-  //   const getLocationCounter = async () => {
-  //     try {
-  //       let counter = await SecureStore.getItemAsync('locationCounter');
-  //       console.log(`counter from location: ${counter}`);
-  //       if (counter !== null) {
-  //         setLocationCounter((prev) => parseInt(counter));
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   getLocationCounter();
-  // }, [locationCounter]);
-
-  // const getLocationCounter = async () => {
-  //   try {
-  //     let counter = await SecureStore.getItemAsync('locationCounter');
-  //     console.log(`counter from location: ${counter}`);
-  //     if (counter !== null) {
-  //       setLocationCounter((prev) => parseInt(counter));
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // getLocationCounter();
+  const set = async () => {
+    if (value === 0) {
+      setChosenRoutes(route.params.routes);
+      setValue(1);
+    }
+  };
+  set();
 
   const handleClue1 = () => {
     setShowValue1(true);

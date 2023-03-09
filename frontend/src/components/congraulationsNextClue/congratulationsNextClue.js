@@ -14,23 +14,31 @@ import { NavigationContainer } from '@react-navigation/native';
 const CongratulationsNextClue = ({ navigation }) => {
   const [locationCounter1, setLocationCounter] = useState(0);
 
-  const lte = async () => {
-    let res = await SecureStore.getItemAsync('locationCounter');
-    console.log(`res = ${res}`);
-    setLocationCounter((prev) => parseInt(res));
-    let updatedLocationCounter = locationCounter1 + 1;
-    await SecureStore.setItemAsync(
-      'locationCounter',
-      updatedLocationCounter.toString()
-    );
+  useEffect(() => {
+    const lte = async () => {
+      let res = await SecureStore.getItemAsync('locationCounter');
+      console.log(`res = ${res}`);
+      setLocationCounter((prev) => parseInt(res));
+    };
+    lte();
+  }, []);
 
-    console.log(`counter from congratulations: ${updatedLocationCounter}`);
-  };
-  lte();
+  useEffect(() => {
+    const lte = async () => {
+      let updatedLocationCounter = locationCounter1 + 1;
+      await SecureStore.setItemAsync(
+        'locationCounter',
+        updatedLocationCounter.toString()
+      );
+
+      console.log(`counter from congratulations: ${updatedLocationCounter}`);
+    };
+    lte();
+  }, [locationCounter1]);
 
   const nextLocation = async () => {
     let render = false;
-    navigation.navigate('LocationOneClues', { render });
+    navigation.navigate('LocationOneClues', { render, locationCounter1 });
   };
   return (
     <View style={styles.page}>
