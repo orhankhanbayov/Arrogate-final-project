@@ -41,29 +41,29 @@ const EditPassword = ({ navigation }) => {
   };
 
   return (
-    
-      <View style={styles.page}>
-        <ImageBackground
-          source={require('../../images/background.png')}
-          resizeMode="cover"
-          style={styles.background}
-        ></ImageBackground>
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-          autoCapitalize="none"
-          style={styles.inputContainer}
-        />
-        <View style={styles.buttonContainer3}>
+    <View style={styles.page}>
+      <ImageBackground
+        source={require('../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+        autoCapitalize="none"
+        style={styles.inputContainer}
+      />
+      <View style={styles.buttonContainer3}>
         <TouchableOpacity onPress={update}>
-          <Image source={require('../../images/edit-password-button.png')}
-          style={styles.image} /> 
+          <Image
+            source={require('../../images/edit-password-button.png')}
+            style={styles.image}
+          />
         </TouchableOpacity>
-        </View>
       </View>
-  
+    </View>
   );
 };
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000000',
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 5
+    elevation: 5,
   },
   page: {
     flex: 1,
@@ -100,5 +100,5 @@ const styles = StyleSheet.create({
     height: 175,
     width: 200,
   },
-})
+});
 export default EditPassword;

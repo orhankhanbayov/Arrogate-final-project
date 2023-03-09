@@ -13,10 +13,11 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
-const CongratulationsNextClue = ({ navigation }) => {
+const CongratulationsNextClue = ({ route, navigation }) => {
   const { setRunningScore, runningScore } = useContext(RunningScoreContext);
 
   const [locationCounter1, setLocationCounter] = useState(0);
+  const { name, scoreCounter } = route.params;
 
   useEffect(() => {
     const lte = async () => {
@@ -50,17 +51,22 @@ const CongratulationsNextClue = ({ navigation }) => {
       ></ImageBackground>
 
       <Text style={styles.title}>
-        Congratulations, you solved Location {locationCounter1 + 1}
+        Congratulations, you solved Location {locationCounter1 + 1} - {name.name}
       </Text>
 
-      <Image
-        source={require('../../images/coin-template.png')}
-        style={styles.image}
-      />
+      <View style={styles.container}>
+  <Image
+    source={require('../../images/coin.png')}
+    style={styles.imageCoin}
+  />
+  <Text style={styles.scoreNumber}>{scoreCounter} x </Text>
+</View>
 
-      <View style={styles.area}>
-        <Text style={styles.subtitle}> Add map here</Text>
-      </View>
+
+<Image
+    source={require('../../images/explore-area.png')}
+    style={styles.image}
+  />
 
       <TouchableOpacity onPress={nextLocation}>
         <Image
@@ -106,9 +112,27 @@ const styles = StyleSheet.create({
     // marginTop: 20,
     // marginBottom: 0,
   },
+  scoreNumber: {
+    fontSize: 50,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'left',
+    // padding: 5,
+    // marginLeft: 50,
+    // marginRight: 50,
+    // marginTop: 20,
+    // marginBottom: 0,
+  },
   image: {
     resizeMode: 'contain',
     height: 280,
+    width: 280,
+    marginTop: -60,
+    marginLeft: 60,
+  },
+  imageCoin: {
+    resizeMode: 'contain',
+    height: 150,
     width: 280,
     marginTop: -60,
     marginLeft: 60,

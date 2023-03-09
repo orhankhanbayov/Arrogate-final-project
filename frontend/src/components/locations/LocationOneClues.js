@@ -106,12 +106,15 @@ const LocationOneClues = ({ route, navigation }) => {
             setConfirmedReveal(true);
             setShowValue4(!showValue4);
             setScoreCounter(0);
+            console.log(chosenRoutes.locations[locationCounter].name)
           },
         },
       ],
       { cancelable: false }
     );
   };
+
+
 
   const nextClue = () => {
     setShowValue1(false);
