@@ -60,7 +60,7 @@ const CongratulationsNextClue = ({ route, navigation }) => {
           source={require('../../images/coin.png')}
           style={styles.imageCoin}
         />
-        <Text style={styles.scoreNumber}>{scoreCounter} x </Text>
+        <Text style={styles.scoreNumber}>{runningScore} </Text>
       </View>
 
       <Image
