@@ -5,33 +5,16 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
-    TextInput,
+    ScrollView,
     TouchableOpacity,
   } from 'react-native';
-
-// Example API returned object : 
-// {
-//   "location_id": "3617159",
-//   "name": "Tatte Bakery and Cafe",
-//   "distance": "0.046736929341611735",
-//   "bearing": "northeast",
-//   "address_obj": {
-//     "street1": "1003 Beacon St",
-//     "street2": "",
-//     "city": "Brookline",
-//     "state": "Massachusetts",
-//     "country": "United States",
-//     "postalcode": "02446-5609",
-//     "address_string": "1003 Beacon St, Brookline, MA 02446-5609"
-//   }
-// },
 
 
 const TripAd = () => {
   const [location, setLocation] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [reviews, setReviews] = useState({});
+  const [showReviews, setShowReviews] = useState(new Array(restaurants.length).fill(false));
 
   const nearBy = async () => {
     try {
@@ -52,7 +35,7 @@ const TripAd = () => {
         .then((response) => response.json())
         .then(async (data) => {
           setRestaurants(data.data);
-
+          
           // fetch reviews by location id for each restaurant
           const locationIDs = data.data.slice(0, 5).map((restaurant) => restaurant.location_id);
 
@@ -61,7 +44,6 @@ const TripAd = () => {
             const optionsReviews = { method: 'GET', headers: { accept: 'application/json' } };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
-            console.log(reviewData)
             setReviews((prevReviews) => ({ ...prevReviews, [id]: reviewData.data }));
           }
           
@@ -72,6 +54,25 @@ const TripAd = () => {
     }
   };
 
+  const toggleReviews = (index) => {
+    const updatedShowReviews = [...showReviews];
+    updatedShowReviews[index] = !updatedShowReviews[index];
+    setShowReviews(updatedShowReviews);
+  };
+
+  const getStars = (rating) => {
+    let stars = '';
+    for (let i = 0; i < Math.floor(rating); i++) {
+      stars += '★';
+    }
+    if (rating % 1 > 0 && rating % 1 <= 0.5) {
+      stars += '½';
+    } else if (rating % 1 > 0.5) {
+      stars += '★';
+    }
+    return stars;
+  };
+
   useEffect(() => {
     nearBy();
   }, []);
@@ -80,8 +81,7 @@ const TripAd = () => {
     <View style={styles.page}>
       <ImageBackground source={require('../images/background.png')} resizeMode="cover" style={styles.background}></ImageBackground>
       <Text style={styles.header}>Restaurants near you</Text>
-
-      <View>
+      <ScrollView>
         {restaurants.slice(0, 5).map((restaurant, index) => (
           <View key={index} style={styles.container}>
             <Text style={styles.text}>
@@ -90,17 +90,23 @@ const TripAd = () => {
             <Text>
               Address: <Text>{restaurant.address_obj.address_string}</Text>
             </Text>
-            <Text>Reviews:</Text>
-            {reviews[restaurant.location_id]?.slice(0, 2).map((review, index) => (
-              <View key={index} style={styles.review}>
-                <Text>Title :<Text>{review.title}</Text></Text>
-                <Text>{review.text}</Text>
-                <Image style={styles.image} source={{ uri: review.rating_image_url }} />
+            <TouchableOpacity onPress={() => toggleReviews(index)}>
+               <Text style={styles.text}>Reviews</Text>
+            </TouchableOpacity>
+            {showReviews[index] && (
+              <View>
+                {reviews[restaurant.location_id]?.map((review, index) => (
+                  <View key={index} style={styles.review}>
+                    <Text>Rating: <Text>{getStars(review.rating)}  </Text></Text>
+                    <Text>Title: <Text>{review.title}  </Text></Text>
+                    <Text>{review.text}{'\n'}</Text>
+                  </View>
+                ))}
               </View>
-            ))}
+            )}
           </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -147,13 +153,6 @@ const styles = StyleSheet.create({
     color: '#204376',
     textAlign: 'center',
   },
-  image: {
-    alignItems: 'center',
-    resizeMode: 'contain',
-    height: 175,
-    width: 200,
-  },
-
 });
 
 export default TripAd;
