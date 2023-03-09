@@ -50,6 +50,10 @@ const LocationOneClues = ({ route, navigation }) => {
     getLocationCounter();
   });
 
+  useEffect(() => {
+    setScoreCounter(0);
+  }, [render]);
+
   const set = async () => {
     if (value === 0) {
       setChosenRoutes(route.params.routes);
@@ -115,42 +119,12 @@ const LocationOneClues = ({ route, navigation }) => {
           style={styles.background}
         ></ImageBackground>
 
-
-  return (
-    <View style={styles.page}>
-      <ImageBackground
-        source={require('../../images/background.png')}
-        resizeMode="cover"
-        style={styles.background}
-      ></ImageBackground>
-
-      <Text>location coins:{scoreCounter}</Text>
-      <View>
-        <Text>total coins: {runningScore}</Text>
-      </View>
-
-      {/* Area/Location banner */}
-
-      <View style={styles.banner}>
-        <Image
-          source={
-            chosenRoutes.name === 'South Bank'
-              ? require('../../images/area1-banner.png')
-              : chosenRoutes.name === 'City Of London'
-              ? require('../../images/area2-banner.png')
-              : require('../../images/area3-banner.png')
-          }
-          style={styles.banner}
-        />
-      </View>
-
-      <View>
-        <Text style={styles.header}>{`Location ${
-          locationCounter + 1
-        } of 5`}</Text>
+        <Text>location coins:{scoreCounter}</Text>
+        <View>
+          <Text>total coins: {runningScore}</Text>
+        </View>
 
         {/* Area/Location banner */}
-
 
         <View style={styles.banner}>
           <Image
@@ -191,7 +165,6 @@ const LocationOneClues = ({ route, navigation }) => {
           </View>
         )}
 
-
         {/* Second Clue */}
         {showValue2 ? (
           <View style={styles.clueBorder}>
@@ -209,7 +182,6 @@ const LocationOneClues = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         )}
-
 
         {/* Third Clue */}
         {showValue3 ? (
