@@ -11,11 +11,19 @@ import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
 const Finished = ({ navigation }) => {
+  useEffect(() => {
+    const scores = async () => {
+      await fetch('/');
+    };
+    scores();
+  }, []);
+
   return (
     <View style={styles.page}>
-      
-      <Text style={styles.title}>Congratulations you have solved the challenge!</Text>
-      
+      <Text style={styles.title}>
+        Congratulations you have solved the challenge!
+      </Text>
+
       <View style={styles.image}>
         <Image
           source={require('../../images/trophy.png')}
@@ -24,11 +32,10 @@ const Finished = ({ navigation }) => {
       </View>
 
       <Text style={styles.subtitle}>Explore the area...</Text>
-      
-      <View style={styles.buttonContainer}>
-          <Text style={styles.button}> Add map here</Text>
-        </View>
 
+      <View style={styles.buttonContainer}>
+        <Text style={styles.button}> Add map here</Text>
+      </View>
     </View>
   );
 };
