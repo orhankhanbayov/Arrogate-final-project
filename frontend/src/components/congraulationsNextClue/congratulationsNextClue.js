@@ -17,7 +17,7 @@ const CongratulationsNextClue = ({ route, navigation }) => {
   const { setRunningScore, runningScore } = useContext(RunningScoreContext);
 
   const [locationCounter1, setLocationCounter] = useState(0);
-  const { scoreCounter } = route.params;
+  // const { scoreCounter } = route.params;
   const { name } = route.params;
   useEffect(() => {
     const lte = async () => {
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     width: 300,
     // marginTop: -60,
     // marginLeft: 50,
-    backgroundColor: '#FF0000',
+    // backgroundColor: '#FF0000',
     alignItems: 'center',
     justifyContent: 'space-between',
     alignSelf: 'center',
