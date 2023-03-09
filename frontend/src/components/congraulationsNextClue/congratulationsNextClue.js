@@ -48,7 +48,9 @@ const CongratulationsNextClue = ({ navigation }) => {
         style={styles.background}
       ></ImageBackground>
 
-      <Text style={styles.title}>Congratulations, you solved Location __</Text>
+      <Text style={styles.title}>
+        Congratulations, you solved Location {locationCounter1 + 1}
+      </Text>
 
       <Image
         source={require('../../images/coin-template.png')}
