@@ -5,7 +5,7 @@ const AccountController = {
   updateScore: (req, res) => {
     User.updateOne(
       { email: req.body.email },
-      { $set: { trophies: req.body.trophies, coins: req.body.coins } },
+      { $inc: { trophies: req.body.trophies, coins: req.body.coins } },
       async (err, user) => {
         if (err) {
           throw err;
