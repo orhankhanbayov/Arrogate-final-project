@@ -72,11 +72,18 @@ export default function LandmarkCamera({ route, navigation }) {
         close
       ) {
         if (locationCounter === 4) {
+          // console.log(`running score from landmarkcam before addition ${runningScore}`)
+          // console.log(`scoreCounter from landmarkcam before addition ${scoreCounter}`)
           setRunningScore(runningScore + scoreCounter);
-          navigation.navigate('Finished', { runningScore });
+          // console.log(`scoreCounter from landmarkcam before navigate ${scoreCounter}`)
+          // console.log(`running score from landmarkcam before navigate ${runningScore}`)
+          navigation.navigate('Finished');
+          // console.log(`running score from landmarkcam after navigate ${runningScore}`)
         } else {
-          navigation.navigate('CongratulationsNextClue', { name });
+          // console.log(`scoreCounter from landmarkcam before nav less than 4 ${scoreCounter}`)
+          // console.log(`running score from landmarkcam before nav less than 4 ${runningScore}`)
           setRunningScore(runningScore + scoreCounter);
+          navigation.navigate('CongratulationsNextClue', { name });
         }
       } else {
         let render = true;

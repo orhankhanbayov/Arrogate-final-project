@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
+import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext'; //////////////
+import { useContext } from 'react';
 
 const Finished = ({ navigation, route }) => {
-  let { runningScore } = route.params;
+  const { runningScore } = useContext(RunningScoreContext);
   useEffect(() => {
     const scores = async () => {
       let token = await SecureStore.getItemAsync('token');
@@ -32,6 +34,8 @@ const Finished = ({ navigation, route }) => {
         }
       );
       console.log(response.status);
+      console.log(`running score from within mainblock ${runningScore}`)
+
     };
     scores();
   }, []);
