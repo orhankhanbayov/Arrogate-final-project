@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 import {
+
 Image,
 StyleSheet,
 ImageBackground,
@@ -186,6 +187,7 @@ padding: 130,
 height: 50,
 zIndex: 0,
 },
+
 });
 
 export default TrophyScreen;

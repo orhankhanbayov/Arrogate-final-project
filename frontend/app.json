@@ -1,9 +1,13 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "Solved",
+    "slug": "Solved",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.arrogate.solved",
+      "buildNumber": "1.0.0"
+    },
     "plugins": [
       [
         "expo-camera",

@@ -23,6 +23,7 @@ const RouteDescription = ({ route, navigation }) => {
   useEffect(() => {
     const l = async () => {
       await SecureStore.setItemAsync('locationCounter', '0');
+      setRunningScore(0);
     };
     l();
   }, []);
