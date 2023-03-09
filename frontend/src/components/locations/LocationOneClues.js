@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+
 import {
   View,
   Text,
@@ -16,8 +18,7 @@ import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
-  const { pass } = route.params;
-
+  const { locationCounter1 } = route.params;
   const [showValue1, setShowValue1] = useState(false);
   const [showValue2, setShowValue2] = useState(false);
   const [showValue3, setShowValue3] = useState(false);
@@ -29,20 +30,33 @@ const LocationOneClues = ({ route, navigation }) => {
   const [scoreCounter, setScoreCounter] = useState(0);
   const { runningScore } = useContext(RunningScoreContext);
 
-  const set = () => {
+  const [isLocationCounterLoaded, setIsLocationCounterLoaded] = useState(false);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const getLocationCounter = async () => {
+      try {
+        let counter = await SecureStore.getItemAsync('locationCounter');
+        console.log(`counter from location: ${counter}`);
+        if (counter !== null) {
+          setLocationCounter((prev) => parseInt(counter));
+          setIsLocationCounterLoaded((prev) => true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getLocationCounter();
+  });
+
+  const set = async () => {
     if (value === 0) {
       setChosenRoutes(route.params.routes);
       setValue(1);
     }
   };
-
   set();
-
-  useEffect(() => {
-    if (pass === false) {
-      setLocationCounter(locationCounter + 1);
-    }
-  }, [pass]);
 
   const handleClue1 = () => {
     setShowValue1(true);
@@ -92,6 +106,15 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('LandmarkCamera', { name, scoreCounter });
     }
   };
+  if (isLocationCounterLoaded) {
+    return (
+      <View style={styles.page}>
+        <ImageBackground
+          source={require('../../images/background.png')}
+          resizeMode="cover"
+          style={styles.background}
+        ></ImageBackground>
+
 
   return (
     <View style={styles.page}>
@@ -126,96 +149,120 @@ const LocationOneClues = ({ route, navigation }) => {
           locationCounter + 1
         } of 5`}</Text>
 
-        <Text style={styles.header2}>{render ? 'Please try again' : ''}</Text>
-      </View>
+        {/* Area/Location banner */}
 
-      {/* First Clue ']' */}
-      {showValue1 ? (
-        <View style={styles.clueBorder}>
-          <Text style={styles.cluesText}>
-            {chosenRoutes.locations[locationCounter].clue1}
-          </Text>
-        </View>
-      ) : (
-        <View style={styles.buttonContainer1}>
-          <TouchableOpacity onPress={handleClue1}>
-            <Image
-              source={require('../../images/get-first-clue-button.png')}
-              style={styles.image}
-            />
-          </TouchableOpacity>
-        </View>
-      )}
 
-      {/* Second Clue */}
-      {showValue2 ? (
-        <View style={styles.clueBorder}>
-          <Text style={styles.cluesText}>
-            {chosenRoutes.locations[locationCounter].clue2}
-          </Text>
-        </View>
-      ) : (
-        <View style={styles.buttonContainer2}>
-          <TouchableOpacity onPress={handleClue2}>
-            <Image
-              source={require('../../images/get-second-clue-button.png')}
-              style={styles.image}
-            />
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* Third Clue */}
-      {showValue3 ? (
-        <View style={styles.clueBorder}>
-          <Text style={styles.cluesText}>
-            {chosenRoutes.locations[locationCounter].clue3}
-          </Text>
-        </View>
-      ) : (
-        <View style={styles.buttonContainer3}>
-          <TouchableOpacity onPress={handleClue3}>
-            <Image
-              source={require('../../images/get-third-clue-button.png')}
-              style={styles.image}
-            />
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* // submit location  */}
-      <View style={styles.buttonLower}>
-        <TouchableOpacity style={styles.button} onPress={nextClue}>
+        <View style={styles.banner}>
           <Image
-            source={require('../../images/submit-location-button.png')}
-            style={styles.submitLocation}
+            source={
+              chosenRoutes.name === 'South Bank'
+                ? require('../../images/area1-banner.png')
+                : chosenRoutes.name === 'City Of London'
+                ? require('../../images/area2-banner.png')
+                : require('../../images/area3-banner.png')
+            }
+            style={styles.banner}
           />
-        </TouchableOpacity>
+        </View>
 
-        {/* give up */}
-        {showValue4 && confirmedReveal ? (
-          <View style={styles.yellowButton}>
-            <ImageBackground
-              source={require('../../images/yellow-button.png')}
-              resizeMode="cover"
-              style={styles.yellowButton}
-            ></ImageBackground>
+        <View>
+          <Text style={styles.header}>{`Location ${
+            locationCounter + 1
+          } of 5`}</Text>
 
-            <Text style={styles.textGiveUp}>
-              {chosenRoutes.locations[locationCounter].name}
+          <Text style={styles.header2}>{render ? 'Please try again' : ''}</Text>
+        </View>
+
+        {/* First Clue ']' */}
+        {showValue1 ? (
+          <View style={styles.clueBorder}>
+            <Text style={styles.cluesText} key="some_unique_value">
+              {chosenRoutes.locations[locationCounter].clue1}
             </Text>
           </View>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleClue4}>
+          <View style={styles.buttonContainer1}>
+            <TouchableOpacity onPress={handleClue1}>
+              <Image
+                source={require('../../images/get-first-clue-button.png')}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+
+
+        {/* Second Clue */}
+        {showValue2 ? (
+          <View style={styles.clueBorder}>
+            <Text style={styles.cluesText}>
+              {chosenRoutes.locations[locationCounter].clue2}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.buttonContainer2}>
+            <TouchableOpacity onPress={handleClue2}>
+              <Image
+                source={require('../../images/get-second-clue-button.png')}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+
+
+        {/* Third Clue */}
+        {showValue3 ? (
+          <View style={styles.clueBorder}>
+            <Text style={styles.cluesText}>
+              {chosenRoutes.locations[locationCounter].clue3}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.buttonContainer3}>
+            <TouchableOpacity onPress={handleClue3}>
+              <Image
+                source={require('../../images/get-third-clue-button.png')}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* // submit location  */}
+        <View style={styles.buttonLower}>
+          <TouchableOpacity style={styles.button} onPress={nextClue}>
             <Image
-              source={require('../../images/give-up-button.png')}
-              style={styles.giveUp}
+              source={require('../../images/submit-location-button.png')}
+              style={styles.submitLocation}
             />
           </TouchableOpacity>
-        )}
+
+          {/* give up */}
+          {showValue4 && confirmedReveal ? (
+            <View style={styles.yellowButton}>
+              <ImageBackground
+                source={require('../../images/yellow-button.png')}
+                resizeMode="cover"
+                style={styles.yellowButton}
+              ></ImageBackground>
+
+              <Text style={styles.textGiveUp}>
+                {chosenRoutes.locations[locationCounter].name}
+              </Text>
+            </View>
+          ) : (
+            <TouchableOpacity style={styles.button} onPress={handleClue4}>
+              <Image
+                source={require('../../images/give-up-button.png')}
+                style={styles.giveUp}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 const styles = StyleSheet.create({
