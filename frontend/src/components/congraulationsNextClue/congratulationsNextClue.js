@@ -58,7 +58,7 @@ const CongratulationsNextClue = ({ route, navigation }) => {
         <Text style={styles.title}>{name.name}</Text>
       </View>
 
-      <View style={styles.container}>
+      <View style={styles.coinsContainer}>
         <Text style={styles.scoreNumber}>{runningScore} </Text>
         <Image
           source={require('../../images/coin-cropped.png')}
@@ -90,14 +90,21 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // backgroundColor: '#EAF3F1',
   },
-  container: {
+  coinsContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // backgroundColor: '#FF0000',
+    backgroundColor: '#EAF3F1',
     alignSelf: 'center',
-    width: 130,
+    // width: 130,
+    borderWidth: 2,
+    borderColor: '#204376',
+    borderRadius: 25,
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 50,
+    paddingHorizontal: 20,
   },
   scoreNumber: {
     resizeMode: 'contain',
@@ -120,30 +127,25 @@ const styles = StyleSheet.create({
     // marginTop: -10,
     // marginLeft: 60,
   },
-  // Modified with chat
-  // titleContainer: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   marginTop: '25%',
-  // },
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-    position: 'absolute',
-    width: '101%',
-    height: '104.5%',
+  titleContainer: {
+    // flex: 1,
+    // alignItems: 'center',
+    justifyContent: 'center',
+    // marginTop: '25%',
+    alignSelf: 'center',
+    // backgroundColor: '#FF0000',
   },
   title: {
-    fontSize: 30,
+    fontSize: 38,
     color: '#204376',
     fontWeight: 'bold',
     textAlign: 'center',
-    padding: 5,
-    marginLeft: 50,
-    marginRight: 50,
-    marginTop: -10,
-    marginBottom: 30,
+    // padding: 5,
+    // marginLeft: 50,
+    // marginRight: 50,
+    // marginTop: -10,
+    // marginBottom: 30,
+    // backgroundColor: '#00FF00',
   },
   subTitle: {
     fontSize: 20,
@@ -154,26 +156,39 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     marginRight: 50,
     marginTop: 50,
-    marginBottom: 30,
+    marginBottom: 1,
+    // backgroundColor: '#0000FF',
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '101%',
+    height: '104.5%',
   },
   image: {
     resizeMode: 'contain',
     height: 300,
     width: 300,
-    marginTop: -60,
-    marginLeft: 50,
+    // marginTop: -60,
+    // marginLeft: 50,
+    backgroundColor: '#FF0000',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
   },
-  area: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: '#204376',
-    borderRadius: 25,
-    padding: 50,
-    marginLeft: 50,
-    marginRight: 50,
-  },
+  // TO DELETE?
+  // area: {
+  //   fontWeight: 'bold',
+  //   textAlign: 'center',
+  //   borderStyle: 'dashed',
+  //   borderWidth: 1,
+  //   borderColor: '#204376',
+  //   borderRadius: 25,
+  //   padding: 50,
+  //   marginLeft: 50,
+  //   marginRight: 50,
+  // },
   buttonImage: {
     resizeMode: 'contain',
     height: 200,
