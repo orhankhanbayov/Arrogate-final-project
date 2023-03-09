@@ -74,7 +74,7 @@ export default function LandmarkCamera({ route, navigation }) {
           setRunningScore(runningScore + scoreCounter);
           navigation.navigate('Finished', { runningScore });
         } else {
-          navigation.navigate('CongratulationsNextClue');
+          navigation.navigate('CongratulationsNextClue', { name });
           setRunningScore(runningScore + scoreCounter);
         }
       } else {

@@ -42,32 +42,31 @@ const EditEmail = ({ navigation }) => {
   };
 
   return (
-    
-      <View style={styles.page}>
+    <View style={styles.page}>
       <ImageBackground
-          source={require('../../images/background.png')}
-          resizeMode="cover"
-          style={styles.background}
-        ></ImageBackground>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          style={styles.inputContainer}
-        />
-        <View style={styles.buttonContainer3}>
+        source={require('../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        style={styles.inputContainer}
+      />
+      <View style={styles.buttonContainer3}>
         <TouchableOpacity onPress={update}>
-          <Image source={require('../../images/edit-email-button.png')}
-          style={styles.image} />
+          <Image
+            source={require('../../images/edit-email-button.png')}
+            style={styles.image}
+          />
         </TouchableOpacity>
-        </View>
       </View>
-    
+    </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000000',
     shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 5
+    elevation: 5,
   },
   page: {
     flex: 1,
@@ -102,5 +101,5 @@ const styles = StyleSheet.create({
     height: 175,
     width: 200,
   },
-})
+});
 export default EditEmail;
