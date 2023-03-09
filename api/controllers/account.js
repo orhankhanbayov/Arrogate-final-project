@@ -3,21 +3,19 @@ const TokenGenerator = require('../models/token_generator');
 
 const AccountController = {
   updateScore: (req, res) => {
-    User.findOne({ email: req.body.email }, async (err, user) => {
-      if (err) {
-        throw err;
-      } else {
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    User.findOne(
+      { email: req.body.email },
+      { $inc: { trophies: req.body.trophies, coins: req.body.coins } },
+      async (err, user) => {
+        if (err) {
+          throw err;
+        } else {
+          const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-        user.trophies = user.trophies || 0;
-        user.coins = user.coins || 0;
-
-        user.trophies += req.body.trophies;
-        user.coins += req.body.coins;
-        await user.save();
-        res.status(204).json({ message: 'OK', token: token });
+          res.status(204).json({ message: 'OK', token: token });
+        }
       }
-    });
+    );
   },
 
   getScore: (req, res) => {
