@@ -17,8 +17,8 @@ const CongratulationsNextClue = ({ route, navigation }) => {
   const { setRunningScore, runningScore } = useContext(RunningScoreContext);
 
   const [locationCounter1, setLocationCounter] = useState(0);
-  const { name, scoreCounter } = route.params;
-
+  const { scoreCounter } = route.params;
+  const { name } = route.params;
   useEffect(() => {
     const lte = async () => {
       let res = await SecureStore.getItemAsync('locationCounter');
@@ -51,22 +51,22 @@ const CongratulationsNextClue = ({ route, navigation }) => {
       ></ImageBackground>
 
       <Text style={styles.title}>
-        Congratulations, you solved Location {locationCounter1 + 1} - {name.name}
+        Congratulations, you solved Location {locationCounter1 + 1} -{' '}
+        {name.name}
       </Text>
 
       <View style={styles.container}>
-  <Image
-    source={require('../../images/coin.png')}
-    style={styles.imageCoin}
-  />
-  <Text style={styles.scoreNumber}>{scoreCounter} x </Text>
-</View>
+        <Image
+          source={require('../../images/coin.png')}
+          style={styles.imageCoin}
+        />
+        <Text style={styles.scoreNumber}>{scoreCounter} x </Text>
+      </View>
 
-
-<Image
-    source={require('../../images/explore-area.png')}
-    style={styles.image}
-  />
+      <Image
+        source={require('../../images/explore-area.png')}
+        style={styles.image}
+      />
 
       <TouchableOpacity onPress={nextLocation}>
         <Image
