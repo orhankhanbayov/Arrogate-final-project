@@ -9,8 +9,11 @@ const AccountController = {
       } else {
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-        user.trophies = req.body.trophies;
-        user.coins = req.body.coins;
+        user.trophies = user.trophies || 0;
+        user.coins = user.coins || 0;
+
+        user.trophies += req.body.trophies;
+        user.coins += req.body.coins;
         await user.save();
         res.status(204).json({ message: 'OK', token: token });
       }
