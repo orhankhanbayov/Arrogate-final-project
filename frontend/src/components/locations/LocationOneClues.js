@@ -27,6 +27,7 @@ const LocationOneClues = ({ route, navigation }) => {
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
+  const [currentClue, setCurrentClue] = useState(0);
   const [scoreCounter, setScoreCounter] = useState(0);
   const { runningScore } = useContext(RunningScoreContext);
 
@@ -60,20 +61,35 @@ const LocationOneClues = ({ route, navigation }) => {
     }
   };
   set();
+  // const handleClue1 = () => {
+  //   setShowValue1(true);
+  //  };
+  //  const handleClue2 = () => {
+  //   setShowValue2(true);
+  // };
+  // const handleClue3 = () => {
+  //   setShowValue3(true);
+  // };
 
   const handleClue1 = () => {
-    setShowValue1(true);
-    setScoreCounter(5);
+    if (currentClue >= 0) {
+      setCurrentClue(1);
+      setScoreCounter(5);
+    }
   };
 
   const handleClue2 = () => {
-    setShowValue2(true);
-    setScoreCounter(3);
+    if (currentClue >= 1) {
+      setCurrentClue(2);
+      setScoreCounter(3);
+    }
   };
 
   const handleClue3 = () => {
-    setShowValue3(true);
-    setScoreCounter(1);
+    if (currentClue >= 2) {
+      setCurrentClue(3);
+      setScoreCounter(1);
+    }
   };
 
   const handleClue4 = () => {
@@ -148,9 +164,9 @@ const LocationOneClues = ({ route, navigation }) => {
         </View>
 
         {/* First Clue ']' */}
-        {showValue1 ? (
+        {currentClue >= 1 ? (
           <View style={styles.clueBorder}>
-            <Text style={styles.cluesText} key="some_unique_value">
+            <Text style={styles.cluesText}>
               {chosenRoutes.locations[locationCounter].clue1}
             </Text>
           </View>
@@ -166,7 +182,7 @@ const LocationOneClues = ({ route, navigation }) => {
         )}
 
         {/* Second Clue */}
-        {showValue2 ? (
+        {currentClue >= 2 ? (
           <View style={styles.clueBorder}>
             <Text style={styles.cluesText}>
               {chosenRoutes.locations[locationCounter].clue2}
@@ -184,7 +200,7 @@ const LocationOneClues = ({ route, navigation }) => {
         )}
 
         {/* Third Clue */}
-        {showValue3 ? (
+        {currentClue >= 3 ? (
           <View style={styles.clueBorder}>
             <Text style={styles.cluesText}>
               {chosenRoutes.locations[locationCounter].clue3}
@@ -331,7 +347,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 170,
     width: 110,
-    marginLeft: 5,
+    marginLeft: 15,
   },
   // red giveUp button
   giveUp: {
