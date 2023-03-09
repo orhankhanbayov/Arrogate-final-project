@@ -4,12 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './screens/homeScreen';
-import SettingsScreen from './screens/settingsScreen';
+import SetScreen from './screens/settScreen';
 import MapScreen from './screens/mapScreen';
 import TrophyScreen from './screens/trophyScreen';
 
 const homeName = 'Home';
-const settingsName = 'Settings';
+const setName = 'Set';
 const mapName = 'Map';
 const trophyName = 'Trophy';
 
@@ -25,7 +25,7 @@ const MainContainer = () => {
           let rn = route.name;
           if (rn === homeName) {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (rn === settingsName) {
+          } else if (rn === setName) {
             iconName = focused ? 'settings' : 'settings-outline';
           } else if (rn === mapName) {
             iconName = focused ? 'map' : 'map-outline';
@@ -39,7 +39,7 @@ const MainContainer = () => {
       <Tab.Screen name={homeName} component={HomeScreen} />
       <Tab.Screen name={mapName} component={MapScreen} />
       <Tab.Screen name={trophyName} component={TrophyScreen} />
-      <Tab.Screen name={settingsName} component={SettingsScreen} />
+      <Tab.Screen name={setName} component={SetScreen} />
     </Tab.Navigator>
   );
 };

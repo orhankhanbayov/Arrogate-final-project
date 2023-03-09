@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as SecureStore from 'expo-secure-store';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import {
   Image,
@@ -13,56 +14,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const SettingsScreen = ({ navigation }) => {
-  
-  handleAboutPress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'About' }],
-    });
-  };
-  
-  handleRulesPress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Rules' }],
-    });
-  };
-
-  handleEditNamePress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Edit name' }],
-    });
-  };
-
-  handleEditEmailPress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Edit email' }],
-    });
-  };
-
-  handleEditPasswordPress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Edit password' }],
-    });
-  };
-
-  handleEditPicturePress = async () => {
-    await SecureStore.deleteItemAsync('token');
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Edit picture' }],
-    });
-  };
-
+const Settings = ({ navigation }) => {
   handleLogout = async () => {
     await SecureStore.deleteItemAsync('token');
     navigation.reset({
@@ -71,49 +23,63 @@ const SettingsScreen = ({ navigation }) => {
     });
   };
 
+  handleEmail = () => {
+    navigation.navigate('EditEmail');
+  };
+
+  handleName = () => {
+    navigation.navigate('EditName');
+  };
+
+  handlePassword = () => {
+    navigation.navigate('EditPassword');
+  };
+
+  handleRules = () => {
+    navigation.navigate('Rules');
+  };
+
+  handleAbout = () => {
+    navigation.navigate('About');
+  };
+
   return (
     <View style={styles.page}>
-      
       <View style={styles.textContainer}>
-        <TouchableOpacity onPress={handleAboutPress}>
+        <TouchableOpacity onPress={handleAbout}>
           <Text style={styles.title}>📄 About</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleRulesPress}>
+        <TouchableOpacity onPress={handleRules}>
           <Text style={styles.title}>📢 Rules</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={handleEditNamePress}>
+
+        <TouchableOpacity onPress={handleName}>
           <Text style={styles.title}>👤 Edit name</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={handleEditNamePress}>
+
+        <TouchableOpacity onPress={handleEmail}>
           <Text style={styles.title}>📧 Edit email</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={handleEditNamePress}>
-          <Text style={styles.title}>🔑 Edit password</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleEditPicturePress}>
-          <Text style={styles.title}>📸 Edit picture</Text>
+        <TouchableOpacity onPress={handlePassword}>
+          <Text style={styles.title}>🔑 Edit password</Text>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.buttonContainer} onPress={handleLogout}>
         <Image
-          source={require('../../../images/logout-button.png')}
+          source={require('../../images/logout-button.png')}
           style={styles.logoutButton}
         />
       </TouchableOpacity>
 
       <ImageBackground
-      // /src/components/navigation/screens/
-        source={require('../../../images/background.png')}
+        // /src/components/navigation/screens/
+        source={require('../../images/background.png')}
         resizeMode="cover"
         style={styles.background}
       ></ImageBackground>
-
     </View>
   );
 };
@@ -161,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default Settings;
