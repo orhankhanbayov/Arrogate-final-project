@@ -31,7 +31,7 @@ const TrophyScreen = ({ navigation }) => {
         }
       );
       const data = await response.json();
-      setScores(data);
+      setScores(data.score);
       console.log(response.status);
     };
     scores();
@@ -51,17 +51,19 @@ const TrophyScreen = ({ navigation }) => {
         ></Image>
       </View>
 
-      <Text style={styles.header}>Welcome, _username_!</Text>
+      <Text style={styles.header}>Welcome</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
       <Text style={styles.rankingsTitle}>Rankings</Text>
       <Text style={styles.pointsTrophiesAndCoins}>? ?</Text>
 
       <View style={styles.usersRankingsContainer}>
-        <Text style={styles.usersRankings}>👤 photo David 3 🏆 15 🪙</Text>
-        <Text style={styles.usersRankings}>👤 photo Juliana 3 🏆 10 🪙</Text>
-        <Text style={styles.usersRankings}>👤 photo Marta 2 🏆 15 🪙</Text>
-        <Text style={styles.usersRankings}>👤 photo Michal 1 🏆 15 🪙</Text>
-        <Text style={styles.usersRankings}>👤 photo Orhan 1 🏆 10 🪙</Text>
+        {scores.map((score) => {
+          return (
+            <Text key={score._id}>
+              👤 {score.name} {score.trophies} 🏆 {score.coins} 🪙
+            </Text>
+          );
+        })}
       </View>
     </View>
   );
