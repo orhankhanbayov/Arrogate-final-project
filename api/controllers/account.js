@@ -18,19 +18,15 @@ const AccountController = {
     );
   },
   getScore: (req, res) => {
-    User.findOne(
-      req.body.email,
-      { trophies: 1, coins: 1 },
-      async (err, user) => {
-        if (err) {
-          throw err;
-        } else {
-          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    User.find({ trophies: 1, coins: 1 }, async (err, user) => {
+      if (err) {
+        throw err;
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-          res.status(200).json({ score: user, token: token });
-        }
+        res.status(200).json({ score: user, token: token });
       }
-    );
+    });
   },
 };
 

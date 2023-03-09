@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { useState } from 'react';
 
 import * as SecureStore from 'expo-secure-store';
 
@@ -14,7 +15,29 @@ import {
 } from 'react-native';
 
 const TrophyScreen = ({ navigation }) => {
-  useEffect(() => {});
+  const [scores, setScores] = useState('');
+  useEffect(() => {
+    const scores = async () => {
+      let token = await SecureStore.getItemAsync('token');
+      let email = await SecureStore.getItemAsync('email');
+      let response = await fetch(
+        'https://mystery-route-backend.onrender.com/account',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(response.status);
+    };
+    scores();
+  }, []);
   return (
     <View style={styles.page}>
       <ImageBackground
