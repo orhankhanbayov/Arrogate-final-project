@@ -17,32 +17,39 @@ import {
 
 const EditName = ({ navigation }) => {
   const [name, setName] = useState('');
-  useEffect(() => {
-    const update = async () => {
-      let token = await SecureStore.getItemAsync('token');
-      let email = await SecureStore.getItemAsync('email');
-      let response = await fetch(
-        'https://mystery-route-backend.onrender.com/account/edit',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            newName: name,
-            email: email,
-          }),
-        }
-      );
-      console.log(response.status);
-    };
-    update();
-  }, []);
+
+  const update = async () => {
+    let token = await SecureStore.getItemAsync('token');
+    let email = await SecureStore.getItemAsync('email');
+    let response = await fetch(
+      'https://mystery-route-backend.onrender.com/account/edit',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          newName: name,
+          email: email,
+        }),
+      }
+    );
+    console.log(response.status);
+  };
+
   return (
     <>
       <View>
-        <TextInput placeholder="Name" />
+        <TextInput
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+          autoCapitalize="words"
+        />
+        <TouchableOpacity onPress={update}>
+          <Image source={require('../../images/edit-name-button.png')} />
+        </TouchableOpacity>
       </View>
     </>
   );
