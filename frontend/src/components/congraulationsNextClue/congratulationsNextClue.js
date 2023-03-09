@@ -47,6 +47,10 @@ const CongratulationsNextClue = ({ route, navigation }) => {
     navigation.navigate('LocationOneClues', { render, locationCounter1 });
   };
 
+  const trip = () => {
+    navigation.navigate('TripAdvisor');
+  };
+
   return (
     <View style={styles.page}>
       <ImageBackground
@@ -71,10 +75,10 @@ const CongratulationsNextClue = ({ route, navigation }) => {
       </View>
 
       {/* <TouchableOpacity onPress={}>       */}
-        <Image
+      <Image
         source={require('../../images/explore-area.png')}
         style={styles.image}
-        />
+      />
       {/* </TouchableOpacity> */}
 
       <TouchableOpacity onPress={nextLocation}>

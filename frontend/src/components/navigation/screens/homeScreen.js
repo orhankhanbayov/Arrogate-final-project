@@ -7,6 +7,7 @@ import CongratulationsNextClue from '../../congraulationsNextClue/congratulation
 import Finished from '../../finished/finished';
 import LandmarkCamera from '../../landmarkCamera/landmark';
 import RouteDescription from '../../routeDescription/routeDescription';
+import TripAd from '../../nearBy/nearBy';
 import {
   View,
   Text,
@@ -47,6 +48,7 @@ const HomeScreen = ({ navigation }) => {
         options={{ unmountOnBlur: true }}
       />
       <Stack.Screen name="RouteDescription" component={RouteDescription} />
+      <Stack.Screen name="TripAdvisor" component={TripAd} />
     </Stack.Navigator>
   );
 };
