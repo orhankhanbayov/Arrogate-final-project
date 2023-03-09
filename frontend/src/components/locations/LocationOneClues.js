@@ -13,6 +13,8 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { useContext } from 'react';
+import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
@@ -25,6 +27,8 @@ const LocationOneClues = ({ route, navigation }) => {
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
+  const [scoreCounter, setScoreCounter] = useState(0);
+  const { runningScore } = useContext(RunningScoreContext);
 
   const [isLocationCounterLoaded, setIsLocationCounterLoaded] = useState(false);
   const isFocused = useIsFocused();
@@ -46,6 +50,10 @@ const LocationOneClues = ({ route, navigation }) => {
     getLocationCounter();
   });
 
+  useEffect(() => {
+    setScoreCounter(0);
+  }, [render]);
+
   const set = async () => {
     if (value === 0) {
       setChosenRoutes(route.params.routes);
@@ -56,14 +64,17 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const handleClue1 = () => {
     setShowValue1(true);
+    setScoreCounter(5);
   };
 
   const handleClue2 = () => {
     setShowValue2(true);
+    setScoreCounter(3);
   };
 
   const handleClue3 = () => {
     setShowValue3(true);
+    setScoreCounter(1);
   };
 
   const handleClue4 = () => {
@@ -79,6 +90,7 @@ const LocationOneClues = ({ route, navigation }) => {
           onPress: () => {
             setConfirmedReveal(true);
             setShowValue4(!showValue4);
+            setScoreCounter(0);
           },
         },
       ],
@@ -95,7 +107,7 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('Finished');
     } else {
       let name = chosenRoutes.locations[locationCounter];
-      navigation.navigate('LandmarkCamera', { name });
+      navigation.navigate('LandmarkCamera', { name, scoreCounter });
     }
   };
   if (isLocationCounterLoaded) {
@@ -106,6 +118,11 @@ const LocationOneClues = ({ route, navigation }) => {
           resizeMode="cover"
           style={styles.background}
         ></ImageBackground>
+
+        <Text>location coins:{scoreCounter}</Text>
+        <View>
+          <Text>total coins: {runningScore}</Text>
+        </View>
 
         {/* Area/Location banner */}
 

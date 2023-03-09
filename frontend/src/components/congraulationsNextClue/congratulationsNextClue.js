@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
+
 import {
   View,
   Text,
@@ -10,8 +12,11 @@ import {
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
-
+import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 const CongratulationsNextClue = ({ navigation }) => {
+  const { setRunningScore, runningScore } = useContext(RunningScoreContext);
+
+
   const [locationCounter1, setLocationCounter] = useState(0);
 
   useEffect(() => {

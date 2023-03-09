@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useContext } from 'react';
+
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {
@@ -13,8 +15,14 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 const RouteDescription = ({ route, navigation }) => {
   const { routes } = route.params;
+  const { setRunningScore, runningScore } = useContext(RunningScoreContext);
+
+  () => {
+    setRunningScore(0);
+  };
   return (
     <View style={styles.page}>
       <ImageBackground
@@ -26,7 +34,9 @@ const RouteDescription = ({ route, navigation }) => {
           <Text style={styles.Title}>{routes.name}</Text>
           <Text style={styles.TextDescription}>{routes.bio}</Text>
           <Text style={styles.TextTime}>{routes.time}</Text>
-          <Text style={styles.TextStartLocation}>{ `Starting point: ${routes.start}.`}</Text>
+          <Text
+            style={styles.TextStartLocation}
+          >{`Starting point: ${routes.start}.`}</Text>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -62,7 +72,7 @@ const styles = StyleSheet.create({
     width: '101%',
     height: '104.5%',
   },
-  
+
   // All Texts
   TextViewStyle: {
     position: 'absolute',
