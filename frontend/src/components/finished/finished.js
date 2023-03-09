@@ -35,7 +35,9 @@ const Finished = ({ navigation, route }) => {
     };
     scores();
   }, []);
-
+  const trip = () => {
+    navigation.navigate('TripAdvisor');
+  };
   return (
     <View style={styles.page}>
       <Text style={styles.title}>
@@ -50,6 +52,12 @@ const Finished = ({ navigation, route }) => {
       </View>
 
       <Text style={styles.subtitle}>Explore the area...</Text>
+      <TouchableOpacity onPress={trip}>
+        <Image
+          source={require('../../images/go-button.png')}
+          style={styles.buttonImage}
+        />
+      </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
         <Text style={styles.button}> Add map here</Text>
