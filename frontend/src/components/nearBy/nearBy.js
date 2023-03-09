@@ -54,6 +54,7 @@ const TripAd = () => {
             };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
+            console.log(reviewData)
             setReviews((prevReviews) => ({
               ...prevReviews,
               [id]: reviewData.data,
@@ -99,27 +100,26 @@ const TripAd = () => {
       <Text style={styles.header}>Restaurants near you</Text>
       <ScrollView>
         {restaurants.slice(0, 5).map((restaurant, index) => (
+
           <View key={index} style={styles.container}>
-            <Text style={styles.text}>
-              Name: <Text style={styles.name}>{restaurant.name}</Text>
-            </Text>
-            <Text>
-              Address: <Text>{restaurant.address_obj.address_string}</Text>
-            </Text>
+            <Text style={styles.name}>{restaurant.name}</Text>
+            <Text style={styles.address}>{restaurant.address_obj.address_string}</Text>
+           
             <TouchableOpacity onPress={() => toggleReviews(index)}>
-              <Text style={styles.text}>Reviews</Text>
+              <Text style={styles.reviewsTitle}>Reviews</Text>
             </TouchableOpacity>
+
             {showReviews[index] && (
               <View>
                 {reviews[restaurant.location_id]?.map((review, index) => (
-                  <View key={index} style={styles.review}>
-                    <Text>
+                  <View key={index} style={styles.reviews}>
+                    <Text style={styles.ratings1}>
                       Rating: <Text>{getStars(review.rating)} </Text>
                     </Text>
-                    <Text>
+                    <Text style={styles.ratings2}>
                       Title: <Text>{review.title} </Text>
                     </Text>
-                    <Text>
+                    <Text style={styles.textReviews}>
                       {review.text}
                       {'\n'}
                     </Text>
@@ -156,24 +156,79 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   container: {
-    borderWidth: 1,
+    marginTop: 20,
+    padding: 10, 
+    borderColor: 'gray',
+    borderMargin: 5,
   },
   address: {
-    fontSize: 17,
-    color: '#204376',
+    fontSize: 14,
+    color: 'gray',
     justifyContent: 'space-evenly',
-    marginHorizontal: 10,
-    marginVertical: 10,
+    marginHorizontal: 15,
+    textAlign: 'center',
   },
   text: {
     fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#204376',
+  },
+  reviewsTitle: {
+    marginTop: 30,
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#204376',
+    marginHorizontal: 15,
+  },
+  reviews: {
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#204376',
+    marginHorizontal: 15,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    padding: 5, 
+  },
+  ratings1: {
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 18,
+    color: '#204376',
+    marginHorizontal: 10,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    padding: 5, 
+  },
+  ratings2: {
+    marginTop: 5,
+    marginBottom: 5,
+    fontSize: 18,
+    color: 'charcoal',
+    marginHorizontal: 10,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    padding: 5, 
+  },
+  textReviews: {
+    fontSize: 18,
+    justifyContent: 'space-evenly',
+    textAlign: 'justify',
+    color: '#204376',
+    marginHorizontal: 15,
   },
   name: {
-    fontSize: 17,
+    fontSize: 25,
     color: '#204376',
+    marginTop: 10,
+    marginBottom: 10,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });
 
