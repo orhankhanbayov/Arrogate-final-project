@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import {
-    ImageBackground,
-    StyleSheet,
-    Text,
-    View,
-    ScrollView,
-    TouchableOpacity,
-  } from 'react-native';
-
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { API_KEY } from '@env';
 
 const TripAd = () => {
   const [location, setLocation] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [reviews, setReviews] = useState({});
-  const [showReviews, setShowReviews] = useState(new Array(restaurants.length).fill(false));
+  const [showReviews, setShowReviews] = useState(
+    new Array(restaurants.length).fill(false)
+  );
 
   const nearBy = async () => {
     try {
@@ -23,30 +25,40 @@ const TripAd = () => {
         return;
       }
 
-      const apiKey = process.env.API_KEY;
+      const apiKey = API_KEY;
 
       // fetch restaurants based on users location
       let { coords } = await Location.getCurrentPositionAsync({});
       setLocation(coords);
       const urlPlaces = `https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${coords.latitude}%2C${coords.longitude}&key=${apiKey}&category=restaurants&radius=400&radiusUnit=m&language=en`;
-      const optionsPlaces = { method: 'GET', headers: { accept: 'application/json' } };
+      const optionsPlaces = {
+        method: 'GET',
+        headers: { accept: 'application/json' },
+      };
 
       fetch(urlPlaces, optionsPlaces)
         .then((response) => response.json())
         .then(async (data) => {
           setRestaurants(data.data);
-          
+
           // fetch reviews by location id for each restaurant
-          const locationIDs = data.data.slice(0, 5).map((restaurant) => restaurant.location_id);
+          const locationIDs = data.data
+            .slice(0, 5)
+            .map((restaurant) => restaurant.location_id);
 
           for (const id of locationIDs) {
             const urlReviews = `https://api.content.tripadvisor.com/api/v1/location/${id}/reviews?key=${apiKey}&language=en`;
-            const optionsReviews = { method: 'GET', headers: { accept: 'application/json' } };
+            const optionsReviews = {
+              method: 'GET',
+              headers: { accept: 'application/json' },
+            };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
-            setReviews((prevReviews) => ({ ...prevReviews, [id]: reviewData.data }));
+            setReviews((prevReviews) => ({
+              ...prevReviews,
+              [id]: reviewData.data,
+            }));
           }
-          
         })
         .catch((error) => console.error(error));
     } catch (error) {
@@ -79,7 +91,11 @@ const TripAd = () => {
 
   return (
     <View style={styles.page}>
-      <ImageBackground source={require('../images/background.png')} resizeMode="cover" style={styles.background}></ImageBackground>
+      <ImageBackground
+        source={require('../../images/background.png')}
+        resizeMode="cover"
+        style={styles.background}
+      ></ImageBackground>
       <Text style={styles.header}>Restaurants near you</Text>
       <ScrollView>
         {restaurants.slice(0, 5).map((restaurant, index) => (
@@ -91,15 +107,22 @@ const TripAd = () => {
               Address: <Text>{restaurant.address_obj.address_string}</Text>
             </Text>
             <TouchableOpacity onPress={() => toggleReviews(index)}>
-               <Text style={styles.text}>Reviews</Text>
+              <Text style={styles.text}>Reviews</Text>
             </TouchableOpacity>
             {showReviews[index] && (
               <View>
                 {reviews[restaurant.location_id]?.map((review, index) => (
                   <View key={index} style={styles.review}>
-                    <Text>Rating: <Text>{getStars(review.rating)}  </Text></Text>
-                    <Text>Title: <Text>{review.title}  </Text></Text>
-                    <Text>{review.text}{'\n'}</Text>
+                    <Text>
+                      Rating: <Text>{getStars(review.rating)} </Text>
+                    </Text>
+                    <Text>
+                      Title: <Text>{review.title} </Text>
+                    </Text>
+                    <Text>
+                      {review.text}
+                      {'\n'}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -110,7 +133,6 @@ const TripAd = () => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   page: {
