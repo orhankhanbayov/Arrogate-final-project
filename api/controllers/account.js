@@ -34,7 +34,7 @@ const AccountController = {
   },
 
   Edit: (req, res) => {
-    User.find({ email: req.email }, async (err, user) => {
+    User.find({ email: req.body.email }, async (err, user) => {
       if (err) {
         throw err;
       } else {

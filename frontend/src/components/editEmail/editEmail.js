@@ -15,6 +15,29 @@ import {
 } from 'react-native';
 
 const EditEmail = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const update = async () => {
+      let token = await SecureStore.getItemAsync('token');
+      let email = await SecureStore.getItemAsync('email');
+      let response = await fetch(
+        'https://mystery-route-backend.onrender.com/account/edit',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            newEmail: email,
+            email: email,
+          }),
+        }
+      );
+      console.log(response.status);
+    };
+    update();
+  }, []);
   return (
     <>
       <View></View>
