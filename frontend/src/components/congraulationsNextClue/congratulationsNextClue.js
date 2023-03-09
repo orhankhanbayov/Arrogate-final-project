@@ -21,7 +21,6 @@ const CongratulationsNextClue = ({ navigation }) => {
   useEffect(() => {
     const lte = async () => {
       let res = await SecureStore.getItemAsync('locationCounter');
-      console.log(`res = ${res}`);
       setLocationCounter((prev) => parseInt(res));
     };
     lte();
@@ -34,8 +33,6 @@ const CongratulationsNextClue = ({ navigation }) => {
         'locationCounter',
         updatedLocationCounter.toString()
       );
-
-      console.log(`counter from congratulations: ${updatedLocationCounter}`);
     };
     lte();
   }, [locationCounter1]);

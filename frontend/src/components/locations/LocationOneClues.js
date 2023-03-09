@@ -37,7 +37,6 @@ const LocationOneClues = ({ route, navigation }) => {
     const getLocationCounter = async () => {
       try {
         let counter = await SecureStore.getItemAsync('locationCounter');
-        console.log(`counter from location: ${counter}`);
         if (counter !== null) {
           setLocationCounter((prev) => parseInt(counter));
           setIsLocationCounterLoaded((prev) => true);
@@ -103,12 +102,13 @@ const LocationOneClues = ({ route, navigation }) => {
     setShowValue2(false);
     setShowValue3(false);
     setShowValue4(false);
-    if (locationCounter === 4) {
-      navigation.navigate('Finished', { runningScore });
-    } else {
-      let name = chosenRoutes.locations[locationCounter];
-      navigation.navigate('LandmarkCamera', { name, scoreCounter });
-    }
+
+    let name = chosenRoutes.locations[locationCounter];
+    navigation.navigate('LandmarkCamera', {
+      name,
+      scoreCounter,
+      locationCounter,
+    });
   };
   if (isLocationCounterLoaded) {
     return (

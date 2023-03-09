@@ -10,6 +10,7 @@ import { GOOGLE_API } from '@env';
 import Config from 'react-native-config';
 import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext'; //////////////
 import { useContext } from 'react';
+import * as SecureStore from 'expo-secure-store';
 
 vision.init({ auth: `${GOOGLE_API}` });
 
@@ -20,9 +21,7 @@ export default function LandmarkCamera({ route, navigation }) {
   const [location, setLocation] = useState();
   const { name, scoreCounter } = route.params;
   const { runningScore, setRunningScore } = useContext(RunningScoreContext); /////////////////////
-  console.log(scoreCounter);
-  console.log(runningScore);
-
+  const { locationCounter } = route.params;
   const getUserCoords = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -71,11 +70,13 @@ export default function LandmarkCamera({ route, navigation }) {
           data[0].landmarkAnnotations[0].description === name.name) ||
         close
       ) {
-        navigation.navigate('CongratulationsNextClue');
-        setRunningScore(runningScore + scoreCounter);
-        console.log(
-          `This is the running score from the landmarkcamera page: ${runningScore}`
-        );
+        if (locationCounter === 4) {
+          setRunningScore(runningScore + scoreCounter);
+          navigation.navigate('Finished', { runningScore });
+        } else {
+          navigation.navigate('CongratulationsNextClue');
+          setRunningScore(runningScore + scoreCounter);
+        }
       } else {
         let render = true;
 
