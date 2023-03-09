@@ -9,7 +9,7 @@ import MapScreen from './screens/mapScreen';
 import TrophyScreen from './screens/trophyScreen';
 
 const homeName = 'Home';
-const setName = 'Set';
+const setName = 'Settings';
 const mapName = 'Map';
 const trophyName = 'Trophies';
 

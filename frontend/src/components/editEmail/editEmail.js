@@ -5,6 +5,7 @@ import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Image,
@@ -36,24 +37,70 @@ const EditEmail = ({ navigation }) => {
         }),
       }
     );
+    navigation.navigate('Settings');
     console.log(response.status);
   };
 
   return (
-    <>
-      <View>
+    
+      <View style={styles.page}>
+      <ImageBackground
+          source={require('../../images/background.png')}
+          resizeMode="cover"
+          style={styles.background}
+        ></ImageBackground>
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          style={styles.inputContainer}
         />
+        <View style={styles.buttonContainer3}>
         <TouchableOpacity onPress={update}>
-          <Image source={require('../../images/edit-email-button.png')} />
+          <Image source={require('../../images/edit-email-button.png')}
+          style={styles.image} />
         </TouchableOpacity>
+        </View>
       </View>
-    </>
+    
   );
 };
+
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    marginTop: 50,
+    marginHorizontal: 20,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 0,
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    shadowColor: '#000000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5
+  },
+  page: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
+  buttonContainer3: {
+    marginLeft: 95,
+  },
+  image: {
+    alignItems: 'center',
+    resizeMode: 'contain',
+    height: 175,
+    width: 200,
+  },
+})
 export default EditEmail;
