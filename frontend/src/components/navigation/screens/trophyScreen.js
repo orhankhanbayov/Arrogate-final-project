@@ -13,6 +13,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 const TrophyScreen = ({ navigation }) => {
@@ -40,19 +41,20 @@ const TrophyScreen = ({ navigation }) => {
     scores();
   }, []);
   return (
-    <View style={styles.page}>
-      <ImageBackground
-        source={require('../../../images/background.png')}
-        resizeMode="cover"
-        style={styles.background}
-      ></ImageBackground>
+    <ScrollView>
+      <View style={styles.page}>
+        <ImageBackground
+          source={require('../../../images/background.png')}
+          resizeMode="cover"
+          style={styles.background}
+        ></ImageBackground>
 
-      <View style={styles.templatesContainer}>
-        <Image
-          source={require('../../../images/trophyandcoin-template.png')}
-          style={styles.trophyAndCoinTemplate}
-        ></Image>
-      </View>
+        <View style={styles.templatesContainer}>
+          <Image
+            source={require('../../../images/trophyandcoin-template.png')}
+            style={styles.trophyAndCoinTemplate}
+          ></Image>
+        </View>
 
       <Text style={styles.header}>Welcome!</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
@@ -74,7 +76,7 @@ const TrophyScreen = ({ navigation }) => {
           );
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
