@@ -3,7 +3,7 @@ const TokenGenerator = require('../models/token_generator');
 
 const AccountController = {
   updateScore: (req, res) => {
-    User.findById(req.body.id, async (err, user) => {
+    User.find({ emai: req.body.email }, async (err, user) => {
       if (err) {
         throw err;
       } else {
