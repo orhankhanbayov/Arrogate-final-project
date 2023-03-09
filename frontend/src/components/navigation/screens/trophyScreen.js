@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 const TrophyScreen = ({ navigation }) => {
+  useEffect(() => {});
   return (
     <View style={styles.page}>
       <ImageBackground
@@ -21,26 +22,26 @@ const TrophyScreen = ({ navigation }) => {
         resizeMode="cover"
         style={styles.background}
       ></ImageBackground>
-      
+
       <View style={styles.templatesContainer}>
-      <Image
-        source={require('../../../images/trophyandcoin-template.png')}
-        style={styles.trophyAndCoinTemplate}
-      ></Image>
+        <Image
+          source={require('../../../images/trophyandcoin-template.png')}
+          style={styles.trophyAndCoinTemplate}
+        ></Image>
       </View>
 
       <Text style={styles.header}>Welcome, _username_!</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
       <Text style={styles.rankingsTitle}>Rankings</Text>
-      <Text style={styles.pointsTrophiesAndCoins}>?                   ?</Text>
+      <Text style={styles.pointsTrophiesAndCoins}>? ?</Text>
 
       <View style={styles.usersRankingsContainer}>
-        <Text style={styles.usersRankings}>👤  photo David    3 🏆  15 🪙</Text>
-        <Text style={styles.usersRankings}>👤  photo Juliana  3 🏆  10 🪙</Text>    
-        <Text style={styles.usersRankings}>👤  photo Marta    2 🏆  15 🪙</Text>
-        <Text style={styles.usersRankings}>👤  photo Michal   1 🏆  15 🪙</Text>
-        <Text style={styles.usersRankings}>👤  photo Orhan    1 🏆  10 🪙</Text>
-        </View>
+        <Text style={styles.usersRankings}>👤 photo David 3 🏆 15 🪙</Text>
+        <Text style={styles.usersRankings}>👤 photo Juliana 3 🏆 10 🪙</Text>
+        <Text style={styles.usersRankings}>👤 photo Marta 2 🏆 15 🪙</Text>
+        <Text style={styles.usersRankings}>👤 photo Michal 1 🏆 15 🪙</Text>
+        <Text style={styles.usersRankings}>👤 photo Orhan 1 🏆 10 🪙</Text>
+      </View>
     </View>
   );
 };
