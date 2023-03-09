@@ -56,25 +56,22 @@ const TrophyScreen = ({ navigation }) => {
           ></Image>
         </View>
 
-      <Text style={styles.header}>Welcome!</Text>
-      <Text style={styles.currentTreasures}>Your current treasures are:</Text>
-      <Text style={styles.rankingsTitle}>Top 10 Rankings:</Text>
-      <Text style={styles.pointsTrophies}>
-        {userScore.trophies}
-      </Text>
+        <Text style={styles.header}>Welcome</Text>
+        <Text style={styles.currentTreasures}>Your current treasures are:</Text>
+        <Text style={styles.rankingsTitle}>Rankings</Text>
+        <Text style={styles.pointsTrophiesAndCoins}>
+          {userScore.coins} {userScore.trophies}
+        </Text>
 
-      <Text style={styles.pointsCoins}>
-        {userScore.coins}
-      </Text>
-
-      <View style={styles.usersRankingsContainer}>
-        {scores.map((score) => {
-          return (
-            <Text style={styles.usersRankings} key={score._id}>
-              👤 {score.name} {score.trophies} 🏆 {score.coins} 🪙
-            </Text>
-          );
-        })}
+        <View style={styles.usersRankingsContainer}>
+          {scores.map((score) => {
+            return (
+              <Text key={score._id} style={styles.usersRankings}>
+                👤 {score.name} 🏆 {score.trophies} 🪙 {score.coins}
+              </Text>
+            );
+          })}
+        </View>
       </View>
     </ScrollView>
   );
@@ -90,16 +87,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    zIndex: -1
   },
-  // Titles styles
+  // All text styles
   header: {
     fontSize: 18,
     textAlign: 'center',
     justifyContent: 'space-evenly',
     color: '#204376',
     fontWeight: 'bold',
-    marginTop: 30,
+    marginTop: 40,
     marginVertical: 10,
     marginHorizontal: 50,
   },
@@ -117,68 +113,50 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     color: '#204376',
     fontWeight: 'bold',
-    marginVertical: 120,
+    marginVertical: 150,
   },
-  // Text your points
-  pointsTrophies: {
-    fontSize: 30,
+  pointsTrophiesAndCoins: {
+    fontSize: 40,
     position: 'absolute',
     justifyContent: 'space-evenly',
     textAlign: 'center',
     color: '#204376',
     fontWeight: 'bold',
-    marginVertical: 125,
-    padding: 10,
-    marginLeft: 35,
+    marginVertical: 155,
+    marginHorizontal: 55,
   },
-  pointsCoins: {
-    fontSize: 30,
-    position: 'absolute',
-    justifyContent: 'space-evenly',
-    textAlign: 'center',
-    color: '#204376',
-    fontWeight: 'bold',
-    marginVertical: 125,
-    padding: 10,
-    marginLeft: 205,
-  },
-  // All users
   usersRankingsContainer: {
     position: 'absolute',
-    top: 260,
+    top: 320,
     left: 40,
     borderRadius: 25,
     borderColor: '#FFFFFF',
     width: '80%',
+    padding: 10,
     backgroundColor: '#FFFFFF',
   },
-  
   usersRankings: {
-    fontSize: 18,
+    fontSize: 19,
     textAlign: 'justify',
     color: '#204376',
-    marginBottom: 8,
-    marginLeft: 15, 
-    marginTop: 10,
+    padding: 10,
   },
   // Images
   templatesContainer: {
     resizeMode: 'contain',
-    position: 'absolute',
+    // position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 50,
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
-    zIndex: 0,
   },
   trophyAndCoinTemplate: {
     flex: 1,
     flexGrow: 1,
     padding: 130,
     height: 50,
-    zIndex: 0,
   },
 });
 
