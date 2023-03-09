@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 const TrophyScreen = ({ navigation }) => {
-  const [scores, setScores] = useState('');
+  const [scores, setScores] = useState([]);
   useEffect(() => {
     const scores = async () => {
       let token = await SecureStore.getItemAsync('token');
@@ -26,14 +26,11 @@ const TrophyScreen = ({ navigation }) => {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            email: email,
-          }),
         }
       );
       const data = await response.json();
+      setScores(data);
       console.log(response.status);
     };
     scores();

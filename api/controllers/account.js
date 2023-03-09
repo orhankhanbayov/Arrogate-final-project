@@ -18,7 +18,7 @@ const AccountController = {
     );
   },
   getScore: (req, res) => {
-    User.find({ trophies: 1, coins: 1 }, async (err, user) => {
+    User.find({ trophies:1, coins:1 }, async (err, user) => {
       if (err) {
         throw err;
       } else {
