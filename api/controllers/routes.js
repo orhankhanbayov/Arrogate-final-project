@@ -43,6 +43,17 @@ const RoutesController = {
       }
     });
   },
+
+  getOne: (req, res) => {
+    Route.findOne({ name: req.body.name }, async (err, route) => {
+      if (err) {
+        throw err;
+      } else {
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        res.status(200).json({ routes: route, token: token });
+      }
+    });
+  },
 };
 
 module.exports = RoutesController;
