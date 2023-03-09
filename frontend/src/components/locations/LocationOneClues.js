@@ -106,7 +106,7 @@ const LocationOneClues = ({ route, navigation }) => {
             setConfirmedReveal(true);
             setShowValue4(!showValue4);
             setScoreCounter(0);
-            console.log(chosenRoutes.locations[locationCounter].name)
+            console.log(chosenRoutes.locations[locationCounter].name);
           },
         },
       ],
@@ -114,13 +114,8 @@ const LocationOneClues = ({ route, navigation }) => {
     );
   };
 
-
-
   const nextClue = () => {
-    setShowValue1(false);
-    setShowValue2(false);
-    setShowValue3(false);
-    setShowValue4(false);
+    setCurrentClue(0);
 
     let name = chosenRoutes.locations[locationCounter];
     navigation.navigate('LandmarkCamera', {
@@ -138,7 +133,6 @@ const LocationOneClues = ({ route, navigation }) => {
           style={styles.background}
         ></ImageBackground>
 
-        
         <View style={styles.counterContainer}>
           <Text style={styles.counterText}>Location 🪙{scoreCounter}</Text>
           <Text style={styles.counterText}>Total 🪙 {runningScore}</Text>
