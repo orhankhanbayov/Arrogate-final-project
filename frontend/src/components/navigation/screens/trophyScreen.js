@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import * as SecureStore from 'expo-secure-store';
 
