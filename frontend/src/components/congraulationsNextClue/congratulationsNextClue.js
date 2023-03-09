@@ -12,11 +12,34 @@ import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
 const CongratulationsNextClue = ({ navigation }) => {
-  const nextLocation = () => {
-    let pass = false;
-    navigation.navigate('LocationOneClues', { pass });
-  };
+  const [locationCounter1, setLocationCounter] = useState(0);
 
+  useEffect(() => {
+    const lte = async () => {
+      let res = await SecureStore.getItemAsync('locationCounter');
+      console.log(`res = ${res}`);
+      setLocationCounter((prev) => parseInt(res));
+    };
+    lte();
+  }, []);
+
+  useEffect(() => {
+    const lte = async () => {
+      let updatedLocationCounter = locationCounter1 + 1;
+      await SecureStore.setItemAsync(
+        'locationCounter',
+        updatedLocationCounter.toString()
+      );
+
+      console.log(`counter from congratulations: ${updatedLocationCounter}`);
+    };
+    lte();
+  }, [locationCounter1]);
+
+  const nextLocation = async () => {
+    let render = false;
+    navigation.navigate('LocationOneClues', { render, locationCounter1 });
+  };
   return (
     <View style={styles.page}>
       <ImageBackground
@@ -28,8 +51,8 @@ const CongratulationsNextClue = ({ navigation }) => {
       <Text style={styles.title}>Congratulations, you solved Location __</Text>
 
       <Image
-          source={require('../../images/coin-template.png')}
-          style={styles.image}
+        source={require('../../images/coin-template.png')}
+        style={styles.image}
       />
 
       <View style={styles.area}>
@@ -37,9 +60,9 @@ const CongratulationsNextClue = ({ navigation }) => {
       </View>
 
       <TouchableOpacity onPress={nextLocation}>
-        <Image 
-        source={require('../../images/next-location-button.png')} 
-        style={styles.buttonImage}
+        <Image
+          source={require('../../images/next-location-button.png')}
+          style={styles.buttonImage}
         />
       </TouchableOpacity>
     </View>
