@@ -119,9 +119,10 @@ const LocationOneClues = ({ route, navigation }) => {
           style={styles.background}
         ></ImageBackground>
 
-        <Text>location coins:{scoreCounter}</Text>
-        <View>
-          <Text>total coins: {runningScore}</Text>
+        
+        <View style={styles.counterContainer}>
+          <Text style={styles.counterText}>Location 🪙{scoreCounter}</Text>
+          <Text style={styles.counterText}>Total 🪙 {runningScore}</Text>
         </View>
 
         {/* Area/Location banner */}
@@ -258,13 +259,26 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 
+  //counter
+  counterContainer: {
+    position: 'absolute',
+    marginTop: 50,
+  },
+  counterText: {
+    fontSize: 13,
+    color: '#72838E',
+    fontWeight: 'bold',
+    marginLeft: 280,
+    padding: 2,
+    textAlign: 'right',
+  },
   // Location _ of 5
   header: {
     fontSize: 22,
     flexDirection: 'column',
     color: '#204376',
     fontWeight: 'bold',
-    marginTop: 130,
+    marginTop: 150,
     marginLeft: 120,
     marginRight: 50,
   },
@@ -295,7 +309,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 25,
     backgroundColor: '#F3FAFA',
-    marginVertical: 15,
+    marginVertical: 10,
     marginHorizontal: 25,
   },
 
