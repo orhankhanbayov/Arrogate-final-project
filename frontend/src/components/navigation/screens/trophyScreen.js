@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: '#FFFFFF',
   },
+  
   usersRankings: {
     fontSize: 18,
     textAlign: 'justify',
