@@ -44,15 +44,23 @@ const RoutesController = {
     });
   },
 
-  getOne: (req, res) => {
-    Route.findOne({ name: req.body.name }, async (err, route) => {
-      if (err) {
-        throw err;
-      } else {
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        res.status(200).json({ routes: route, token: token });
-      }
-    });
+  Update: (req, res) => {
+    Route.findById(req.body.id)
+      .populate({
+        path: 'locations',
+        model: 'Location',
+      })
+      .exec(async (err, routes) => {
+        if (err) {
+          throw err;
+        } else {
+          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+
+          route.start = req.body.start;
+          await route.save();
+          res.status(204).json({ message: 'OK', token: token });
+        }
+      });
   },
 };
 
