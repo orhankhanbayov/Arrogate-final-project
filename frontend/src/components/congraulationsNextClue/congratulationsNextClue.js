@@ -38,9 +38,9 @@ const CongratulationsNextClue = ({ route, navigation }) => {
     lte();
   }, [locationCounter1]);
 
-  handleTrip(() => {
-    navigation.navigate('Tripadvisor');
-  });
+  // handleTrip(() => {
+  //   navigation.navigate('Tripadvisor');
+  // });
 
   const nextLocation = async () => {
     let render = false;
