@@ -42,6 +42,7 @@ const CongratulationsNextClue = ({ route, navigation }) => {
     let render = false;
     navigation.navigate('LocationOneClues', { render, locationCounter1 });
   };
+
   return (
     <View style={styles.page}>
       <ImageBackground
@@ -50,23 +51,27 @@ const CongratulationsNextClue = ({ route, navigation }) => {
         style={styles.background}
       ></ImageBackground>
 
-      <Text style={styles.title}>
-        Congratulations, you solved Location {locationCounter1 + 1} -{' '}
-        {name.name}
-      </Text>
-
-      <View style={styles.container}>
-        <Image
-          source={require('../../images/coin.png')}
-          style={styles.imageCoin}
-        />
-        <Text style={styles.scoreNumber}>{runningScore} </Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.subTitle}>
+          Congratulations, you solved Location {locationCounter1 + 1}
+        </Text>
+        <Text style={styles.title}>{name.name}</Text>
       </View>
 
-      <Image
+      <View style={styles.container}>
+        <Text style={styles.scoreNumber}>{runningScore} </Text>
+        <Image
+          source={require('../../images/coin-cropped.png')}
+          style={styles.imageCoin}
+        />
+      </View>
+
+      {/* <TouchableOpacity onPress={}>       */}
+        <Image
         source={require('../../images/explore-area.png')}
         style={styles.image}
-      />
+        />
+      {/* </TouchableOpacity> */}
 
       <TouchableOpacity onPress={nextLocation}>
         <Image
@@ -81,8 +86,47 @@ const CongratulationsNextClue = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
     // backgroundColor: '#EAF3F1',
   },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    // backgroundColor: '#FF0000',
+    alignSelf: 'center',
+    width: 130,
+  },
+  scoreNumber: {
+    resizeMode: 'contain',
+    fontSize: 50,
+    color: '#204376',
+    fontWeight: 'bold',
+    // backgroundColor: '#0000FF',
+    // textAlign: 'left',
+    // marginTop: -100,
+    // padding: 5,
+    // marginRight: 50,
+    // marginTop: 20,
+    // marginBottom: 0,
+  },
+  imageCoin: {
+    resizeMode: 'contain',
+    height: 80,
+    width: 80,
+    // backgroundColor: '#00FF00'
+    // marginTop: -10,
+    // marginLeft: 60,
+  },
+  // Modified with chat
+  // titleContainer: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   marginTop: '25%',
+  // },
   background: {
     flex: 1,
     resizeMode: 'cover',
@@ -91,6 +135,17 @@ const styles = StyleSheet.create({
     height: '104.5%',
   },
   title: {
+    fontSize: 30,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: -10,
+    marginBottom: 30,
+  },
+  subTitle: {
     fontSize: 20,
     color: '#204376',
     fontWeight: 'bold',
@@ -101,41 +156,12 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 30,
   },
-  subtitle: {
-    fontSize: 20,
-    color: '#204376',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    // padding: 5,
-    // marginLeft: 50,
-    // marginRight: 50,
-    // marginTop: 20,
-    // marginBottom: 0,
-  },
-  scoreNumber: {
-    fontSize: 50,
-    color: '#204376',
-    fontWeight: 'bold',
-    textAlign: 'left',
-    // padding: 5,
-    // marginLeft: 50,
-    // marginRight: 50,
-    // marginTop: 20,
-    // marginBottom: 0,
-  },
   image: {
     resizeMode: 'contain',
-    height: 280,
-    width: 280,
+    height: 300,
+    width: 300,
     marginTop: -60,
-    marginLeft: 60,
-  },
-  imageCoin: {
-    resizeMode: 'contain',
-    height: 150,
-    width: 280,
-    marginTop: -60,
-    marginLeft: 60,
+    marginLeft: 50,
   },
   area: {
     fontWeight: 'bold',
@@ -154,7 +180,7 @@ const styles = StyleSheet.create({
     width: 200,
     marginLeft: 100,
     // marginTop will follow the area
-    marginTop: 20,
+    marginTop: -90,
   },
 });
 

@@ -36,10 +36,19 @@ export default function LandmarkCamera({ route, navigation }) {
         latitude: currentLocation.coords.latitude,
         longitude: currentLocation.coords.longitude,
       }, // the user's coords
+        
+      // ------ ORIGINAL:
+      // {
+      //   latitude: name.coordinates.coordinates[0],
+      //   longitude: name.coordinates.coordinates[1],
+      // } // the secret location coords
+      // ------ End ORIGINAL
+      
+      // ------- FIXME MARTA testing
       {
-        latitude: name.coordinates.coordinates[0],
-        longitude: name.coordinates.coordinates[1],
-      } // the secret location coords
+        latitude: 51.5543740, // To put my coords
+        longitude: -0.1416847, // To put my coords
+      } // ------- End FIXME MARTA testing 
     );
     if (dis1 < 50) {
       return true;
