@@ -17,6 +17,7 @@ import {
 
 const TrophyScreen = ({ navigation }) => {
   const [scores, setScores] = useState([]);
+  const [userScore, setUserScore] = useState([]);
   useEffect(() => {
     const scores = async () => {
       let token = await SecureStore.getItemAsync('token');
@@ -32,6 +33,8 @@ const TrophyScreen = ({ navigation }) => {
       );
       const data = await response.json();
       setScores(data.score);
+      const selectedScore = data.score.find((score) => score.email === email);
+      setUserScore(selectedScore);
       console.log(response.status);
     };
     scores();
@@ -54,7 +57,9 @@ const TrophyScreen = ({ navigation }) => {
       <Text style={styles.header}>Welcome</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
       <Text style={styles.rankingsTitle}>Rankings</Text>
-      <Text style={styles.pointsTrophiesAndCoins}>? ?</Text>
+      <Text style={styles.pointsTrophiesAndCoins}>
+        {userScore.coins} {userScore.trophies}
+      </Text>
 
       <View style={styles.usersRankingsContainer}>
         {scores.map((score) => {
