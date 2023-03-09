@@ -12,7 +12,7 @@ import * as SecureStore from 'expo-secure-store';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useContext } from 'react';
-import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext.js';
+import RunningScoreContext from '../landmarkCamera/RunningScoreContext';
 
 const LocationOneClues = ({ route, navigation }) => {
   const { render } = route.params;
@@ -26,9 +26,8 @@ const LocationOneClues = ({ route, navigation }) => {
   const [chosenRoutes, setChosenRoutes] = useState('');
   const [locationCounter, setLocationCounter] = useState(0);
   const [value, setValue] = useState(0);
-  const [scoreCounter, setScoreCounter] = useState(0)
+  const [scoreCounter, setScoreCounter] = useState(0);
   const { runningScore } = useContext(RunningScoreContext);
-
 
   const set = () => {
     if (value === 0) {
@@ -47,17 +46,17 @@ const LocationOneClues = ({ route, navigation }) => {
 
   const handleClue1 = () => {
     setShowValue1(true);
-    setScoreCounter(5)
+    setScoreCounter(5);
   };
 
   const handleClue2 = () => {
     setShowValue2(true);
-    setScoreCounter(3)
+    setScoreCounter(3);
   };
 
   const handleClue3 = () => {
     setShowValue3(true);
-    setScoreCounter(1)
+    setScoreCounter(1);
   };
 
   const handleClue4 = () => {
@@ -73,7 +72,7 @@ const LocationOneClues = ({ route, navigation }) => {
           onPress: () => {
             setConfirmedReveal(true);
             setShowValue4(!showValue4);
-            setScoreCounter(0)
+            setScoreCounter(0);
           },
         },
       ],
@@ -90,7 +89,7 @@ const LocationOneClues = ({ route, navigation }) => {
       navigation.navigate('Finished');
     } else {
       let name = chosenRoutes.locations[locationCounter];
-      navigation.navigate('LandmarkCamera', { name, scoreCounter } );
+      navigation.navigate('LandmarkCamera', { name, scoreCounter });
     }
   };
 
@@ -102,10 +101,10 @@ const LocationOneClues = ({ route, navigation }) => {
         style={styles.background}
       ></ImageBackground>
 
-      <Text>{scoreCounter}</Text>
+      <Text>location coins:{scoreCounter}</Text>
       <View>
-      <Text>Running Score: {runningScore}</Text>
-    </View>
+        <Text>total coins: {runningScore}</Text>
+      </View>
 
       {/* Area/Location banner */}
 
@@ -197,10 +196,10 @@ const LocationOneClues = ({ route, navigation }) => {
         {showValue4 && confirmedReveal ? (
           <View style={styles.yellowButton}>
             <ImageBackground
-            source={require('../../images/yellow-button.png')}
-            resizeMode="cover"
-            style={styles.yellowButton}
-          ></ImageBackground>
+              source={require('../../images/yellow-button.png')}
+              resizeMode="cover"
+              style={styles.yellowButton}
+            ></ImageBackground>
 
             <Text style={styles.textGiveUp}>
               {chosenRoutes.locations[locationCounter].name}
@@ -239,11 +238,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginHorizontal: 15,
   },
-  
+
   // Location _ of 5
   header: {
     fontSize: 22,
-    flexDirection:'column',
+    flexDirection: 'column',
     color: '#204376',
     fontWeight: 'bold',
     marginTop: 130,
@@ -255,7 +254,7 @@ const styles = StyleSheet.create({
   header2: {
     position: 'absolute',
     fontSize: 20,
-    flexDirection:'column',
+    flexDirection: 'column',
     color: 'red',
     fontWeight: 'bold',
     marginTop: 520,
@@ -280,7 +279,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 25,
   },
-  
+
   // get clues buttons images
   buttonContainer1: {
     position: 'absolute',
