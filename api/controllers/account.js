@@ -18,13 +18,34 @@ const AccountController = {
     );
   },
   getScore: (req, res) => {
-    User.find({}, { trophies:1, coins:1, name:1, email:1 }, async (err, user) => {
+    User.find(
+      {},
+      { trophies:1, coins:1, name:1, email:1 },
+      async (err, user) => {
+        if (err) {
+          throw err;
+        } else {
+          const token = await TokenGenerator.jsonwebtoken(req.user_id);
+
+          res.status(200).json({ score: user, token: token });
+        }
+      }
+    );
+  },
+
+  Edit: (req, res) => {
+    User.find({ email: req.email }, async (err, user) => {
       if (err) {
         throw err;
       } else {
         const token = await TokenGenerator.jsonwebtoken(req.user_id);
 
-        res.status(200).json({ score: user, token: token });
+        user.password = req.body.newPassword || user.password;
+        user.email = req.body.newEmail || user.email;
+        user.name = req.body.newName || user.name;
+
+        await user.save();
+        res.status(204).json({ message: 'OK', token: token });
       }
     });
   },
