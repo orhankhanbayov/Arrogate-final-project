@@ -36,24 +36,42 @@ const Finished = ({ navigation, route }) => {
     scores();
   }, []);
 
+  // handleTrip(() => {
+  //   navigation.navigate('Tripadvisor');
+  // });
+
   return (
     <View style={styles.page}>
       <Text style={styles.title}>
         Congratulations you have solved the challenge!
       </Text>
+      <Text style={styles.titleWinnings}>
+        You have won a total of...
+      </Text>
+
+      <View style={styles.container}>
+        <Image
+          source={require('../../images/coin.png')}
+          style={styles.imageCoin}
+        />
+        <Text style={styles.scoreNumber}>{runningScore} </Text>
+      </View>
 
       <View style={styles.image}>
         <Image
           source={require('../../images/trophy.png')}
-          style={styles.image}
+          style={styles.imageCoin}
         />
       </View>
 
       <Text style={styles.subtitle}>Explore the area...</Text>
 
-      <View style={styles.buttonContainer}>
-        <Text style={styles.button}> Add map here</Text>
-      </View>
+      <TouchableOpacity>
+      <Image
+        source={require('../../images/explore-area.png')}
+        style={styles.imageRestaurants}
+      />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -74,6 +92,17 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 30,
   },
+  titleWinnings: {
+    fontSize: 20,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: -10,
+    marginBottom: 30,
+  },
   subtitle: {
     fontSize: 14,
     color: '#204376',
@@ -85,12 +114,37 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
   },
+  scoreNumber: {
+    fontSize: 50,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'left',
+    // padding: 5,
+    // marginLeft: 50,
+    // marginRight: 50,
+    // marginTop: 20,
+    // marginBottom: 0,
+  },
   image: {
     resizeMode: 'contain',
     height: 280,
     width: 280,
     marginLeft: 27,
   },
+  imageCoin: {
+    resizeMode: 'contain',
+    height: 150,
+    width: 280,
+    marginTop: -60,
+    marginLeft: 60,
+  },
+imageRestaurants: {
+  resizeMode: 'contain',
+  height: 280,
+  width: 280,
+  marginTop: -320,
+  marginLeft: 60,
+},
   button: {
     fontSize: 14,
     color: '#204376',
