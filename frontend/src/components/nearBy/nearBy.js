@@ -54,7 +54,7 @@ const TripAd = () => {
             };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
-            console.log(reviewData)
+            console.log(reviewData);
             setReviews((prevReviews) => ({
               ...prevReviews,
               [id]: reviewData.data,
@@ -100,11 +100,12 @@ const TripAd = () => {
       <Text style={styles.header}>Restaurants near you</Text>
       <ScrollView>
         {restaurants.slice(0, 5).map((restaurant, index) => (
-
           <View key={index} style={styles.container}>
             <Text style={styles.name}>{restaurant.name}</Text>
-            <Text style={styles.address}>{restaurant.address_obj.address_string}</Text>
-           
+            <Text style={styles.address}>
+              {restaurant.address_obj.address_string}
+            </Text>
+
             <TouchableOpacity onPress={() => toggleReviews(index)}>
               <Text style={styles.reviewsTitle}>Reviews</Text>
             </TouchableOpacity>
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 20,
-    padding: 10, 
+    padding: 10,
     borderColor: 'gray',
     borderMargin: 5,
   },
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     backgroundColor: 'white',
     borderRadius: 25,
-    padding: 5, 
+    padding: 5,
   },
   ratings1: {
     marginTop: 10,
@@ -203,17 +204,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     backgroundColor: 'white',
     borderRadius: 25,
-    padding: 5, 
+    padding: 5,
   },
   ratings2: {
     marginTop: 5,
     marginBottom: 5,
     fontSize: 18,
-    color: 'charcoal',
+    color: 'grey',
     marginHorizontal: 10,
     backgroundColor: 'white',
     borderRadius: 25,
-    padding: 5, 
+    padding: 5,
   },
   textReviews: {
     fontSize: 18,
