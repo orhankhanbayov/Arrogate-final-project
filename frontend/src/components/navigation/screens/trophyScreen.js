@@ -8,6 +8,7 @@ import * as SecureStore from 'expo-secure-store';
 import {
   Image,
   StyleSheet,
+  ScrollView,
   ImageBackground,
   Text,
   View,
@@ -58,10 +59,12 @@ const TrophyScreen = ({ navigation }) => {
       </View>
       <Text style={styles.header}>Welcome!</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
-      <Text style={styles.rankingsTitle}>Top 10 Rankings:</Text>
+      <Text style={styles.rankingsTitle}>Rankings:</Text>
+      
+      <ScrollView>
       <Text style={styles.pointsTrophies}>{userScore.trophies}</Text>
-
       <Text style={styles.pointsCoins}>{userScore.coins}</Text>
+      
       <View style={styles.usersRankingsContainer}>
         {scores.map((score) => {
           return (
@@ -71,6 +74,8 @@ const TrophyScreen = ({ navigation }) => {
           );
         })}
       </View>
+      </ScrollView>
+
     </View>
   );
 };
@@ -112,7 +117,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     color: '#204376',
     fontWeight: 'bold',
-    marginVertical: 120,
+    marginTop: 100,
+    marginBottom: 20,
   },
 
   // Text your points
@@ -141,8 +147,8 @@ const styles = StyleSheet.create({
 
   // All users
   usersRankingsContainer: {
-    position: 'absolute',
-    top: 260,
+    // position: 'absolute',
+    top: 10,
     left: 40,
     borderRadius: 25,
     borderColor: '#FFFFFF',
