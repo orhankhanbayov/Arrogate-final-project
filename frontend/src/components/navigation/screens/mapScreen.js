@@ -24,7 +24,7 @@ const MapScreen = () => {
   const [coords, setCoords] = useState({ coords: [] });
   const [show, setShow] = useState(false);
 
-  const GOOGLE_MAPS_APIKEY = `${GOOGLE_API}`;
+  const GOOGLE_MAPS_APIKEY = `AIzaSyA5NUI-XZOU8iZ9_sbUEx6v05spj3X6INE`;
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();

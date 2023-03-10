@@ -25,30 +25,38 @@ const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="ChooseRoutes"
         component={ChooseRoutes}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
       <Stack.Screen
         name="LocationOneClues"
         component={LocationOneClues}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
       <Stack.Screen
         name="CongratulationsNextClue"
         component={CongratulationsNextClue}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
       <Stack.Screen name="Finished" component={Finished} />
       <Stack.Screen
         name="LandmarkCamera"
         component={LandmarkCamera}
-        options={{ unmountOnBlur: true }}
+        options={{ unmountOnBlur: true, headerShown: false }}
       />
-      <Stack.Screen name="RouteDescription" component={RouteDescription} />
-      <Stack.Screen name="TripAdvisor" component={TripAd} />
+      <Stack.Screen
+        name="RouteDescription"
+        component={RouteDescription}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TripAdvisor"
+        component={TripAd}
+        screenOptions={{ headerShown: true, headerBackTitleVisible: true }}
+      />
     </Stack.Navigator>
   );
 };
