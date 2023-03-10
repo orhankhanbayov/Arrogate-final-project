@@ -43,40 +43,60 @@ const Finished = ({ navigation, route }) => {
   };
   return (
     <View style={styles.page}>
-      <Text style={styles.title}>
-        Congratulations you have solved the challenge!
+      {/* <Text style={styles.title}>
+        Congratulations, you have solved the challenge!
       </Text>
-      <Text style={styles.titleWinnings}>You have won a total of...</Text>
+      <Text style={styles.titleWinnings}>
+        You have won a total of...
+      </Text> */}
 
-      <View style={styles.container}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>
+          Congratulations, you have solved the challenge!
+        </Text>
+        {/* <Text style={styles.subTitle}>You have won a total of...</Text> */}
+      </View>
+
+      {/* <View style={styles.coinsContainer}>
+        <Text style={styles.scoreNumber}>{`${runningScore} 🪙`}</Text>
+        {/* <Image
+          source={require('../../images/trophy.png')}
+          style={styles.imageCoin}
+        /> */}
+      {/* </View>  */}
+
+      <Text style={styles.trophyText}> 🏆 </Text>
+
+      {/* <View style={styles.trophyContainer}>
+        <Image
+          source={require('../../images/trophy.png')}
+          style={styles.imageCoin}
+        />
+      </View> */}
+
+      {/* <View style={styles.container}>
         <Image
           source={require('../../images/coin.png')}
           style={styles.imageCoin}
         />
         <Text style={styles.scoreNumber}>{runningScore} </Text>
-      </View>
+      </View> */}
 
-      <View style={styles.image}>
+      {/* <View style={styles.image}>
         <Image
           source={require('../../images/trophy.png')}
           style={styles.imageCoin}
         />
-      </View>
+      </View> */}
 
-      <Text style={styles.subtitle}>Explore the area...</Text>
-      <TouchableOpacity onPress={trip}>
-        <Image
-          source={require('../../images/go-button.png')}
-          style={styles.buttonImage}
-        />
-      </TouchableOpacity>
+      <Text style={styles.exploreArea}>Explore the area...</Text>
 
-      <TouchableOpacity>
-        <Image
-          source={require('../../images/explore-area.png')}
-          style={styles.imageRestaurants}
-        />
-      </TouchableOpacity>
+      {/* <TouchableOpacity onPress={}>       */}
+      <Image
+        source={require('../../images/explore-area.png')}
+        style={styles.image}
+      />
+      {/* </TouchableOpacity> */}
     </View>
   );
 };
@@ -84,88 +104,154 @@ const Finished = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: '#EAF3F1',
+  },
+  coinsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    // alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#EAF3F1',
-  },
-  title: {
-    fontSize: 20,
-    color: '#204376',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 50,
-    marginRight: 50,
-    marginTop: 50,
-    marginBottom: 30,
-  },
-  titleWinnings: {
-    fontSize: 20,
-    color: '#204376',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 50,
-    marginRight: 50,
-    marginTop: -10,
-    marginBottom: 30,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#204376',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 5,
-    marginLeft: 50,
-    marginRight: 50,
-    marginTop: 20,
+    alignSelf: 'center',
+    width: 130,
+    height: 200,
+    borderWidth: 2,
+    borderColor: '#204376',
+    borderRadius: 25,
+    padding: 10,
     marginBottom: 10,
+    marginTop: 50,
+    paddingHorizontal: 20,
   },
   scoreNumber: {
+    resizeMode: 'contain',
     fontSize: 50,
     color: '#204376',
     fontWeight: 'bold',
-    textAlign: 'left',
+    // backgroundColor: '#0000FF',
+    // textAlign: 'left',
+    // marginTop: -100,
     // padding: 5,
-    // marginLeft: 50,
     // marginRight: 50,
     // marginTop: 20,
     // marginBottom: 0,
   },
-  image: {
-    resizeMode: 'contain',
-    height: 280,
-    width: 280,
-    marginLeft: 27,
-  },
   imageCoin: {
     resizeMode: 'contain',
-    height: 150,
-    width: 280,
-    marginTop: -60,
-    marginLeft: 60,
+    height: 80,
+    width: 80,
+    // backgroundColor: '#00FF00'
+    // marginTop: -10,
+    // marginLeft: 60,
   },
-  imageRestaurants: {
-    resizeMode: 'contain',
-    height: 280,
-    width: 280,
-    marginTop: -320,
-    marginLeft: 60,
+  trophyContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#EAF3F1',
+    alignSelf: 'center',
+    // width: 130,
+    borderWidth: 2,
+    borderColor: '#204376',
+    borderRadius: 25,
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 50,
+    paddingHorizontal: 20,
   },
-  button: {
-    fontSize: 14,
+  titleContainer: {
+    // flex: 1,
+    // alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '10%',
+    alignSelf: 'center',
+    // backgroundColor: '#FF0000',
+  },
+  trophyText: {
+    fontSize: 150,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginLeft: -30,
+    // marginBottom: 30,
+    // backgroundColor: '#FF0000',
+  },
+  title: {
+    fontSize: 34,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    // padding: 5,
+    // marginLeft: 50,
+    // marginRight: 50,
+    // marginTop: 20,
+    // marginBottom: 30,
+    // backgroundColor: '#00FF00',
+  },
+  subTitle: {
+    fontSize: 20,
     color: '#204376',
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 5,
     marginLeft: 50,
     marginRight: 50,
-    marginTop: 20,
-    marginBottom: 30,
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: '#204376',
-    borderRadius: 25,
-    borderTopWidth: 50,
-    borderBottomWidth: 50,
+    marginTop: 1,
+    marginBottom: 1,
+    // backgroundColor: '#0000FF',
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    width: '101%',
+    height: '104.5%',
+  },
+  image: {
+    resizeMode: 'contain',
+    height: 300,
+    width: 300,
+    // marginTop: -60,
+    // marginLeft: 50,
+    // backgroundColor: '#FF0000',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
+  exploreArea: {
+    fontSize: 20,
+    color: '#204376',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 5,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 100,
+    marginBottom: 1,
+    // backgroundColor: '#0000FF',
+  },
+  // TO DELETE?
+  // area: {
+  //   fontWeight: 'bold',
+  //   textAlign: 'center',
+  //   borderStyle: 'dashed',
+  //   borderWidth: 1,
+  //   borderColor: '#204376',
+  //   borderRadius: 25,
+  //   padding: 50,
+  //   marginLeft: 50,
+  //   marginRight: 50,
+  // },
+  buttonImage: {
+    resizeMode: 'contain',
+    height: 200,
+    width: 200,
+    marginLeft: 100,
+    // marginTop will follow the area
+    marginTop: 0,
+    marginBottom: 20,
   },
 });
 
