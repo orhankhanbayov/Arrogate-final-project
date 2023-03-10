@@ -35,19 +35,15 @@ const Finished = ({ navigation, route }) => {
     };
     scores();
   }, []);
-
-  // handleTrip(() => {
-  //   navigation.navigate('Tripadvisor');
-  // });
-
+  const trip = () => {
+    navigation.navigate('TripAdvisor');
+  };
   return (
     <View style={styles.page}>
       <Text style={styles.title}>
         Congratulations you have solved the challenge!
       </Text>
-      <Text style={styles.titleWinnings}>
-        You have won a total of...
-      </Text>
+      <Text style={styles.titleWinnings}>You have won a total of...</Text>
 
       <View style={styles.container}>
         <Image
@@ -65,12 +61,18 @@ const Finished = ({ navigation, route }) => {
       </View>
 
       <Text style={styles.subtitle}>Explore the area...</Text>
+      <TouchableOpacity onPress={trip}>
+        <Image
+          source={require('../../images/go-button.png')}
+          style={styles.buttonImage}
+        />
+      </TouchableOpacity>
 
       <TouchableOpacity>
-      <Image
-        source={require('../../images/explore-area.png')}
-        style={styles.imageRestaurants}
-      />
+        <Image
+          source={require('../../images/explore-area.png')}
+          style={styles.imageRestaurants}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -138,13 +140,13 @@ const styles = StyleSheet.create({
     marginTop: -60,
     marginLeft: 60,
   },
-imageRestaurants: {
-  resizeMode: 'contain',
-  height: 280,
-  width: 280,
-  marginTop: -320,
-  marginLeft: 60,
-},
+  imageRestaurants: {
+    resizeMode: 'contain',
+    height: 280,
+    width: 280,
+    marginTop: -320,
+    marginLeft: 60,
+  },
   button: {
     fontSize: 14,
     color: '#204376',

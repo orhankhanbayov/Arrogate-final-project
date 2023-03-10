@@ -12,7 +12,7 @@ import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningS
 import { useContext } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
-vision.init({ auth: `${GOOGLE_API}` });
+vision.init({ auth: `AIzaSyA5NUI-XZOU8iZ9_sbUEx6v05spj3X6INE` });
 
 export default function LandmarkCamera({ route, navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -36,7 +36,7 @@ export default function LandmarkCamera({ route, navigation }) {
         latitude: currentLocation.coords.latitude,
         longitude: currentLocation.coords.longitude,
       }, // the user's coords
-        
+
       {
         latitude: name.coordinates.coordinates[0],
         longitude: name.coordinates.coordinates[1],
