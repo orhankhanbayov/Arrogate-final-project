@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scoreNumber: {
-    resizeMode: 'contain',
+    // resizeMode: 'contain',
     fontSize: 50,
     color: '#204376',
     fontWeight: 'bold',
