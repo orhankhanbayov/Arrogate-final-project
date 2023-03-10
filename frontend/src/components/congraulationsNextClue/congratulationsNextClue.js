@@ -48,6 +48,8 @@ const CongratulationsNextClue = ({ route, navigation }) => {
   };
 
   const trip = () => {
+    let render = false;
+
     navigation.navigate('TripAdvisor');
   };
 

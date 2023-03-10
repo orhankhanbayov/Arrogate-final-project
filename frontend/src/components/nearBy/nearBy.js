@@ -54,7 +54,6 @@ const TripAd = () => {
             };
             const response = await fetch(urlReviews, optionsReviews);
             const reviewData = await response.json();
-            console.log(reviewData);
             setReviews((prevReviews) => ({
               ...prevReviews,
               [id]: reviewData.data,
