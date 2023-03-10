@@ -91,12 +91,12 @@ const Finished = ({ navigation, route }) => {
 
       <Text style={styles.exploreArea}>Explore the area...</Text>
 
-      {/* <TouchableOpacity onPress={}>       */}
-      <Image
-        source={require('../../images/explore-area.png')}
-        style={styles.image}
-      />
-      {/* </TouchableOpacity> */}
+      <TouchableOpacity onPress={trip}>
+        <Image
+          source={require('../../images/explore-area.png')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

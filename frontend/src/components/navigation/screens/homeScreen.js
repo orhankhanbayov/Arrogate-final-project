@@ -41,11 +41,15 @@ const HomeScreen = ({ navigation }) => {
         component={CongratulationsNextClue}
         options={{ unmountOnBlur: true, headerShown: false }}
       />
-      <Stack.Screen name="Finished" component={Finished} />
+      <Stack.Screen
+        name="Finished"
+        component={Finished}
+        options={{ unmountOnBlur: true, headerShown: false }}
+      />
       <Stack.Screen
         name="LandmarkCamera"
         component={LandmarkCamera}
-        options={{ unmountOnBlur: true, headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="RouteDescription"
