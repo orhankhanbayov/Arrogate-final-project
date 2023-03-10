@@ -10,20 +10,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import Camera1 from './src/components/landmarkCamera/landmark';
 const Stack = createStackNavigator();
 import RunningScoreContext from 'frontend/src/components/landmarkCamera/RunningScoreContext.js';
-
-
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 
 export default function App() {
   const [runningScore, setRunningScore] = useState(0);
   return (
     <RunningScoreContext.Provider value={{ runningScore, setRunningScore }}>
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="LogIn" component={LogInForm} />
-        <Stack.Screen name="SignUp" component={SignUpForm} />
-        <Stack.Screen name="MainContainer" component={MainContainer} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="LogIn" component={LogInForm} />
+          <Stack.Screen name="SignUp" component={SignUpForm} />
+          <Stack.Screen name="MainContainer" component={MainContainer} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </RunningScoreContext.Provider>
   );
 }

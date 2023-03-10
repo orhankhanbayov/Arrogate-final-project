@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: 300,
     width: 300,
-    // marginTop: -60,
+    marginTop: -60,
     // marginLeft: 50,
     // backgroundColor: '#FF0000',
     alignItems: 'center',

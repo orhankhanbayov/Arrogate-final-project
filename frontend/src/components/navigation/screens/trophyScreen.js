@@ -60,22 +60,23 @@ const TrophyScreen = ({ navigation }) => {
       <Text style={styles.header}>Welcome!</Text>
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
       <Text style={styles.rankingsTitle}>Rankings:</Text>
-      
-      
+
       <Text style={styles.pointsTrophies}>{userScore.trophies}</Text>
       <Text style={styles.pointsCoins}>{userScore.coins}</Text>
       <ScrollView>
-      <View style={styles.usersRankingsContainer}>
-        {scores.map((score) => {
-          return (
-            <Text style={styles.usersRankings} key={score._id}>
-              👤 {score.name} {score.trophies} 🏆 {score.coins} 🪙
-            </Text>
-          );
-        })}
-      </View>
+        <View style={styles.usersRankingsContainer}>
+          {scores
+            .sort((a, b) => b.coins - a.coins)
+            .map((score) => {
+              return (
+                <Text style={styles.usersRankings} key={score._id}>
+                  👤 {score.name} {'   '} {score.trophies} 🏆 {'   '}
+                  {score.coins} 🪙
+                </Text>
+              );
+            })}
+        </View>
       </ScrollView>
-
     </View>
   );
 };
