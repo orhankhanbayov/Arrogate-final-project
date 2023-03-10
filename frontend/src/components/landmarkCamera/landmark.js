@@ -36,6 +36,7 @@ export default function LandmarkCamera({ route, navigation }) {
         latitude: currentLocation.coords.latitude,
         longitude: currentLocation.coords.longitude,
       }, // the user's coords
+        
       {
         latitude: name.coordinates.coordinates[0],
         longitude: name.coordinates.coordinates[1],
