@@ -34,8 +34,7 @@ const Finished = ({ navigation, route }) => {
         }
       );
       console.log(response.status);
-      console.log(`running score from within mainblock ${runningScore}`)
-
+      console.log(`running score from within mainblock ${runningScore}`);
     };
     scores();
   }, []);
