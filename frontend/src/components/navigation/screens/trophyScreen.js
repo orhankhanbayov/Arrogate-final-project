@@ -61,10 +61,10 @@ const TrophyScreen = ({ navigation }) => {
       <Text style={styles.currentTreasures}>Your current treasures are:</Text>
       <Text style={styles.rankingsTitle}>Rankings:</Text>
       
-      <ScrollView>
+      
       <Text style={styles.pointsTrophies}>{userScore.trophies}</Text>
       <Text style={styles.pointsCoins}>{userScore.coins}</Text>
-      
+      <ScrollView>
       <View style={styles.usersRankingsContainer}>
         {scores.map((score) => {
           return (
